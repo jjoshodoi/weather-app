@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 
-const App = () => {
+function App() {
   const API_KEY = "a33e014e75b0261963e1c6981f48ea3e";
   const example = `api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${API_KEY}`;
   const city_name = " ";
@@ -16,6 +16,6 @@ const App = () => {
       </form>
     </div>
   );
-};
+}
 
 export default App;

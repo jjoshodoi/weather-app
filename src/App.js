@@ -26,13 +26,8 @@ const getLocation = async () => {
           Search
           </button>
       </form>
-      {locations.map(reciple =>(
-
-      <Locations />
-      ))};
     </div>
   );
-
 }
 
 export default App;

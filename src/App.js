@@ -1,29 +1,40 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const API_KEY = "a33e014e75b0261963e1c6981f48ea3e";
-  const city_name = "London"; //Empty need to initialise to User input from Search Bar
-  const example = `http://api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${API_KEY}`;
-  // const example = `http://api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${API_KEY}`;
+
+  const [locations, setLocations] = useState([]);
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState('London');
 
   useEffect(async () => {
     getLocation();
-  }, []);
-  const getLocation = async () => {
-    const reponse = await fetch(example);
-    const data = reponse.json();
-    console.log(data);
+  }, [query]);
 
+  const getLocation = async () => {
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${API_KEY}`)
+    const data = await response.json();
+    setLocations(data.hits);
+    console.log(query,data);
+  };
     // Calls the API key and allows you call certain data.
     // Add parameters we need to call such as temp, day, sunny/rainy
+  const update = e => {
+    setSearch(e.target.value);
+  };
+
+  const getSearch = e => {
+      e.preventDefault();
+      setQuery(search);
+      setSearch('');
   };
 
   return (
     <div className="App">
-      <form className="Search-form">
-        <input className="Search-Bar" type="text" />
+      <form onSubmit={getSearch} className="Search-form">
+        <input className="Search-Bar" type="text" value={search} onChange={update}/>
         <button className="Search-button" type="submit">
           Search
         </button>

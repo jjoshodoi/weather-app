@@ -18,7 +18,7 @@ const getLocation = async () => {
   return (
     <div className="App">
       <form className="Search-form">
-        <input className="Search-Bar" type= "text"/>
+        <input className="city_name" type= "text"/>
         <button className= "Search-button" type = "submit">
           Search
           </button>

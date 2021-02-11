@@ -1,62 +1,51 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
-import SearchText from "./search";
 
 function App() {
   const API_KEY = "a33e014e75b0261963e1c6981f48ea3e";
-  var city_name = " "; //Empty need to initialise to User input from Search Bar
-  console.log(city_name);
-  const example = `http://api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${API_KEY}`;
-  // const example = `http://api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${API_KEY}`;
 
-  const [searchText, setSearchText] = useState(() => " ");
-  
+  const [locations, setLocations] = useState([]);
+  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("London");
+
   useEffect(() => {
     getLocation();
-  }, [city_name]);
+  }, [query]);
 
-  const getLocation = async (searchText) => {
-    console.log(searchText);
-    const reponse = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${searchText}&appid=${API_KEY}`
+  const getLocation = async () => {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${API_KEY}`
     );
-    const data = reponse.json();
-    console.log(data);
-
-    // Calls the API key and allows you call certain data.
-    // Add parameters we need to call such as temp, day, sunny/rainy
+    const data = await response.json();
+    setLocations(data.hits);
+    console.log(query, data);
+  };
+  // Calls the API key and allows you call certain data.
+  // Add parameters we need to call such as temp, day, sunny/rainy
+  const update = (e) => {
+    setSearch(e.target.value);
   };
 
-  const handleChanged = (e) => {
-    // Handle Changed Code
-    setSearchText(e.target.value);
-    // console.log(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    // Submit code
+  const getSearch = (e) => {
     e.preventDefault();
-    city_name = searchText;
-    // console.log(city_name);
-    getLocation();
+    setQuery(search);
+    setSearch("");
   };
 
   return (
     <div className="App">
-      <form className="Search-form" onSubmit={handleSubmit}>
+      <form onSubmit={getSearch} className="Search-form">
         <input
           className="Search-Bar"
           type="text"
-          value={searchText}
-          onChange={handleChanged}
-          placeholder="Enter City ... e.g. London, Birmingham, Moscow"
+          value={search}
+          onChange={update}
         />
-        <button onClick={handleSubmit} className="Search-button" type="submit">
+        <button className="Search-button" type="submit">
           Search
         </button>
       </form>
-      <SearchText getLocation={getLocation}/>
     </div>
   );
 }

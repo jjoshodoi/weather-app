@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const API_KEY = "a33e014e75b0261963e1c6981f48ea3e";
-  //var city_name = document.getElementById("city_name").value; //Empty need to initialise to User input from Search Bar
+  var city_name = document.getElementById("city_name").value; //Empty need to initialise to User input from Search Bar
   const [locations, setLocations] = useState([]);
 
 useEffect(async () => {
@@ -12,7 +12,9 @@ useEffect(async () => {
 }, []);
 
 const getLocation = async () => {
-  const reponse = await fetch(`api.openweathermap.org/data/2.5/weather?q=London&appid=a33e014e75b0261963e1c6981f48ea3e`) //Calls current Weather API
+  const reponse = await fetch(
+    `https://api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${API_KEY}`
+    ); //Calls current Weather API
   const data = await reponse.json();
   console.log(data);
   // Calls the API key and allows you call certain data. 
@@ -29,5 +31,4 @@ const getLocation = async () => {
     </div>
   );
 }
-
 export default App;

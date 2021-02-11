@@ -12,7 +12,7 @@ useEffect(async () => {
 }, []);
 
 const getLocation = async () => {
-  const reponse = await fetch(`api.openweathermap.org/data/2.5/weather?q={London}&appid=${API_KEY}`) //Calls current Weather API
+  const reponse = await fetch(`api.openweathermap.org/data/2.5/weather?q=London&appid=a33e014e75b0261963e1c6981f48ea3e`) //Calls current Weather API
   const data = await reponse.json();
   console.log(data);
   // Calls the API key and allows you call certain data. 

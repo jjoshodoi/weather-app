@@ -38,6 +38,7 @@ function App() {
         <button className="Search-button" type="submit">
           Search
         </button>
+        
       </form>
     </div>
   );

@@ -2,7 +2,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import SearchBar from "./components/search";
 import DisplayDate from "./components/displayDate";
-import SelectDay from "./components/displayTemp";
+import SelectDay from "./components/selectDay";
 import GeoButtons from "./components/geoButtons";
 
 function App() {

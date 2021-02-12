@@ -19,7 +19,8 @@ function App() {
 
   const kelvinToCelcius = (num) => {
     num = num - 273;
-    return Math.round(num * 100) / 100;
+    // return Math.round(num * 100) / 100;
+    return Math.round(num * 10) / 10;
   };
 
   /// SEARCH CODE
@@ -60,13 +61,14 @@ function App() {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${WEATHER_API_KEY}`
     );
-    await console.log(response.json());
+    const data = await response.json();
     console.log(
       "Latitude: " +
         position.coords.latitude +
         "<br>Longitude: " +
         position.coords.longitude
     );
+    setDataFromApi(data);
   };
 
   const showError = (error) => {

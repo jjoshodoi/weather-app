@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const SearchBar = ({
   WEATHER_API_KEY,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const DisplayDate = () => {
   const days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];

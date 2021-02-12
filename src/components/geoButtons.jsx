@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 // Need to revisit these buttons --- May not need them
 const GeoButtons = (GEOCODING_API_KEY) => {

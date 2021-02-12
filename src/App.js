@@ -32,13 +32,15 @@ function App() {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${WEATHER_API_KEY}`
     );
-    const data = await response.json();
-    setLocations(data.hits);
-    // console.log(query, data);
-    setDataFromApi(data);
+    // Check here if the response is valid
+    if (response.ok) {
+      const data = await response.json();
+      setLocations(data.hits);
+      // console.log(query, data);
+      setDataFromApi(data);
+    }
   };
-  // Calls the API key and allows you call certain data.
-  // Add parameters we need to call such as temp, day, sunny/rainy
+
   const update = (e) => {
     setSearch(e.target.value);
   };

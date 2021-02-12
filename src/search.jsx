@@ -4,7 +4,6 @@ const SearchForm = ({ getLocation }) => {
   const [searchText, setSearchText] = useState(() => " ");
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(searchText);
     getLocation(searchText);
   };
   return (

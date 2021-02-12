@@ -32,10 +32,10 @@ function App() {
     // Check here if the response is valid
     if (response.ok) {
       const data = await response.json();
-      await setLongnitude(data.coord.lon);
-      await setLatitude(data.coord.lat);
-      await setCWDataFromApi(data);
-      callOneCall();
+      setLongnitude(data.coord.lon);
+      setLatitude(data.coord.lat);
+      setCWDataFromApi(data);
+      await callOneCall();
     } else {
       alert("Enter a valid Location");
     }

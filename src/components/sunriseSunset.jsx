@@ -2,7 +2,6 @@ import React from "react";
 
 const SunriseSunset = ({ oneCallDataFromApi }) => {
   const epochToDate = (num) => {
-    console.log(num);
     var d = new Date(num * 1000); // The 0 there is the key, which sets the date to the epoch
     return d;
   };

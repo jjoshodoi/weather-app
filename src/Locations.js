@@ -13,6 +13,15 @@ const Location = ({ cwDataFromApi, oneCallDataFromApi }) => {
     return Math.round(num);
   };
 
+  const mainWeatherAttribute = [];
+  if (oneCallDataFromApi !== undefined && oneCallDataFromApi != null) {
+    console.log(oneCallDataFromApi.current);
+    oneCallDataFromApi.current.weather.map((item) =>
+      mainWeatherAttribute.push(item.main)
+    );
+  }
+  console.log(mainWeatherAttribute);
+
   return (
     <div className="location">
       {/* <GeoButtons GEOCODING_API_KEY={GEOCODING_API_KEY} /> */}
@@ -30,7 +39,8 @@ const Location = ({ cwDataFromApi, oneCallDataFromApi }) => {
         {oneCallDataFromApi &&
           oneCallDataFromApi.hourly.map((hour) => (
             <ul>
-              <li>{`${new Date().getHours()} ${kelvinToCelcius(
+              <li key={""}>{`${new Date().getHours()} ${kelvinToCelcius(
+                //Change key to be unique
                 hour.temp
               )}°C`}</li>
             </ul>

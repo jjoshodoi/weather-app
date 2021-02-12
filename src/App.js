@@ -1,5 +1,6 @@
 import "./App.css";
 import { useEffect, useState } from "react";
+import Location from "./Locations";
 import SearchBar from "./components/search";
 import DisplayDate from "./components/displayDate";
 import SelectDay from "./components/selectDay";
@@ -16,13 +17,6 @@ function App() {
   const [query, setQuery] = useState("London");
   // store our data from api in this
   const [dataFromApi, setDataFromApi] = useState(null);
-
-  // Change from Kelvin to Degrees Celcius
-  const kelvinToCelcius = (num) => {
-    num = num - 273;
-    // return Math.round(num * 100) / 100; // TODO(jjoshodoi): We can chose to use either 1dp or 2dp
-    return Math.round(num * 10) / 10;
-  };
 
   /// SEARCH CODE
   useEffect(() => {
@@ -53,14 +47,16 @@ function App() {
     setSearch("");
   };
 
+  // Gets current position of user and calls showPosition
   const getUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
-      console.log("Didn't work");
+      alert("Didn't work");
     }
   };
 
+  // Fetches Location given a longnitude and latitude
   const showPosition = async (position) => {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${WEATHER_API_KEY}`
@@ -75,6 +71,7 @@ function App() {
     setDataFromApi(data);
   };
 
+  // Errors for when the Location fails. Gets called getUserLocation
   const showError = (error) => {
     switch (error.code) {
       case error.PERMISSION_DENIED:
@@ -103,22 +100,7 @@ function App() {
         getUserLocation={getUserLocation}
         getSearch={getSearch}
       />
-      <GeoButtons GEOCODING_API_KEY={GEOCODING_API_KEY} />
-
-      <DisplayDate />
-      <h1>{`${kelvinToCelcius(dataFromApi && dataFromApi.main.temp)} °C`}</h1>
-      <h3>
-        {dataFromApi && dataFromApi.name},{" "}
-        {dataFromApi && dataFromApi.sys.country}
-      </h3>
-      <SelectDay />
-      <div>
-        <h3>Sunrise: {dataFromApi && dataFromApi.sys.sunrise}</h3>
-        <h3>Sunset: {dataFromApi && dataFromApi.sys.sunset}</h3>
-        <h3>Precipitation: {dataFromApi && dataFromApi.main.humidity}</h3>
-        <h3>Humidity: {dataFromApi && dataFromApi.weather.main}</h3>
-      </div>
-      <AdditionalStats />
+      <Location dataFromApi={dataFromApi} />
     </div>
   );
 }

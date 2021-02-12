@@ -6,19 +6,20 @@ import SelectDay from "./components/displayTemp";
 import GeoButtons from "./components/geoButtons";
 
 function App() {
+  //hide api keys
   const WEATHER_API_KEY = process.env.REACT_APP_API_KEY;
   const GEOCODING_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
   const [locations, setLocations] = useState([]);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("London");
+  // store our data from api in this
   const [dataFromApi, setDataFromApi] = useState(null);
 
   // Change from Kelvin to Degrees Celcius
-
   const kelvinToCelcius = (num) => {
     num = num - 273;
-    // return Math.round(num * 100) / 100;
+    // return Math.round(num * 100) / 100; // TODO(jjoshodoi): We can chose to use either 1dp or 2dp
     return Math.round(num * 10) / 10;
   };
 

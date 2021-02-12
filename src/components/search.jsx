@@ -15,9 +15,7 @@ const SearchBar = ({
         value={search}
         onChange={update}
       />
-      <button className="Search-button" type="submit">
-        Search
-      </button>
+      <input type="image" src="src\Images\sunicon.png"/>  
       <span onClick={getUserLocation} type="submit">
         LOCATE
       </span>

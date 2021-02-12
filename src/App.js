@@ -20,7 +20,7 @@ function App() {
 
   /// SEARCH CODE
   useEffect(() => {
-    getLocation();
+    getLocation(); //Need to add weather for next 7 days,
   }, [query]);
 
   const getLocation = async () => {

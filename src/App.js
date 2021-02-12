@@ -16,7 +16,7 @@ function App() {
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("London");
   // store our data from api in this
-  const [dataFromApi, setDataFromApi] = useState(null);
+  const [cwDataFromApi, setCWDataFromApi] = useState(null);
 
   /// SEARCH CODE
   useEffect(() => {
@@ -31,7 +31,7 @@ function App() {
     if (response.ok) {
       const data = await response.json();
       setLocations(data.hits);
-      setDataFromApi(data);
+      setCWDataFromApi(data);
     } else {
       alert("Enter a valid Location");
     }
@@ -68,7 +68,7 @@ function App() {
         "<br>Longitude: " +
         position.coords.longitude
     );
-    setDataFromApi(data);
+    setCWDataFromApi(data);
   };
 
   // Errors for when the Location fails. Gets called getUserLocation
@@ -100,7 +100,7 @@ function App() {
         getUserLocation={getUserLocation}
         getSearch={getSearch}
       />
-      <Location dataFromApi={dataFromApi} />
+      <Location cwDataFromApi={cwDataFromApi} />
     </div>
   );
 }

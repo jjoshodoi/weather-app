@@ -7,8 +7,7 @@ import GeoButtons from "./components/geoButtons";
 
 function App() {
   const WEATHER_API_KEY = process.env.REACT_APP_API_KEY;
-  const GOOGLE_GEOCODING_API_KEY = "AIzaSyAD63JAkZ23KxNXmMUqRVKk9S5YZkR0TE4";
-  // console.log(GOOGLE_GEOCODING_API_KEY);
+  const GEOCODING_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
   const [locations, setLocations] = useState([]);
   const [search, setSearch] = useState("");
@@ -99,7 +98,7 @@ function App() {
         getUserLocation={getUserLocation}
         getSearch={getSearch}
       />
-      <GeoButtons GOOGLE_GEOCODING_API_KEY={GOOGLE_GEOCODING_API_KEY} />
+      <GeoButtons GEOCODING_API_KEY={GEOCODING_API_KEY} />
 
       <DisplayDate />
       <h1>{`${kelvinToCelcius(dataFromApi && dataFromApi.main.temp)} °C`}</h1>

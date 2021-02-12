@@ -15,10 +15,12 @@ const SearchBar = ({
         value={search}
         onChange={update}
       />
-      <input type="image" src="src\Images\sunicon.png"/>  
-      <span onClick={getUserLocation} type="submit">
-        LOCATE
-      </span>
+      <button className="Search-Button" type="submit">
+        Search
+      </button>
+      <button onClick={getUserLocation} className="Search-Location" type="submit">
+        Locate
+      </button>
     </form>
   );
 };

@@ -12,11 +12,13 @@ function App() {
   const WEATHER_API_KEY = process.env.REACT_APP_API_KEY;
   const GEOCODING_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
-  const [locations, setLocations] = useState([]);
+  const [longnitude, setLongnitude] = useState(["-0.1257"]);
+  const [latitude, setLatitude] = useState(["51.5085"]);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("London");
   // store our data from api in this
   const [cwDataFromApi, setCWDataFromApi] = useState(null);
+  const [oneCallDataFromApi, setOneCallDataFromApi] = useState(null);
 
   /// SEARCH CODE
   useEffect(() => {
@@ -30,8 +32,23 @@ function App() {
     // Check here if the response is valid
     if (response.ok) {
       const data = await response.json();
-      setLocations(data.hits);
+      setLongnitude(data.coord.lon);
+      setLatitude(data.coord.lat);
       setCWDataFromApi(data);
+      callOneCall();
+    } else {
+      alert("Enter a valid Location");
+    }
+  };
+
+  const callOneCall = async () => {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longnitude}&exclude=daily,minutely&appid=${WEATHER_API_KEY}`
+    );
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      setOneCallDataFromApi(data);
     } else {
       alert("Enter a valid Location");
     }
@@ -100,7 +117,10 @@ function App() {
         getUserLocation={getUserLocation}
         getSearch={getSearch}
       />
-      <Location cwDataFromApi={cwDataFromApi} />
+      <Location
+        cwDataFromApi={cwDataFromApi}
+        oneCallDataFromApi={oneCallDataFromApi}
+      />
     </div>
   );
 }

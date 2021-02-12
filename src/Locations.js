@@ -27,6 +27,17 @@ const Location = ({ cwDataFromApi, oneCallDataFromApi }) => {
       </h3>
       <SelectDay />
       <div>
+        {oneCallDataFromApi &&
+          oneCallDataFromApi.hourly.map((hour) => (
+            <ul>
+              <li>{`${new Date().getHours()} ${kelvinToCelcius(
+                hour.temp
+              )}°C`}</li>
+            </ul>
+          ))}
+      </div>
+
+      <div>
         <SunriseSunset oneCallDataFromApi={oneCallDataFromApi} />
         <h3>
           Humidity: {oneCallDataFromApi && oneCallDataFromApi.current.humidity}

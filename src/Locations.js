@@ -5,6 +5,7 @@ import SelectDay from "./components/selectDay";
 import GeoButtons from "./components/geoButtons";
 import AdditionalStats from "./components/additionalStats";
 import SunriseSunset from "./components/sunriseSunset";
+import TempByHour from "./components/tempTiles/tempByHour";
 
 const Location = ({ cwDataFromApi, oneCallDataFromApi }) => {
   // Change from Kelvin to Degrees Celcius
@@ -35,17 +36,10 @@ const Location = ({ cwDataFromApi, oneCallDataFromApi }) => {
         {cwDataFromApi && cwDataFromApi.sys.country}
       </h3>
       <SelectDay />
-      <div>
-        {oneCallDataFromApi &&
-          oneCallDataFromApi.hourly.map((hour) => (
-            <ul>
-              <li key={""}>{`${new Date().getHours()} ${kelvinToCelcius(
-                //Change key to be unique
-                hour.temp
-              )}°C`}</li>
-            </ul>
-          ))}
-      </div>
+      <TempByHour
+        oneCallDataFromApi={oneCallDataFromApi}
+        kelvinToCelcius={kelvinToCelcius}
+      />
 
       <div>
         <SunriseSunset oneCallDataFromApi={oneCallDataFromApi} />

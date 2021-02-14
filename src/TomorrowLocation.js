@@ -45,22 +45,19 @@ const TomorrowLocation = ({
         cwDataFromApi={cwDataFromApi}
         kelvinToCelcius={kelvinToCelcius}
       />
-      {/* <h1>{`${kelvinToCelcius(
-        oneCallDataFromApi && oneCallDataFromApi.current.temp
-      )} °C`}</h1>
-      <h3>
-        {cwDataFromApi && cwDataFromApi.name},{" "}
-        {cwDataFromApi && cwDataFromApi.sys.country}
-      </h3> */}
-      <SelectDay setCurrentView={setCurrentView} tomorrow={tomorrow}/>
-      <TempByHour
+      <SelectDay setCurrentView={setCurrentView} tomorrow={tomorrow} />
+      {/* Temp By Hour will be done starting from 0 depending on country. */}
+      {/* <TempByHour
         findMainWeatherAttribute={findMainWeatherAttribute}
         oneCallDataFromApi={oneCallDataFromApi}
         kelvinToCelcius={kelvinToCelcius}
-      />
+      /> */}
 
       <div>
-        <SunriseSunset oneCallDataFromApi={oneCallDataFromApi} />
+        <SunriseSunset
+          oneCallDataFromApi={oneCallDataFromApi}
+          tomorrow={tomorrow}
+        />
         <h3>
           Humidity: {oneCallDataFromApi && oneCallDataFromApi.current.humidity}
         </h3>

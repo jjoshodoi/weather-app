@@ -4,7 +4,7 @@ const SelectDay = ({ setCurrentView }) => {
   return (
     //Should we Reset day back to Today when they search.
     <div>
-      <button onClick={() => setCurrentView("Today")}>Today</button>
+      <button onClick={() => setCurrentView("Today")}>Now</button>
       <button onClick={() => setCurrentView("TomorrowLocationView")}>
         Tomorrow
       </button>

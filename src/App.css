@@ -82,3 +82,9 @@
   border-style: solid;
   margin: 10px;
 }
+
+.time-of-day-tile {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}

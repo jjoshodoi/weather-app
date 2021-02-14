@@ -53,7 +53,7 @@ const TodayLocation = ({
       />
 
       <div>
-        <SunriseSunset oneCallDataFromApi={oneCallDataFromApi} />
+        <SunriseSunset oneCallDataFromApi={oneCallDataFromApi} tomorrow={tomorrow} />
         <h3>
           Humidity: {oneCallDataFromApi && oneCallDataFromApi.current.humidity}
         </h3>

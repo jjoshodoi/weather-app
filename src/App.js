@@ -2,18 +2,12 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import Location from "./Locations";
 import SearchBar from "./components/search";
-import DisplayDate from "./components/displayDate";
-import SelectDay from "./components/selectDay";
-import GeoButtons from "./components/geoButtons";
-import AdditionalStats from "./components/additionalStats";
 
 function App() {
   //hide api keys
   const WEATHER_API_KEY = process.env.REACT_APP_API_KEY;
   const GEOCODING_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
-  const [longnitude, setLongnitude] = useState(["-0.1257"]);
-  const [latitude, setLatitude] = useState(["51.5085"]);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("London");
   // store our data from api in this
@@ -32,18 +26,16 @@ function App() {
     // Check here if the response is valid
     if (response.ok) {
       const data = await response.json();
-      setLongnitude(data.coord.lon);
-      setLatitude(data.coord.lat);
       setCWDataFromApi(data);
-      await callOneCall();
+      await callOneCall(data.coord.lon, data.coord.lat);
     } else {
       alert("Enter a valid Location");
     }
   };
 
-  const callOneCall = async () => {
+  const callOneCall = async (lon, lat) => {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longnitude}&exclude=daily,minutely&appid=${WEATHER_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=daily,minutely&appid=${WEATHER_API_KEY}`
     );
     if (response.ok) {
       const data = await response.json();
@@ -79,6 +71,7 @@ function App() {
       `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${WEATHER_API_KEY}`
     );
     const data = await response.json();
+    await callOneCall(data.coord.lon, data.coord.lat);
     console.log(
       "Latitude: " +
         position.coords.latitude +

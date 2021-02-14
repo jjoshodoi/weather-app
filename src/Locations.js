@@ -1,12 +1,12 @@
 import React from "react";
 import DisplayDate from "./components/displayDate";
 import SelectDay from "./components/selectDay";
-import GeoButtons from "./components/geoButtons";
+// import GeoButtons from "./components/geoButtons";
 import AdditionalStats from "./components/additionalStats";
 import SunriseSunset from "./components/sunriseSunset";
 import TempByHour from "./components/tempTiles/tempByHour";
 
-const Location = ({ cwDataFromApi, oneCallDataFromApi }) => {
+const TodayLocation = ({ cwDataFromApi, oneCallDataFromApi, setCurrentView}) => {
   // Change from Kelvin to Degrees Celcius
   const kelvinToCelcius = (num) => {
     num = num - 273;
@@ -63,4 +63,4 @@ const Location = ({ cwDataFromApi, oneCallDataFromApi }) => {
   );
 };
 
-export default Location;
+export default TodayLocation;

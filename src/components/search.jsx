@@ -1,11 +1,6 @@
 import React from "react";
 
-const SearchBar = ({
-  update,
-  search,
-  getUserLocation,
-  getSearch,
-}) => {
+const SearchBar = ({ update, search, getUserLocation, getSearch }) => {
   return (
     <form onSubmit={getSearch} className="Search-form">
       <input
@@ -17,7 +12,7 @@ const SearchBar = ({
       <button className="Search-Button" type="submit">
         Search
       </button>
-      <button onClick={getUserLocation} className="Search-Location" type="submit">
+      <button onClick={getUserLocation} className="Search-Location">
         Locate
       </button>
     </form>

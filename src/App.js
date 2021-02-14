@@ -1,7 +1,9 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import Location from "./Locations";
+import TodayLocation from "./Locations";
 import SearchBar from "./components/search";
+import TomorrowLocation from "./TomorrowLocation";
+import Next7DaysView from "./Next7Days";
 
 function App() {
   //hide api keys
@@ -10,6 +12,8 @@ function App() {
 
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("London");
+  // Select relevant Page View
+  const [currentView, setCurrentView] = useState("view1");
   // store our data from api in this
   const [cwDataFromApi, setCWDataFromApi] = useState(null);
   const [oneCallDataFromApi, setOneCallDataFromApi] = useState(null);
@@ -60,7 +64,7 @@ function App() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
-      alert("Didn't work");
+      alert("Failed to GeoLocate");
     }
   };
 
@@ -100,6 +104,32 @@ function App() {
     }
   };
 
+  var findView = (currentView) => {
+    switch (currentView) {
+      case "TomorrowLocationView":
+        return (
+          <TomorrowLocation
+            cwDataFromApi={cwDataFromApi}
+            oneCallDataFromApi={oneCallDataFromApi}
+          />
+        );
+      case "Next7DaysView":
+        return (
+          <Next7DaysView
+            cwDataFromApi={cwDataFromApi}
+            oneCallDataFromApi={oneCallDataFromApi}
+          />
+        );
+      default:
+        return (
+          <TodayLocation
+            cwDataFromApi={cwDataFromApi}
+            oneCallDataFromApi={oneCallDataFromApi}
+          />
+        );
+    }
+  };
+
   return (
     <div className="App">
       <SearchBar
@@ -109,10 +139,36 @@ function App() {
         getUserLocation={getUserLocation}
         getSearch={getSearch}
       />
-      <Location
-        cwDataFromApi={cwDataFromApi}
-        oneCallDataFromApi={oneCallDataFromApi}
-      />
+      {/* switch to select relevant page  */}
+      {(() => {
+        switch (currentView) {
+          case "TomorrowLocationView":
+            return (
+              <TomorrowLocation
+                cwDataFromApi={cwDataFromApi}
+                oneCallDataFromApi={oneCallDataFromApi}
+                setCurrentView={setCurrentView}
+                
+              />
+            );
+          case "Next7DaysView":
+            return (
+              <Next7DaysView
+                cwDataFromApi={cwDataFromApi}
+                oneCallDataFromApi={oneCallDataFromApi}
+                setCurrentView={setCurrentView}
+              />
+            );
+          default:
+            return (
+              <TodayLocation
+                cwDataFromApi={cwDataFromApi}
+                oneCallDataFromApi={oneCallDataFromApi}
+                setCurrentView={setCurrentView}
+              />
+            );
+        }
+      })()}
     </div>
   );
 }

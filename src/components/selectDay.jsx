@@ -2,6 +2,7 @@ import React from "react";
 
 const SelectDay = ({ setCurrentView }) => {
   return (
+    //Should we Reset day back to Today when they search.
     <div>
       <button onClick={() => setCurrentView("Today")}>Today</button>
       <button onClick={() => setCurrentView("TomorrowLocationView")}>

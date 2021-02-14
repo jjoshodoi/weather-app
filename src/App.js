@@ -39,7 +39,7 @@ function App() {
 
   const callOneCall = async (lon, lat) => {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=daily,minutely&appid=${WEATHER_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${WEATHER_API_KEY}`
     );
     if (response.ok) {
       const data = await response.json();
@@ -104,6 +104,12 @@ function App() {
     }
   };
 
+  // Change Kelvin to Celcius
+  const kelvinToCelcius = (num) => {
+    num = num - 273;
+    return Math.round(num);
+  };
+
   return (
     <div className="App">
       <SearchBar
@@ -113,7 +119,7 @@ function App() {
         getUserLocation={getUserLocation}
         getSearch={getSearch}
       />
-      
+
       {/* switch to select relevant page  */}
       {(() => {
         switch (currentView) {
@@ -123,6 +129,8 @@ function App() {
                 cwDataFromApi={cwDataFromApi}
                 oneCallDataFromApi={oneCallDataFromApi}
                 setCurrentView={setCurrentView}
+                kelvinToCelcius={kelvinToCelcius}
+                tomorrow = {true} // Use this value to see if we are looking for tomorrows data or not
               />
             );
           case "Next7DaysView":
@@ -131,6 +139,7 @@ function App() {
                 cwDataFromApi={cwDataFromApi}
                 oneCallDataFromApi={oneCallDataFromApi}
                 setCurrentView={setCurrentView}
+                kelvinToCelcius={kelvinToCelcius}
               />
             );
           default:
@@ -139,6 +148,8 @@ function App() {
                 cwDataFromApi={cwDataFromApi}
                 oneCallDataFromApi={oneCallDataFromApi}
                 setCurrentView={setCurrentView}
+                kelvinToCelcius={kelvinToCelcius}
+                tomorrow = {false} 
               />
             );
         }

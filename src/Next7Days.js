@@ -13,4 +13,5 @@ const Next7DaysView = ({
   );
 };
 
+
 export default Next7DaysView;

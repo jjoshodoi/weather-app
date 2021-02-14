@@ -1,7 +1,17 @@
 import React from "react";
+import TempCard from "./tempcard";
 
-const TempByHour = ({ oneCallDataFromApi, kelvinToCelcius }) => {
+const TempByHour = ({
+  oneCallDataFromApi,
+  kelvinToCelcius,
+  findMainWeatherAttribute,
+}) => {
   const currentHour = new Date().getHours();
+
+  const timeDifference =
+    oneCallDataFromApi && oneCallDataFromApi.timezone_offset / 3600;
+
+  // var weatherAttributeForCard = findMainWeatherAttribute(oneCallDataFromApi);
   return (
     <div className="temp-tile">
       {oneCallDataFromApi &&
@@ -9,20 +19,15 @@ const TempByHour = ({ oneCallDataFromApi, kelvinToCelcius }) => {
           hour,
           index //How many values are we to display
         ) => (
-          <div className="tile-border">
-            <div className="card">
-              {index === 0
-                ? "Now"
-                : currentHour + index > 23
-                ? currentHour + index - 24
-                : currentHour + index}
-            </div>
-            <div>icon</div>
-            <div>{`${kelvinToCelcius(
-              //Change key to be unique
-              hour.temp
-            )}°C`}</div>
-          </div>
+          <TempCard
+            key={index} // Uniquely identify each Card we make
+            indexNum={index}
+            hour={hour}
+            currentHour={currentHour}
+            timeDifference={timeDifference}
+            oneCallDataFromApi={oneCallDataFromApi}
+            kelvinToCelcius={kelvinToCelcius}
+          />
         ))}
     </div>
   );

@@ -1,21 +1,19 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import Location from "./Locations";
+import TodayLocation from "./Locations";
 import SearchBar from "./components/search";
-import DisplayDate from "./components/displayDate";
-import SelectDay from "./components/selectDay";
-import GeoButtons from "./components/geoButtons";
-import AdditionalStats from "./components/additionalStats";
+import TomorrowLocation from "./TomorrowLocation";
+import Next7DaysView from "./Next7Days";
 
 function App() {
   //hide api keys
   const WEATHER_API_KEY = process.env.REACT_APP_API_KEY;
   const GEOCODING_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
-  const [longnitude, setLongnitude] = useState(["-0.1257"]);
-  const [latitude, setLatitude] = useState(["51.5085"]);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("London");
+  // Select relevant Page View
+  const [currentView, setCurrentView] = useState("view1");
   // store our data from api in this
   const [cwDataFromApi, setCWDataFromApi] = useState(null);
   const [oneCallDataFromApi, setOneCallDataFromApi] = useState(null);
@@ -32,22 +30,19 @@ function App() {
     // Check here if the response is valid
     if (response.ok) {
       const data = await response.json();
-      setLongnitude(data.coord.lon);
-      setLatitude(data.coord.lat);
       setCWDataFromApi(data);
-      await callOneCall();
+      await callOneCall(data.coord.lon, data.coord.lat);
     } else {
       alert("Enter a valid Location");
     }
   };
 
-  const callOneCall = async () => {
+  const callOneCall = async (lon, lat) => {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longnitude}&exclude=daily,minutely&appid=${WEATHER_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=daily,minutely&appid=${WEATHER_API_KEY}`
     );
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       setOneCallDataFromApi(data);
     } else {
       alert("Enter a valid Location");
@@ -69,7 +64,7 @@ function App() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
-      alert("Didn't work");
+      alert("Failed to GeoLocate");
     }
   };
 
@@ -79,6 +74,7 @@ function App() {
       `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${WEATHER_API_KEY}`
     );
     const data = await response.json();
+    await callOneCall(data.coord.lon, data.coord.lat);
     console.log(
       "Latitude: " +
         position.coords.latitude +
@@ -108,6 +104,32 @@ function App() {
     }
   };
 
+  var findView = (currentView) => {
+    switch (currentView) {
+      case "TomorrowLocationView":
+        return (
+          <TomorrowLocation
+            cwDataFromApi={cwDataFromApi}
+            oneCallDataFromApi={oneCallDataFromApi}
+          />
+        );
+      case "Next7DaysView":
+        return (
+          <Next7DaysView
+            cwDataFromApi={cwDataFromApi}
+            oneCallDataFromApi={oneCallDataFromApi}
+          />
+        );
+      default:
+        return (
+          <TodayLocation
+            cwDataFromApi={cwDataFromApi}
+            oneCallDataFromApi={oneCallDataFromApi}
+          />
+        );
+    }
+  };
+
   return (
     <div className="App">
       <SearchBar
@@ -117,10 +139,36 @@ function App() {
         getUserLocation={getUserLocation}
         getSearch={getSearch}
       />
-      <Location
-        cwDataFromApi={cwDataFromApi}
-        oneCallDataFromApi={oneCallDataFromApi}
-      />
+      {/* switch to select relevant page  */}
+      {(() => {
+        switch (currentView) {
+          case "TomorrowLocationView":
+            return (
+              <TomorrowLocation
+                cwDataFromApi={cwDataFromApi}
+                oneCallDataFromApi={oneCallDataFromApi}
+                setCurrentView={setCurrentView}
+                
+              />
+            );
+          case "Next7DaysView":
+            return (
+              <Next7DaysView
+                cwDataFromApi={cwDataFromApi}
+                oneCallDataFromApi={oneCallDataFromApi}
+                setCurrentView={setCurrentView}
+              />
+            );
+          default:
+            return (
+              <TodayLocation
+                cwDataFromApi={cwDataFromApi}
+                oneCallDataFromApi={oneCallDataFromApi}
+                setCurrentView={setCurrentView}
+              />
+            );
+        }
+      })()}
     </div>
   );
 }

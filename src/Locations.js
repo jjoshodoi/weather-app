@@ -1,13 +1,12 @@
 import React from "react";
-import SearchBar from "./components/search";
 import DisplayDate from "./components/displayDate";
 import SelectDay from "./components/selectDay";
-import GeoButtons from "./components/geoButtons";
+// import GeoButtons from "./components/geoButtons";
 import AdditionalStats from "./components/additionalStats";
 import SunriseSunset from "./components/sunriseSunset";
 import TempByHour from "./components/tempTiles/tempByHour";
 
-const Location = ({ cwDataFromApi, oneCallDataFromApi }) => {
+const TodayLocation = ({ cwDataFromApi, oneCallDataFromApi, setCurrentView}) => {
   // Change from Kelvin to Degrees Celcius
   const kelvinToCelcius = (num) => {
     num = num - 273;
@@ -16,19 +15,24 @@ const Location = ({ cwDataFromApi, oneCallDataFromApi }) => {
 
   const mainWeatherAttribute = [];
   if (oneCallDataFromApi !== undefined && oneCallDataFromApi != null) {
-    console.log(oneCallDataFromApi.current);
     oneCallDataFromApi.current.weather.map((item) =>
       mainWeatherAttribute.push(item.main)
     );
   }
-  console.log(mainWeatherAttribute);
-  if (mainWeatherAttribute.includes("Clear"))  {
-    document.body.classList.add("background-warm");
-    mainWeatherAttribute.pop();
-    } else if (mainWeatherAttribute.includes("Clouds"))  {
-    document.body.classList.add("background-cloudy"); // Need to remove hardcoding of London.
-    mainWeatherAttribute.length = 0; // Problem where the array doesnt reset itself so background doesnt change.
-  }
+  console.log(`Main Weather Attributes: ${mainWeatherAttribute}`);
+
+  const findMainWeatherAttribute = (apiData) => {
+    const listMainWeatherAttribute = [];
+    if (apiData !== undefined && apiData != null) {
+      apiData.current.weather.map((item) =>
+        listMainWeatherAttribute.push(item.main)
+      );
+    } else {
+      console.log("Failed to find main weather attribute");
+    }
+    return listMainWeatherAttribute;
+  };
+
   return (
     <div className="location">
       {/* <GeoButtons GEOCODING_API_KEY={GEOCODING_API_KEY} /> */}
@@ -43,6 +47,7 @@ const Location = ({ cwDataFromApi, oneCallDataFromApi }) => {
       </h3>
       <SelectDay />
       <TempByHour
+        findMainWeatherAttribute={findMainWeatherAttribute}
         oneCallDataFromApi={oneCallDataFromApi}
         kelvinToCelcius={kelvinToCelcius}
       />
@@ -58,4 +63,4 @@ const Location = ({ cwDataFromApi, oneCallDataFromApi }) => {
   );
 };
 
-export default Location;
+export default TodayLocation;

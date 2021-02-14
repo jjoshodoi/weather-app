@@ -39,7 +39,6 @@ function App() {
     );
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       setOneCallDataFromApi(data);
     } else {
       alert("Enter a valid Location");

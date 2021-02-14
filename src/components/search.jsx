@@ -1,7 +1,6 @@
 import React from "react";
 
 const SearchBar = ({
-  WEATHER_API_KEY,
   update,
   search,
   getUserLocation,

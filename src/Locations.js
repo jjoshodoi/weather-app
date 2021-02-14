@@ -1,5 +1,4 @@
 import React from "react";
-import SearchBar from "./components/search";
 import DisplayDate from "./components/displayDate";
 import SelectDay from "./components/selectDay";
 import GeoButtons from "./components/geoButtons";
@@ -16,12 +15,23 @@ const Location = ({ cwDataFromApi, oneCallDataFromApi }) => {
 
   const mainWeatherAttribute = [];
   if (oneCallDataFromApi !== undefined && oneCallDataFromApi != null) {
-    console.log(oneCallDataFromApi.current);
     oneCallDataFromApi.current.weather.map((item) =>
       mainWeatherAttribute.push(item.main)
     );
   }
-  console.log(mainWeatherAttribute);
+  console.log(`Main Weather Attributes: ${mainWeatherAttribute}`);
+
+  const findMainWeatherAttribute = (apiData) => {
+    const listMainWeatherAttribute = [];
+    if (apiData !== undefined && apiData != null) {
+      apiData.current.weather.map((item) =>
+        listMainWeatherAttribute.push(item.main)
+      );
+    } else {
+      console.log("Failed to find main weather attribute");
+    }
+    return listMainWeatherAttribute;
+  };
 
   return (
     <div className="location">
@@ -37,6 +47,7 @@ const Location = ({ cwDataFromApi, oneCallDataFromApi }) => {
       </h3>
       <SelectDay />
       <TempByHour
+        findMainWeatherAttribute={findMainWeatherAttribute}
         oneCallDataFromApi={oneCallDataFromApi}
         kelvinToCelcius={kelvinToCelcius}
       />

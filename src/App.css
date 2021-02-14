@@ -1,11 +1,7 @@
 .App {
   text-align: center;
   height: 1000px;
-  background: linear-gradient(
-    179.31deg,
-    rgba(48, 87, 89, 0.97) 9.28%,
-    #fdfeff 167.45%
-  );
+
 }
 
 .Search-form {
@@ -45,6 +41,7 @@
     179.31deg,
     rgba(48, 87, 89, 0.97) 9.28%,
     #fdfeff 167.45%
+    
   );
 }
 
@@ -56,10 +53,17 @@
   );
 }
 
-.background-cloudy {
+.background-thunderstorm {
   background: linear-gradient(
     179.31deg,
     rgba(87, 42, 182, 0.97) 9.28%,
+    #fdfeff 167.45%
+  );
+}
+
+.background-cloudy {
+  background: linear-gradient(
+    #000000,
     #fdfeff 167.45%
   );
 }

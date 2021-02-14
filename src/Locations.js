@@ -22,7 +22,13 @@ const Location = ({ cwDataFromApi, oneCallDataFromApi }) => {
     );
   }
   console.log(mainWeatherAttribute);
-
+  if (mainWeatherAttribute.includes("Clear"))  {
+    document.body.classList.add("background-warm");
+    mainWeatherAttribute.pop();
+    } else if (mainWeatherAttribute.includes("Clouds"))  {
+    document.body.classList.add("background-cloudy"); // Need to remove hardcoding of London.
+    mainWeatherAttribute.length = 0; // Problem where the array doesnt reset itself so background doesnt change.
+  }
   return (
     <div className="location">
       {/* <GeoButtons GEOCODING_API_KEY={GEOCODING_API_KEY} /> */}

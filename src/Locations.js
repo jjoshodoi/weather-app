@@ -6,7 +6,11 @@ import AdditionalStats from "./components/additionalStats";
 import SunriseSunset from "./components/sunriseSunset";
 import TempByHour from "./components/tempTiles/tempByHour";
 
-const TodayLocation = ({ cwDataFromApi, oneCallDataFromApi, setCurrentView}) => {
+const TodayLocation = ({
+  cwDataFromApi,
+  oneCallDataFromApi,
+  setCurrentView,
+}) => {
   // Change from Kelvin to Degrees Celcius
   const kelvinToCelcius = (num) => {
     num = num - 273;
@@ -45,7 +49,7 @@ const TodayLocation = ({ cwDataFromApi, oneCallDataFromApi, setCurrentView}) => 
         {cwDataFromApi && cwDataFromApi.name},{" "}
         {cwDataFromApi && cwDataFromApi.sys.country}
       </h3>
-      <SelectDay />
+      <SelectDay setCurrentView={setCurrentView} />
       <TempByHour
         findMainWeatherAttribute={findMainWeatherAttribute}
         oneCallDataFromApi={oneCallDataFromApi}

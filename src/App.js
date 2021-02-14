@@ -13,7 +13,7 @@ function App() {
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("London");
   // Select relevant Page View
-  const [currentView, setCurrentView] = useState("view1");
+  const [currentView, setCurrentView] = useState("Today");
   // store our data from api in this
   const [cwDataFromApi, setCWDataFromApi] = useState(null);
   const [oneCallDataFromApi, setOneCallDataFromApi] = useState(null);
@@ -104,32 +104,6 @@ function App() {
     }
   };
 
-  var findView = (currentView) => {
-    switch (currentView) {
-      case "TomorrowLocationView":
-        return (
-          <TomorrowLocation
-            cwDataFromApi={cwDataFromApi}
-            oneCallDataFromApi={oneCallDataFromApi}
-          />
-        );
-      case "Next7DaysView":
-        return (
-          <Next7DaysView
-            cwDataFromApi={cwDataFromApi}
-            oneCallDataFromApi={oneCallDataFromApi}
-          />
-        );
-      default:
-        return (
-          <TodayLocation
-            cwDataFromApi={cwDataFromApi}
-            oneCallDataFromApi={oneCallDataFromApi}
-          />
-        );
-    }
-  };
-
   return (
     <div className="App">
       <SearchBar
@@ -139,6 +113,7 @@ function App() {
         getUserLocation={getUserLocation}
         getSearch={getSearch}
       />
+      
       {/* switch to select relevant page  */}
       {(() => {
         switch (currentView) {
@@ -148,7 +123,6 @@ function App() {
                 cwDataFromApi={cwDataFromApi}
                 oneCallDataFromApi={oneCallDataFromApi}
                 setCurrentView={setCurrentView}
-                
               />
             );
           case "Next7DaysView":

@@ -1,11 +1,15 @@
 import React from "react";
 
-const SelectDay = () => {
+const SelectDay = ({ setCurrentView }) => {
   return (
     <div>
-      <button>Today</button>
-      <button>Tomorrow</button>
-      <button>Next 7 Days</button>
+      <button onClick={() => setCurrentView("Today")}>Today</button>
+      <button onClick={() => setCurrentView("TomorrowLocationView")}>
+        Tomorrow
+      </button>
+      <button onClick={() => setCurrentView("Next7DaysView")}>
+        Next 7 Days
+      </button>
     </div>
   );
 };

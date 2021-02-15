@@ -25,7 +25,7 @@ const DisplayDate = ({ tomorrow }) => {
     todayOrTomorrowText = "Tomorrow";
   }
 
-  var day = days[d.getDay()];
+  var day = days[d.getDay() - 1];
   var date = d.getDate();
   var month = months[d.getMonth()];
   // console.log(day, month, date);

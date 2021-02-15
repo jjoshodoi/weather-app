@@ -47,11 +47,12 @@ const TomorrowLocation = ({
       />
       <SelectDay setCurrentView={setCurrentView} tomorrow={tomorrow} />
       {/* Temp By Hour will be done starting from 0 depending on country. */}
-      {/* <TempByHour
+      <TempByHour
         findMainWeatherAttribute={findMainWeatherAttribute}
         oneCallDataFromApi={oneCallDataFromApi}
         kelvinToCelcius={kelvinToCelcius}
-      /> */}
+        tomorrow={tomorrow}
+      />
 
       <div>
         <SunriseSunset

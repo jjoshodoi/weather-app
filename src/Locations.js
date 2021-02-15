@@ -50,6 +50,7 @@ const TodayLocation = ({
         findMainWeatherAttribute={findMainWeatherAttribute}
         oneCallDataFromApi={oneCallDataFromApi}
         kelvinToCelcius={kelvinToCelcius}
+        tomorrow={tomorrow}
       />
 
       <div>

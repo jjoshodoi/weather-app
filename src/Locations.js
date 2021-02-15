@@ -14,22 +14,22 @@ const TodayLocation = ({
   kelvinToCelcius,
   tomorrow,
 }) => {
-  const mainWeatherAttribute = [];
-  if (oneCallDataFromApi !== undefined && oneCallDataFromApi != null) {
-    oneCallDataFromApi.current.weather.map((item) =>
-      mainWeatherAttribute.push(item.main)
-    );
-  }
-  console.log(`Main Weather Attributes: ${mainWeatherAttribute}`);
+  // const mainWeatherAttribute = [];
+  // if (oneCallDataFromApi !== undefined && oneCallDataFromApi != null) {
+  //   oneCallDataFromApi.current.weather.map((item) =>
+  //     mainWeatherAttribute.push(item.main)
+  //   );
+  // }
+  // console.log(`Main Weather Attributes: ${mainWeatherAttribute}`);
 
-  if (mainWeatherAttribute.includes("Clear"))  {
-    document.body.classList.add("background-warm");
-    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); // Problem where the array doesnt reset itself so background doesnt change.
-    } else if (mainWeatherAttribute.includes("Clouds"))  {
-    document.body.classList.add("background-cloudy"); // Need to remove hardcoding of London.
-    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); // Problem where the array doesnt reset itself so background doesnt change.
-    console.log(mainWeatherAttribute);
-  }
+  // if (mainWeatherAttribute.includes("Clear"))  {
+  //   document.body.classList.add("background-warm");
+  //   mainWeatherAttribute.splice(0, mainWeatherAttribute.length); // Problem where the array doesnt reset itself so background doesnt change.
+  //   } else if (mainWeatherAttribute.includes("Clouds"))  {
+  //   document.body.classList.add("background-cloudy"); // Need to remove hardcoding of London.
+  //   mainWeatherAttribute.splice(0, mainWeatherAttribute.length); // Problem where the array doesnt reset itself so background doesnt change.
+  //   console.log(mainWeatherAttribute);
+  // }
 
   const findMainWeatherAttribute = (apiData) => {
     const listMainWeatherAttribute = [];

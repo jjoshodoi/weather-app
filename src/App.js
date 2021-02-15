@@ -17,11 +17,16 @@ function App() {
   // store our data from api in this
   const [cwDataFromApi, setCWDataFromApi] = useState(null);
   const [oneCallDataFromApi, setOneCallDataFromApi] = useState(null);
+  const [mainWeatherAttribute, setMainWeatherAttribute] = useState([]);
 
   /// SEARCH CODE
   useEffect(() => {
     getLocation(); //Need to add weather for next 7 days,
   }, [query]);
+
+  // useEffect(() => {
+  //   getMainWeather(); //Need to add weather for next 7 days,
+  // }, []);
 
   const getLocation = async () => {
     const response = await fetch(
@@ -44,6 +49,10 @@ function App() {
     if (response.ok) {
       const data = await response.json();
       setOneCallDataFromApi(data);
+      const tempWeather = [];
+      data.current.weather.map((item) => tempWeather.push(item.main));
+      console.log(tempWeather);
+      setMainWeatherAttribute(tempWeather);
     } else {
       alert("Enter a valid Location");
     }
@@ -75,12 +84,12 @@ function App() {
     );
     const data = await response.json();
     await callOneCall(data.coord.lon, data.coord.lat);
-    console.log(
-      "Latitude: " +
-        position.coords.latitude +
-        "<br>Longitude: " +
-        position.coords.longitude
-    );
+    // console.log(
+    //   "Latitude: " +
+    //     position.coords.latitude +
+    //     "<br>Longitude: " +
+    //     position.coords.longitude
+    // );
     setCWDataFromApi(data);
   };
 
@@ -110,6 +119,18 @@ function App() {
     return Math.round(num);
   };
 
+
+  if (mainWeatherAttribute.includes("Clear")) {
+    document.body.classList.remove(document.body.classList.value);
+    document.body.classList.add("background-warm");
+    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); // Problem where the array doesnt reset itself so background doesnt change.
+  } else if (mainWeatherAttribute.includes("Clouds")) {
+    document.body.classList.remove(document.body.classList.value);
+    document.body.classList.add("background-cloudy"); // Need to remove hardcoding of London.
+    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); // Problem where the array doesnt reset itself so background doesnt change.
+  }
+  console.log(document.body.classList);
+
   return (
     <div className="App">
       <SearchBar
@@ -130,7 +151,7 @@ function App() {
                 oneCallDataFromApi={oneCallDataFromApi}
                 setCurrentView={setCurrentView}
                 kelvinToCelcius={kelvinToCelcius}
-                tomorrow = {true} // Use this value to see if we are looking for tomorrows data or not
+                tomorrow={true} // Use this value to see if we are looking for tomorrows data or not
               />
             );
           case "Next7DaysView":
@@ -149,7 +170,7 @@ function App() {
                 oneCallDataFromApi={oneCallDataFromApi}
                 setCurrentView={setCurrentView}
                 kelvinToCelcius={kelvinToCelcius}
-                tomorrow = {false} 
+                tomorrow={false}
               />
             );
         }

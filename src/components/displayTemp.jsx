@@ -17,7 +17,7 @@ const DisplayTemp = ({
 
   const currentHour = new Date().getHours();
   const differenceFrom12AM = 24 - currentHour;
-  console.log(differenceFrom12AM);
+  // console.log(differenceFrom12AM);
 
   return (
     <div>

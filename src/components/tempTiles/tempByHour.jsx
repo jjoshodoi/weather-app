@@ -5,16 +5,14 @@ const TempByHour = ({
   oneCallDataFromApi,
   kelvinToCelcius,
   tomorrow,
-  findMainWeatherAttribute,
 }) => {
-  
   // Finds Current Hour
   const currentHour = new Date().getHours();
 
   // Finds hours from now to 12AM
   const differenceFrom12AM = 24 - currentHour;
 
-  console.log(oneCallDataFromApi && oneCallDataFromApi.hourly.slice(0, 24));
+  // console.log(oneCallDataFromApi && oneCallDataFromApi.hourly.slice(0, 24));
 
   const timeDifference =
     oneCallDataFromApi && oneCallDataFromApi.timezone_offset / 3600;

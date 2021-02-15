@@ -119,15 +119,19 @@ function App() {
     return Math.round(num);
   };
 
-
-  if (mainWeatherAttribute.includes("Clear")) {
-    document.body.classList.remove(document.body.classList.value);
-    document.body.classList.add("background-warm");
-    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); // Problem where the array doesnt reset itself so background doesnt change.
+  if (mainWeatherAttribute.includes("Clear") && (kelvinToCelcius(
+    oneCallDataFromApi && oneCallDataFromApi.current.temp) > 16)) { 
+    document.body.className = "background-warm";
+    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); 
   } else if (mainWeatherAttribute.includes("Clouds")) {
-    document.body.classList.remove(document.body.classList.value);
-    document.body.classList.add("background-cloudy"); // Need to remove hardcoding of London.
-    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); // Problem where the array doesnt reset itself so background doesnt change.
+    document.body.className = "background-cloudy";
+    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); 
+  } else if (mainWeatherAttribute.includes("Clear")) { 
+    document.body.className = "background-clear"; 
+    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); 
+  } else if (mainWeatherAttribute.includes("Rain")) { 
+    document.body.className = "background-rain"; 
+    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); 
   }
   console.log(document.body.classList);
 

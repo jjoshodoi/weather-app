@@ -4,6 +4,7 @@ import TodayLocation from "./Locations";
 import SearchBar from "./components/search";
 import TomorrowLocation from "./TomorrowLocation";
 import Next7DaysView from "./Next7Days";
+// import { GoogleDropDown } from './GoogleDropDown';
 
 function App() {
   //hide api keys
@@ -119,16 +120,20 @@ function App() {
     return Math.round(num);
   };
 
-
   if (mainWeatherAttribute.includes("Clear")) {
-    document.body.classList.remove(document.body.classList.value);
-    document.body.classList.add("background-warm");
-    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); // Problem where the array doesnt reset itself so background doesnt change.
+    document.body.style.backgroundColor = "lightblue"; // Problem where the array doesnt reset itself so background doesnt change.
   } else if (mainWeatherAttribute.includes("Clouds")) {
-    document.body.classList.remove(document.body.classList.value);
-    document.body.classList.add("background-cloudy"); // Need to remove hardcoding of London.
-    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); // Problem where the array doesnt reset itself so background doesnt change.
+    document.body.style.backgroundColor = "grey";
   }
+  // if (mainWeatherAttribute.includes("Clear")) {
+  //   document.body.classList.remove(document.body.classList.value);
+  //   document.body.classList.add("background-warm");
+  //   mainWeatherAttribute.splice(0, mainWeatherAttribute.length); // Problem where the array doesnt reset itself so background doesnt change.
+  // } else if (mainWeatherAttribute.includes("Clouds")) {
+  //   document.body.classList.remove(document.body.classList.value);
+  //   document.body.classList.add("background-cloudy"); // Need to remove hardcoding of London.
+  //   mainWeatherAttribute.splice(0, mainWeatherAttribute.length); // Problem where the array doesnt reset itself so background doesnt change.
+  // }
   console.log(document.body.classList);
 
   return (
@@ -140,6 +145,17 @@ function App() {
         getUserLocation={getUserLocation}
         getSearch={getSearch}
       />
+      {/* <GoogleComponent
+        apiKey={GEOCODING_API_KEY}
+        language={"en"}
+        country={"country:in|country:us"}
+        coordinates={true}
+        locationBoxStyle={"custom-style"}
+        locationListStyle={"custom-style-list"}
+        onChange={(e) => {
+          this.setState({ place: e });
+        }}
+      /> */}
 
       {/* switch to select relevant page  */}
       {(() => {

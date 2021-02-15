@@ -19,6 +19,10 @@ const DisplayTemp = ({
                 <h4>{`Feels Like ${kelvinToCelcius(
                   oneCallDataFromApi && oneCallDataFromApi.current.feels_like
                 )}°C`}</h4>
+                <h3>
+                  {oneCallDataFromApi &&
+                    oneCallDataFromApi.current.weather[0].main}
+                </h3>
               </div>
             );
           default:
@@ -31,6 +35,9 @@ const DisplayTemp = ({
                       oneCallDataFromApi &&
                         oneCallDataFromApi.daily[1].temp.morn
                     )} °C`}
+                    {/* <h4>{oneCallDataFromApi &&
+                    oneCallDataFromApi.daily[1].weather[0].main}</h4> */}
+                    {/* {replace when doing termp tiles for this page} */}
                     <h5>{`Feels Like ${kelvinToCelcius(
                       oneCallDataFromApi &&
                         oneCallDataFromApi.daily[1].feels_like.morn

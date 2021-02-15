@@ -13,7 +13,7 @@ function App() {
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("London");
   // Select relevant Page View
-  const [currentView, setCurrentView] = useState("view1");
+  const [currentView, setCurrentView] = useState("Today");
   // store our data from api in this
   const [cwDataFromApi, setCWDataFromApi] = useState(null);
   const [oneCallDataFromApi, setOneCallDataFromApi] = useState(null);
@@ -39,7 +39,7 @@ function App() {
 
   const callOneCall = async (lon, lat) => {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=daily,minutely&appid=${WEATHER_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${WEATHER_API_KEY}`
     );
     if (response.ok) {
       const data = await response.json();
@@ -104,30 +104,10 @@ function App() {
     }
   };
 
-  var findView = (currentView) => {
-    switch (currentView) {
-      case "TomorrowLocationView":
-        return (
-          <TomorrowLocation
-            cwDataFromApi={cwDataFromApi}
-            oneCallDataFromApi={oneCallDataFromApi}
-          />
-        );
-      case "Next7DaysView":
-        return (
-          <Next7DaysView
-            cwDataFromApi={cwDataFromApi}
-            oneCallDataFromApi={oneCallDataFromApi}
-          />
-        );
-      default:
-        return (
-          <TodayLocation
-            cwDataFromApi={cwDataFromApi}
-            oneCallDataFromApi={oneCallDataFromApi}
-          />
-        );
-    }
+  // Change Kelvin to Celcius
+  const kelvinToCelcius = (num) => {
+    num = num - 273;
+    return Math.round(num);
   };
 
   return (
@@ -139,6 +119,7 @@ function App() {
         getUserLocation={getUserLocation}
         getSearch={getSearch}
       />
+
       {/* switch to select relevant page  */}
       {(() => {
         switch (currentView) {
@@ -148,7 +129,8 @@ function App() {
                 cwDataFromApi={cwDataFromApi}
                 oneCallDataFromApi={oneCallDataFromApi}
                 setCurrentView={setCurrentView}
-                
+                kelvinToCelcius={kelvinToCelcius}
+                tomorrow = {true} // Use this value to see if we are looking for tomorrows data or not
               />
             );
           case "Next7DaysView":
@@ -157,6 +139,7 @@ function App() {
                 cwDataFromApi={cwDataFromApi}
                 oneCallDataFromApi={oneCallDataFromApi}
                 setCurrentView={setCurrentView}
+                kelvinToCelcius={kelvinToCelcius}
               />
             );
           default:
@@ -165,6 +148,8 @@ function App() {
                 cwDataFromApi={cwDataFromApi}
                 oneCallDataFromApi={oneCallDataFromApi}
                 setCurrentView={setCurrentView}
+                kelvinToCelcius={kelvinToCelcius}
+                tomorrow = {false} 
               />
             );
         }

@@ -5,14 +5,15 @@ import SelectDay from "./components/selectDay";
 import AdditionalStats from "./components/additionalStats";
 import SunriseSunset from "./components/sunriseSunset";
 import TempByHour from "./components/tempTiles/tempByHour";
+import DisplayTemp from "./components/displayTemp";
 
-const TodayLocation = ({ cwDataFromApi, oneCallDataFromApi, setCurrentView}) => {
-  // Change from Kelvin to Degrees Celcius
-  const kelvinToCelcius = (num) => {
-    num = num - 273;
-    return Math.round(num);
-  };
-
+const TodayLocation = ({
+  cwDataFromApi,
+  oneCallDataFromApi,
+  setCurrentView,
+  kelvinToCelcius,
+  tomorrow,
+}) => {
   const mainWeatherAttribute = [];
   if (oneCallDataFromApi !== undefined && oneCallDataFromApi != null) {
     oneCallDataFromApi.current.weather.map((item) =>
@@ -47,23 +48,23 @@ const TodayLocation = ({ cwDataFromApi, oneCallDataFromApi, setCurrentView}) => 
     <div className="location">
       {/* <GeoButtons GEOCODING_API_KEY={GEOCODING_API_KEY} /> */}
 
-      <DisplayDate />
-      <h1>{`${kelvinToCelcius(
-        oneCallDataFromApi && oneCallDataFromApi.current.temp
-      )} °C`}</h1>
-      <h3>
-        {cwDataFromApi && cwDataFromApi.name},{" "}
-        {cwDataFromApi && cwDataFromApi.sys.country}
-      </h3>
-      <SelectDay />
+      <DisplayDate tomorrow={tomorrow} />
+      <DisplayTemp
+        oneCallDataFromApi={oneCallDataFromApi}
+        cwDataFromApi={cwDataFromApi}
+        kelvinToCelcius={kelvinToCelcius}
+        tomorrow={tomorrow}
+      />
+      <SelectDay setCurrentView={setCurrentView} />
       <TempByHour
         findMainWeatherAttribute={findMainWeatherAttribute}
         oneCallDataFromApi={oneCallDataFromApi}
         kelvinToCelcius={kelvinToCelcius}
+        tomorrow={tomorrow}
       />
 
       <div>
-        <SunriseSunset oneCallDataFromApi={oneCallDataFromApi} />
+        <SunriseSunset oneCallDataFromApi={oneCallDataFromApi} tomorrow={tomorrow} />
         <h3>
           Humidity: {oneCallDataFromApi && oneCallDataFromApi.current.humidity}
         </h3>

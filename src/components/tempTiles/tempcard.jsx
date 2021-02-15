@@ -7,6 +7,8 @@ const TempCard = ({
   currentHour,
   oneCallDataFromApi,
   kelvinToCelcius,
+  differenceFrom12AM,
+  tomorrow,
 }) => {
   // map every weather attribute in api
   var weatherAttributeForCard =
@@ -15,11 +17,20 @@ const TempCard = ({
   return (
     <div className="tile-border">
       <div className="card">
-        {indexNum === 0
-          ? "Now"
-          : currentHour + indexNum + timeDifference > 23
-          ? currentHour + indexNum + timeDifference - 24
-          : currentHour + indexNum + timeDifference}
+        {(() => {
+          switch (tomorrow) {
+            case false:
+              return indexNum === 0
+                ? "Now"
+                : currentHour + indexNum + timeDifference > 23
+                ? currentHour + indexNum + timeDifference - 24
+                : currentHour + indexNum + timeDifference;
+            case true:
+              return currentHour + indexNum + differenceFrom12AM - 24; // Returning 12am onwards
+            default:
+              return "N/A Times";
+          }
+        })()}
       </div>
       <div>{weatherAttributeForCard}</div>
       <div>{`${kelvinToCelcius(

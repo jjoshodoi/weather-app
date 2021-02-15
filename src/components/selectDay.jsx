@@ -1,11 +1,16 @@
 import React from "react";
 
-const SelectDay = () => {
+const SelectDay = ({ setCurrentView }) => {
   return (
+    //Should we Reset day back to Today when they search.
     <div>
-      <button>Today</button>
-      <button>Tomorrow</button>
-      <button>Next 7 Days</button>
+      <button onClick={() => setCurrentView("Today")}>Now</button>
+      <button onClick={() => setCurrentView("TomorrowLocationView")}>
+        Tomorrow
+      </button>
+      <button onClick={() => setCurrentView("Next7DaysView")}>
+        Next 7 Days
+      </button>
     </div>
   );
 };

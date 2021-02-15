@@ -18,7 +18,7 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow }) => {
             return (
               <div>
                 <h3>
-                  Sunrise:
+                  Sunrise:{" "}
                   {oneCallDataFromApi &&
                     epochToDate(oneCallDataFromApi.current.sunrise).getHours()}
                   :
@@ -33,7 +33,7 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow }) => {
                     ).getSeconds()}
                 </h3>
                 <h3>
-                  Sunset:
+                  Sunset:{" "}
                   {oneCallDataFromApi &&
                     epochToDate(oneCallDataFromApi.current.sunset).getHours()}
                   :
@@ -49,7 +49,7 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow }) => {
             return (
               <div>
                 <h3>
-                  Sunrise:
+                  Sunrise:{" "}
                   {oneCallDataFromApi &&
                     epochToDate(oneCallDataFromApi.daily[1].sunrise).getHours()}
                   :
@@ -64,7 +64,7 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow }) => {
                     ).getSeconds()}
                 </h3>
                 <h3>
-                  Sunset:
+                  Sunset:{" "}
                   {oneCallDataFromApi &&
                     epochToDate(oneCallDataFromApi.daily[1].sunset).getHours()}
                   :

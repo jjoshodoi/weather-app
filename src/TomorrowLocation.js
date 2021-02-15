@@ -60,7 +60,7 @@ const TomorrowLocation = ({
           tomorrow={tomorrow}
         />
         <h3>
-          Humidity: {oneCallDataFromApi && oneCallDataFromApi.current.humidity}
+          Humidity: {oneCallDataFromApi && oneCallDataFromApi.current.humidity}%
         </h3>
       </div>
       <AdditionalStats />

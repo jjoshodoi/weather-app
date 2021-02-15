@@ -53,6 +53,14 @@
   );
 }
 
+.background-clear {
+  background: linear-gradient(
+    179.31deg,
+    rgba(120, 192, 197, 0.97) 9.28%, 
+    #FDFEFF 167.45%
+  );
+}
+
 .background-thunderstorm {
   background: linear-gradient(
     179.31deg,

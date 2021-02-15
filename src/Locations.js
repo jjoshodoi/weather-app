@@ -22,6 +22,15 @@ const TodayLocation = ({
   }
   console.log(`Main Weather Attributes: ${mainWeatherAttribute}`);
 
+  if (mainWeatherAttribute.includes("Clear"))  {
+    document.body.classList.add("background-warm");
+    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); // Problem where the array doesnt reset itself so background doesnt change.
+    } else if (mainWeatherAttribute.includes("Clouds"))  {
+    document.body.classList.add("background-cloudy"); // Need to remove hardcoding of London.
+    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); // Problem where the array doesnt reset itself so background doesnt change.
+    console.log(mainWeatherAttribute);
+  }
+
   const findMainWeatherAttribute = (apiData) => {
     const listMainWeatherAttribute = [];
     if (apiData !== undefined && apiData != null) {
@@ -34,6 +43,7 @@ const TodayLocation = ({
     return listMainWeatherAttribute;
   };
 
+  
   return (
     <div className="location">
       {/* <GeoButtons GEOCODING_API_KEY={GEOCODING_API_KEY} /> */}

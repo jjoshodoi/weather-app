@@ -5,6 +5,8 @@ import TodayLocation from "./Locations";
 import SearchBar from "./components/search";
 import TomorrowLocation from "./TomorrowLocation";
 import Next7DaysView from "./Next7Days";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
 
 function App({ isScriptLoaded, isScriptLoadSucceed }) {
   //hide api keys
@@ -30,11 +32,16 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   const [address, setAddress] = useState("");
 
   // store the current contents of history locations
-  const [historyLocations, setHistoryLocations] = useState([]);
+  // const [historyLocations, setHistoryLocations] = useState([]);
 
   // store an updated list of history locations
-  const [updatedHistoryLocations, setUpdatedHistoryLocations] = useState(() => [
-    localStorage.getItem("history"),
+  // const [updatedHistoryLocations, setUpdatedHistoryLocations] = useState(() => [
+  //   localStorage.getItem("history"),
+  // ]);
+
+  // store list of favourites
+  const [favourites, setFavourites] = useState(() => [
+    localStorage.getItem("favourites"),
   ]);
 
   useEffect(() => {
@@ -45,20 +52,42 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     getUserLocation();
   }, []); // Option?
 
+  // useEffect(() => {
+  //   getHistory();
+  // }, []);
+
+  // useEffect(() => {
+  //   writeHistory();
+  // }, [updatedHistoryLocations]);
+
   useEffect(() => {
-    getHistory();
+    readFavourites();
   }, []);
 
   useEffect(() => {
-    writeHistory();
-  }, [updatedHistoryLocations]);
+    writeIntoFavourites
+  })
 
   // Clear History
-  const clearHistory = () => {
+  const clearFavourites = () => {
     localStorage.clear();
   };
 
-  // clearHistory();
+  // localStorage - Read
+  const readFavourites = () => {
+    setFavourites(localStorage.getItem("favourites"));
+  };
+
+  // localStorage - Writes
+  const writeIntoFavourites = () => {
+    if (!favourites.includes(query)) {
+      setFavourites((currentFavs) => [...currentFavs, query]);
+    }
+  };
+
+  console.log("Favourites: ", favourites);
+
+  // clearFavourites();
 
   // Update the search bar accordingly
   const handleChange = (value) => {
@@ -66,19 +95,20 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   };
 
   // Get current history
-  const getHistory = () => {
-    if (localStorage.getItem("history") != null) {
-      setHistoryLocations(localStorage.getItem("history"));
-    }
-    console.log("Can't Read Favourites if Empty");
-  };
+  // const getHistory = () => {
+  //   if (localStorage.getItem("history") != null) {
+  //     setHistoryLocations(localStorage.getItem("history"));
+  //   }
+  //   console.log("Can't Read Favourites if Empty");
+  // };
 
   // write into history
-  const writeHistory = () => {
-    console.log(historyLocations, updatedHistoryLocations);
-    localStorage.setItem("history", updatedHistoryLocations);
-    setHistoryLocations(updatedHistoryLocations);
-  };
+  // const writeHistory = () => {
+  //   console.log(historyLocations, updatedHistoryLocations);
+  //   localStorage.setItem("history", updatedHistoryLocations);
+  //   setHistoryLocations(updatedHistoryLocations);
+  // };
+
   // Set address and Set Query, set address to empty after making it equal to query
   const handleSelect = async (value) => {
     setAddress(value);
@@ -92,12 +122,12 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     );
     // Check here if the response is valid
     if (response.ok) {
-      if (!updatedHistoryLocations.includes(query)) {
-        setUpdatedHistoryLocations((historyLocations) => [
-          ...historyLocations,
-          query,
-        ]);
-      }
+      // if (!updatedHistoryLocations.includes(query)) {
+      //   setUpdatedHistoryLocations((historyLocations) => [
+      //     ...historyLocations,
+      //     query,
+      //   ]);
+      // }
       const data = await response.json();
       setCWDataFromApi(data);
       await callOneCall(data.coord.lon, data.coord.lat);
@@ -214,6 +244,21 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
           handleSelect={handleSelect}
           address={address}
         />
+        <button onClick={writeIntoFavourites}>Add To Favourites</button>
+
+        {/* <DropdownButton
+          id="dropdown-split-variants-primary"
+          title="Favourite Locations"
+        >
+          <div>
+            {favourites.map((item) => (
+              <Dropdown.Item>{item}</Dropdown.Item>
+            ))}
+          </div>
+          <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+          <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+          <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        </DropdownButton> */}
 
         {/* switch to select relevant page  */}
         {(() => {

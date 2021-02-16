@@ -15,12 +15,14 @@ const Next7DaysView = ({
       <div>
         <h1>Next 7 Days</h1>
         {oneCallDataFromApi &&
-          oneCallDataFromApi.daily.slice(0, 7).map((day, index) => (
+          oneCallDataFromApi.daily.slice(0, 8).map((day, index) => (
             <div key={index}>
-              {today + index === 0
+              {index === 0
                 ? "Today"
                 : index === 1
                 ? "Tomorrow"
+                : today + index > 6
+                ? days[today + index - 7]
                 : days[today + index]}{" "}
               {day.weather[0].main} icon{" "}
               {`Highs: ${day.temp.max} Lows: ${day.temp.min}`}

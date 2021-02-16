@@ -1,6 +1,7 @@
 import React from "react";
 import TempCard from "./tempcard";
 
+
 const TempByHour = ({
   oneCallDataFromApi,
   kelvinToCelcius,
@@ -61,7 +62,9 @@ const TempByHour = ({
                     kelvinToCelcius={kelvinToCelcius}
                     differenceFrom12AM={differenceFrom12AM}
                     tomorrow={tomorrow}
+                    
                   />
+                  
                 ))
             );
           default:

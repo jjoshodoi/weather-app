@@ -225,13 +225,6 @@ if (isScriptLoadSucceed && isScriptLoaded) {
           handleSelect={handleSelect}
           address={address}
         />
-        <div>
-          {historyLocations.map((item) => (
-            <ul>
-              <li>{item}</li>
-            </ul>
-          ))}
-        </div>
 
         {/* switch to select relevant page  */}
         {(() => {

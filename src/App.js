@@ -12,7 +12,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   const GEOCODING_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
   const [search, setSearch] = useState("");
-  const [query, setQuery] = useState("London");
+  const [query, setQuery] = useState("London, UK");
   // Select relevant Page View
   const [currentView, setCurrentView] = useState("Today");
   // store our data from api in this
@@ -20,21 +20,54 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   const [oneCallDataFromApi, setOneCallDataFromApi] = useState(null);
   const [mainWeatherAttribute, setMainWeatherAttribute] = useState([]);
   const [address, setAddress] = useState("");
+  const [historyLocations, setHistoryLocations] = useState([]);
+  const [updatedHistoryLocations, setUpdatedHistoryLocations] = useState(() => [
+    localStorage.getItem("history"),
+  ]);
 
   /// SEARCH CODE
   useEffect(() => {
-    getLocation(); //Need to add weather for next 7 days,
+    getLocation();
   }, [query]);
 
-  // useEffect(() => {
-  //   getMainWeather(); //Need to add weather for next 7 days,
-  // }, []);
+  useEffect(() => {
+    getUserLocation();
+  }, []); // Option?
+
+  useEffect(() => {
+    getHistory();
+  }, []);
+
+  useEffect(() => {
+    writeHistory();
+  }, [updatedHistoryLocations]);
+
+  const clearHistory = () => {
+    localStorage.clear();
+  };
+
+  // clearHistory();
 
   const handleChange = (value) => {
     setAddress(value);
   };
 
-  const handleSelect = (value) => {
+  const getHistory = () => {
+    if (localStorage.getItem("history") != null) {
+      setHistoryLocations(localStorage.getItem("history"));
+    }
+    console.log("Can't Read Favourites if Empty");
+  };
+
+  const writeHistory = () => {
+    console.log(historyLocations, updatedHistoryLocations);
+    localStorage.setItem("history", updatedHistoryLocations);
+    setHistoryLocations(updatedHistoryLocations);
+
+    // setHistoryLocations((historyLocations) => [...historyLocations, query]);
+  };
+
+  const handleSelect = async (value) => {
     setAddress(value);
     setQuery(value);
     setAddress("");
@@ -46,6 +79,12 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     );
     // Check here if the response is valid
     if (response.ok) {
+      if (!historyLocations.includes(query)) {
+        setUpdatedHistoryLocations((historyLocations) => [
+          ...historyLocations,
+          query,
+        ]);
+      }
       const data = await response.json();
       setCWDataFromApi(data);
       await callOneCall(data.coord.lon, data.coord.lat);

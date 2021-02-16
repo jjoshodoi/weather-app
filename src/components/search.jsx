@@ -32,6 +32,7 @@ const SearchBar = ({
           <div>
             <input
               {...getInputProps({
+                className: "Search-Bar",
                 placeholder: "Enter Address ...",
                 // className: "location-search-input",
               })}

@@ -11,21 +11,32 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   const WEATHER_API_KEY = process.env.REACT_APP_API_KEY;
   const GEOCODING_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
   const [query, setQuery] = useState("London, UK");
+
   // Select relevant Page View
   const [currentView, setCurrentView] = useState("Today");
+
   // store our data from api in this
   const [cwDataFromApi, setCWDataFromApi] = useState(null);
+
+  // store data from one call api
   const [oneCallDataFromApi, setOneCallDataFromApi] = useState(null);
+
+  // store the main weather attribute
   const [mainWeatherAttribute, setMainWeatherAttribute] = useState([]);
+
+  // store the address from searchbar
   const [address, setAddress] = useState("");
+
+  // store the current contents of history locations
   const [historyLocations, setHistoryLocations] = useState([]);
+
+  // store an updated list of history locations
   const [updatedHistoryLocations, setUpdatedHistoryLocations] = useState(() => [
     localStorage.getItem("history"),
   ]);
 
-  /// SEARCH CODE
   useEffect(() => {
     getLocation();
   }, [query]);
@@ -81,7 +92,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     );
     // Check here if the response is valid
     if (response.ok) {
-      if (!historyLocations.includes(query)) {
+      if (!updatedHistoryLocations.includes(query)) {
         setUpdatedHistoryLocations((historyLocations) => [
           ...historyLocations,
           query,
@@ -203,6 +214,13 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
           handleSelect={handleSelect}
           address={address}
         />
+        <div>
+          {historyLocations.map((item) => (
+            <ul>
+              <li>{item}</li>
+            </ul>
+          ))}
+        </div>
 
         {/* switch to select relevant page  */}
         {(() => {

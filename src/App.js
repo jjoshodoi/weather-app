@@ -38,7 +38,7 @@ function App() {
       setCWDataFromApi(data);
       await callOneCall(data.coord.lon, data.coord.lat);
     } else {
-      alert("Enter a valid Location");
+      alert("Enter a valid Location 2");
     }
   };
 

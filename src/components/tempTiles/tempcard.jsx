@@ -32,7 +32,7 @@ const TempCard = ({
           }
         })()}
       </div>
-      <div class = "center">{weatherAttributeForCard}</div>
+      <div className = "center">{weatherAttributeForCard}</div>
       <div>{`${kelvinToCelcius(
         //Change key to be unique
         hour.temp

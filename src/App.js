@@ -1,11 +1,12 @@
 import "./App.css";
+import scriptLoader from "react-async-script-loader";
 import { useEffect, useState } from "react";
 import TodayLocation from "./Locations";
 import SearchBar from "./components/search";
 import TomorrowLocation from "./TomorrowLocation";
 import Next7DaysView from "./Next7Days";
 
-function App() {
+function App({ isScriptLoaded, isScriptLoadSucceed }) {
   //hide api keys
   const WEATHER_API_KEY = process.env.REACT_APP_API_KEY;
   const GEOCODING_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
@@ -18,6 +19,7 @@ function App() {
   const [cwDataFromApi, setCWDataFromApi] = useState(null);
   const [oneCallDataFromApi, setOneCallDataFromApi] = useState(null);
   const [mainWeatherAttribute, setMainWeatherAttribute] = useState([]);
+  const [address, setAddress] = useState("");
 
   /// SEARCH CODE
   useEffect(() => {
@@ -27,6 +29,16 @@ function App() {
   // useEffect(() => {
   //   getMainWeather(); //Need to add weather for next 7 days,
   // }, []);
+
+  const handleChange = (value) => {
+    setAddress(value);
+  };
+
+  const handleSelect = (value) => {
+    setAddress(value);
+    setQuery(value);
+    setAddress("");
+  };
 
   const getLocation = async () => {
     const response = await fetch(
@@ -119,68 +131,79 @@ function App() {
     return Math.round(num);
   };
 
-  if (mainWeatherAttribute.includes("Clear") && (kelvinToCelcius(
-    oneCallDataFromApi && oneCallDataFromApi.current.temp) > 16)) { 
+  if (
+    mainWeatherAttribute.includes("Clear") &&
+    kelvinToCelcius(oneCallDataFromApi && oneCallDataFromApi.current.temp) > 16
+  ) {
     document.body.className = "background-warm";
-    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); 
+    mainWeatherAttribute.splice(0, mainWeatherAttribute.length);
   } else if (mainWeatherAttribute.includes("Clouds")) {
     document.body.className = "background-cloudy";
-    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); 
-  } else if (mainWeatherAttribute.includes("Clear")) { 
-    document.body.className = "background-clear"; 
-    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); 
-  } else if (mainWeatherAttribute.includes("Rain")) { 
-    document.body.className = "background-rain"; 
-    mainWeatherAttribute.splice(0, mainWeatherAttribute.length); 
+    mainWeatherAttribute.splice(0, mainWeatherAttribute.length);
+  } else if (mainWeatherAttribute.includes("Clear")) {
+    document.body.className = "background-clear";
+    mainWeatherAttribute.splice(0, mainWeatherAttribute.length);
+  } else if (mainWeatherAttribute.includes("Rain")) {
+    document.body.className = "background-rain";
+    mainWeatherAttribute.splice(0, mainWeatherAttribute.length);
   }
   console.log(document.body.classList);
 
-  return (
-    <div className="App">
-      <SearchBar
-        WEATHER_API_KEY={WEATHER_API_KEY}
-        getLocation={getLocation}
-        update={update}
-        getUserLocation={getUserLocation}
-        getSearch={getSearch}
-      />
+  if (isScriptLoadSucceed && isScriptLoaded) {
+    return (
+      <div className="App">
+        <SearchBar
+          WEATHER_API_KEY={WEATHER_API_KEY}
+          getLocation={getLocation}
+          update={update}
+          getUserLocation={getUserLocation}
+          getSearch={getSearch}
+          handleChange={handleChange}
+          handleSelect={handleSelect}
+          address={address}
+        />
 
-      {/* switch to select relevant page  */}
-      {(() => {
-        switch (currentView) {
-          case "TomorrowLocationView":
-            return (
-              <TomorrowLocation
-                cwDataFromApi={cwDataFromApi}
-                oneCallDataFromApi={oneCallDataFromApi}
-                setCurrentView={setCurrentView}
-                kelvinToCelcius={kelvinToCelcius}
-                tomorrow={true} // Use this value to see if we are looking for tomorrows data or not
-              />
-            );
-          case "Next7DaysView":
-            return (
-              <Next7DaysView
-                cwDataFromApi={cwDataFromApi}
-                oneCallDataFromApi={oneCallDataFromApi}
-                setCurrentView={setCurrentView}
-                kelvinToCelcius={kelvinToCelcius}
-              />
-            );
-          default:
-            return (
-              <TodayLocation
-                cwDataFromApi={cwDataFromApi}
-                oneCallDataFromApi={oneCallDataFromApi}
-                setCurrentView={setCurrentView}
-                kelvinToCelcius={kelvinToCelcius}
-                tomorrow={false}
-              />
-            );
-        }
-      })()}
-    </div>
-  );
+        {/* switch to select relevant page  */}
+        {(() => {
+          switch (currentView) {
+            case "TomorrowLocationView":
+              return (
+                <TomorrowLocation
+                  cwDataFromApi={cwDataFromApi}
+                  oneCallDataFromApi={oneCallDataFromApi}
+                  setCurrentView={setCurrentView}
+                  kelvinToCelcius={kelvinToCelcius}
+                  tomorrow={true} // Use this value to see if we are looking for tomorrows data or not
+                />
+              );
+            case "Next7DaysView":
+              return (
+                <Next7DaysView
+                  cwDataFromApi={cwDataFromApi}
+                  oneCallDataFromApi={oneCallDataFromApi}
+                  setCurrentView={setCurrentView}
+                  kelvinToCelcius={kelvinToCelcius}
+                />
+              );
+            default:
+              return (
+                <TodayLocation
+                  cwDataFromApi={cwDataFromApi}
+                  oneCallDataFromApi={oneCallDataFromApi}
+                  setCurrentView={setCurrentView}
+                  kelvinToCelcius={kelvinToCelcius}
+                  tomorrow={false}
+                />
+              );
+          }
+        })()}
+      </div>
+    );
+  } else {
+    return <div></div>;
+  }
 }
 
-export default App;
+export default scriptLoader([
+  `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_API_KEY}&libraries=places`,
+])(App);

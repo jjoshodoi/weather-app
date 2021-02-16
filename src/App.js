@@ -42,16 +42,19 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     writeHistory();
   }, [updatedHistoryLocations]);
 
+  // Clear History
   const clearHistory = () => {
     localStorage.clear();
   };
 
   // clearHistory();
 
+  // Update the search bar accordingly
   const handleChange = (value) => {
     setAddress(value);
   };
 
+  // Get current history
   const getHistory = () => {
     if (localStorage.getItem("history") != null) {
       setHistoryLocations(localStorage.getItem("history"));
@@ -59,20 +62,19 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     console.log("Can't Read Favourites if Empty");
   };
 
+  // write into history
   const writeHistory = () => {
     console.log(historyLocations, updatedHistoryLocations);
     localStorage.setItem("history", updatedHistoryLocations);
     setHistoryLocations(updatedHistoryLocations);
-
-    // setHistoryLocations((historyLocations) => [...historyLocations, query]);
   };
-
+  // Set address and Set Query, set address to empty after making it equal to query
   const handleSelect = async (value) => {
     setAddress(value);
     setQuery(value);
     setAddress("");
   };
-
+  // Call the Weather API
   const getLocation = async () => {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${WEATHER_API_KEY}`
@@ -92,7 +94,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
       alert("Enter a valid Location 2");
     }
   };
-
+  // Call the One Call API
   const callOneCall = async (lon, lat) => {
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${WEATHER_API_KEY}`
@@ -108,15 +110,15 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
       alert("Enter a valid Location");
     }
   };
-
-  const update = (e) => {
-    setSearch(e.target.value);
-  };
-
+  // Updates search variable with value in search bar
+  // const update = (e) => {
+  //   setSearch(e.target.value);
+  // };
+  // Runs onSubmit to get the value of search, then resets value
   const getSearch = (e) => {
     e.preventDefault();
-    setQuery(search);
-    setSearch("");
+    setQuery(address);
+    setAddress("");
   };
 
   // Gets current position of user and calls showPosition
@@ -192,9 +194,9 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     return (
       <div className="App">
         <SearchBar
-          WEATHER_API_KEY={WEATHER_API_KEY}
-          getLocation={getLocation}
-          update={update}
+          // WEATHER_API_KEY={WEATHER_API_KEY}
+          // getLocation={getLocation}
+          // update={update}
           getUserLocation={getUserLocation}
           getSearch={getSearch}
           handleChange={handleChange}

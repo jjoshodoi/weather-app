@@ -9,19 +9,8 @@ const SearchBar = ({
   address,
 }) => {
   return (
-    <div>
-      {/* <form onSubmit={getSearch} className="Search-form">
-        <input
-          className="Search-Bar"
-          type="text"
-          value={search}
-          onChange={update}
-        />
-        <button className="Search-Button" type="submit">
-          Search
-        </button>
-      </form> */}
-      <form onSubmit={getSearch}>
+    <div className="">
+      <form onSubmit={getSearch} className="Search-form">
         <PlacesAutocomplete
           value={address}
           onChange={handleChange}
@@ -68,10 +57,10 @@ const SearchBar = ({
         <button className="Search-Button" type="submit">
           Search
         </button>
+        <button onClick={getUserLocation} className="Search-Location">
+          Locate
+        </button>
       </form>
-      <button onClick={getUserLocation} className="Search-Location">
-        Locate
-      </button>
     </div>
   );
 };

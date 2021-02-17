@@ -89,6 +89,8 @@
 
 .pageButton {
   background: lightseagreen;
+  min-width: 120px;
+  max-width: 120px;
   border-radius: 50px;
   padding: 10px 20px;
   color: white;
@@ -97,6 +99,8 @@
 
 .pageButton-active {
   background: darkblue;
+  min-width: 120px;
+  max-width: 120px;
   border-radius: 50px;
   padding: 10px 20px;
   color: white;

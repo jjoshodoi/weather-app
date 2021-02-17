@@ -19,45 +19,48 @@ const TempCard = ({
     oneCallDataFromApi && oneCallDataFromApi.hourly[indexNum].weather[0].main;
 
   return (
-    <div className={`tile-border${indexNum === 0 ? "-now" : ""}`}>
-      <div className="card">
-        {(() => {
-          switch (tomorrow) {
-            case false:
-              return indexNum === 0
-                ? "Now"
-                : currentHour + indexNum + timeDifference > 23
-                ? currentHour + indexNum + timeDifference - 24
-                : currentHour + indexNum + timeDifference;
-            case true:
-              return currentHour + indexNum + differenceFrom12AM - 24; // Returning 12am onwards
-            default:
-              return "N/A Times";
-          }
-        })()}
-        <div className = "center">
+    <div>
           {(() => {
-          switch (weatherAttributeForCard) {
-            case "Clouds":
-              return  <AiFillCloud className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>;   
-            case "Rain":
-              return  <IoRainy className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>;
-            case "Snow":
-              return <BiCloudSnow className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>  
-            case "Clear":
-              return <TiWeatherSunny className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>  
-          }
-        })()}
-         
+            switch (tomorrow) {
+              case false:
+                return indexNum === 0
+                  ? "Now"
+                  : currentHour + indexNum + timeDifference > 23
+                  ? currentHour + indexNum + timeDifference - 24
+                  : currentHour + indexNum + timeDifference;
+              case true:
+                return currentHour + indexNum + differenceFrom12AM - 24; // Returning 12am onwards
+              default:
+                return "N/A Times";
+            }
+          })()}
 
+      <div className={`tile-border${indexNum === 0 ? "-now" : ""}`}>
+        <div className="card">
+          
+          <div className = "center">
+            {(() => {
+            switch (weatherAttributeForCard) {
+              case "Clouds":
+                return  <AiFillCloud size="4x" className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>;   
+              case "Rain":
+                return  <IoRainy size="4x" className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>;
+              case "Snow":
+                return <BiCloudSnow size="4x" className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>  
+              case "Clear":
+                return <TiWeatherSunny size="4x" className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>  
+            }
+          })()}
+          
+
+          </div>
         </div>
+        <div className = "center">{`${kelvinToCelcius(
+          //Change key to be unique
+          hour.temp
+        )}°C`}</div>
       </div>
-      <div className="center">{weatherAttributeForCard}</div>
-      <div>{`${kelvinToCelcius(
-        //Change key to be unique
-        hour.temp
-      )}°C`}</div>
-    </div>
+      </div>
   );
 };
 

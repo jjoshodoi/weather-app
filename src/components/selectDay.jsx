@@ -10,7 +10,7 @@ const SelectDay = ({ currentView, setCurrentView }) => {
         className={`pageButton${currentView === "Today" ? "-active" : ""}`}
         onClick={() => setCurrentView("Today")}
       >
-        Now
+        Today
       </button>
       <button
         id={2}

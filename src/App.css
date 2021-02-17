@@ -54,8 +54,8 @@
 .background-clear {
   background: linear-gradient(
     179.31deg,
-    rgba(120, 192, 197, 0.97) 9.28%, 
-    #FDFEFF 167.45%
+    rgba(120, 192, 197, 0.97) 9.28%,
+    #fdfeff 167.45%
   );
 }
 
@@ -68,18 +68,11 @@
 }
 
 .background-rain {
-  background: linear-gradient(
-    180deg, 
-    #0E2F62 0%, 
-    #fdfeff 167.45%
-  );
+  background: linear-gradient(180deg, #0e2f62 0%, #fdfeff 167.45%);
 }
 
 .background-cloudy {
-  background: linear-gradient(
-    #000000,
-    #fdfeff 167.45%
-  );
+  background: linear-gradient(#000000, #fdfeff 167.45%);
 }
 
 .temp-tile {
@@ -93,7 +86,7 @@
 }
 
 .tile-border {
-  border: 1px solid #FDFEFF;
+  border: 1px solid #fdfeff;
   margin: 10px;
   min-width: 40px;
   max-width: 40px;
@@ -108,7 +101,23 @@
 }
 
 .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pageButton {
+  background: lightseagreen;
+  border-radius: 50px;
+  padding: 10px 20px;
+  color: white;
+  border: none;
+}
+
+.pageButton-active {
+  background: darkblue;
+  border-radius: 50px;
+  padding: 10px 20px;
+  color: white;
+  border: none;
 }

@@ -5,13 +5,14 @@ const Next7DaysView = ({
   cwDataFromApi,
   oneCallDataFromApi,
   setCurrentView,
+  currentView,
 }) => {
   const d = new Date();
   const today = d.getDay() - 1;
   const days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
   return (
     <div>
-      <SelectDay setCurrentView={setCurrentView} />
+      <SelectDay setCurrentView={setCurrentView} currentView={currentView}/>
       <div>
         <h1>Next 7 Days</h1>
         {oneCallDataFromApi &&

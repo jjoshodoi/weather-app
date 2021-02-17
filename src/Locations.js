@@ -12,8 +12,8 @@ const TodayLocation = ({
   setCurrentView,
   kelvinToCelcius,
   tomorrow,
+  currentView,
 }) => {
-
   const findMainWeatherAttribute = (apiData) => {
     const listMainWeatherAttribute = [];
     if (apiData !== undefined && apiData != null) {
@@ -26,7 +26,6 @@ const TodayLocation = ({
     return listMainWeatherAttribute;
   };
 
-  
   return (
     <div className="location">
       <DisplayDate tomorrow={tomorrow} />
@@ -36,7 +35,7 @@ const TodayLocation = ({
         kelvinToCelcius={kelvinToCelcius}
         tomorrow={tomorrow}
       />
-      <SelectDay setCurrentView={setCurrentView} />
+      <SelectDay setCurrentView={setCurrentView} currentView={currentView} />
       <TempByHour
         findMainWeatherAttribute={findMainWeatherAttribute}
         oneCallDataFromApi={oneCallDataFromApi}
@@ -45,7 +44,10 @@ const TodayLocation = ({
       />
 
       <div>
-        <SunriseSunset oneCallDataFromApi={oneCallDataFromApi} tomorrow={tomorrow} />
+        <SunriseSunset
+          oneCallDataFromApi={oneCallDataFromApi}
+          tomorrow={tomorrow}
+        />
         <h3>
           Humidity: {oneCallDataFromApi && oneCallDataFromApi.current.humidity}%
         </h3>

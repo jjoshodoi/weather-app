@@ -217,6 +217,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
           <MdFavorite onClick={addToFav} />
           <span>Add to Fav</span>
         </div>
+
         <div>
           <GrClear onClick={clearFavourites} />
           <span>Clear All Favs</span>
@@ -229,13 +230,19 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              {favourites.map((item) => (
+              {favourites.length === 0 ? (
                 <Dropdown.Item>
-                  <button onClick={() => handleDropDownClick(item)}>
-                    {item}
-                  </button>
+                  <button>Nothing In Favourites</button>
                 </Dropdown.Item>
-              ))}
+              ) : (
+                favourites.map((item) => (
+                  <Dropdown.Item>
+                    <button onClick={() => handleDropDownClick(item)}>
+                      {item}
+                    </button>
+                  </Dropdown.Item>
+                ))
+              )}
             </Dropdown.Menu>
           </Dropdown>
         </div>
@@ -249,6 +256,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
                   cwDataFromApi={cwDataFromApi}
                   oneCallDataFromApi={oneCallDataFromApi}
                   setCurrentView={setCurrentView}
+                  currentView={currentView}
                   kelvinToCelcius={kelvinToCelcius}
                   tomorrow={true} // Use this value to see if we are looking for tomorrows data or not
                 />
@@ -260,6 +268,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
                   oneCallDataFromApi={oneCallDataFromApi}
                   setCurrentView={setCurrentView}
                   kelvinToCelcius={kelvinToCelcius}
+                  currentView={currentView}
                 />
               );
             default:
@@ -269,6 +278,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
                   oneCallDataFromApi={oneCallDataFromApi}
                   setCurrentView={setCurrentView}
                   kelvinToCelcius={kelvinToCelcius}
+                  currentView={currentView}
                   tomorrow={false}
                 />
               );

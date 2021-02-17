@@ -13,6 +13,7 @@ const TomorrowLocation = ({
   setCurrentView,
   kelvinToCelcius,
   tomorrow,
+  currentView,
 }) => {
   return (
     <div className="location">
@@ -25,7 +26,11 @@ const TomorrowLocation = ({
         cwDataFromApi={cwDataFromApi}
         kelvinToCelcius={kelvinToCelcius}
       />
-      <SelectDay setCurrentView={setCurrentView} tomorrow={tomorrow} />
+      <SelectDay
+        currentView={currentView}
+        setCurrentView={setCurrentView}
+        tomorrow={tomorrow}
+      />
       {/* Temp By Hour will be done starting from 0 depending on country. */}
       <TempByHour
         oneCallDataFromApi={oneCallDataFromApi}

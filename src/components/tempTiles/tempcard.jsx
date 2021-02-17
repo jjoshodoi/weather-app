@@ -19,7 +19,7 @@ const TempCard = ({
     oneCallDataFromApi && oneCallDataFromApi.hourly[indexNum].weather[0].main;
 
   return (
-    <div className="tile-border">
+    <div className={`tile-border${indexNum === 0 ? "-now" : ""}`}>
       <div className="card">
         {(() => {
           switch (tomorrow) {
@@ -39,13 +39,13 @@ const TempCard = ({
           {(() => {
           switch (weatherAttributeForCard) {
             case "Clouds":
-              return  <AiFillCloud />;   
+              return  <AiFillCloud className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>;   
             case "Rain":
-              return  <IoRainy />;
+              return  <IoRainy className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>;
             case "Snow":
-              return <BiCloudSnow/>  
+              return <BiCloudSnow className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>  
             case "Clear":
-              return <TiWeatherSunny />  
+              return <TiWeatherSunny className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>  
           }
         })()}
          

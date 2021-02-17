@@ -28,7 +28,7 @@ const TempByHour = ({
               oneCallDataFromApi &&
               oneCallDataFromApi.hourly.slice(0, 24).map((
                 hour,
-                index //How many values are we to display
+                index //increment with the card
               ) => (
                 <TempCard
                   key={index} // Uniquely identify each Card we make

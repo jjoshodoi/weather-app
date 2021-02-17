@@ -1,6 +1,6 @@
 import "./App.css";
 import scriptLoader from "react-async-script-loader";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 import TodayLocation from "./Locations";
 import SearchBar from "./components/search";
 import TomorrowLocation from "./TomorrowLocation";
@@ -29,13 +29,11 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   // store the address from searchbar
   const [address, setAddress] = useState("");
 
-  // store the current contents of history locations
-  const [historyLocations, setHistoryLocations] = useState([]);
-
-  // store an updated list of history locations
-  const [updatedHistoryLocations, setUpdatedHistoryLocations] = useState(() => [
-    localStorage.getItem("history"),
-  ]);
+  // store the favourites list
+  const [favourites, setFavourites] = useState(() => {
+    const localData = localStorage.getItem("favourites");
+    return localData ? JSON.parse(localData) : [];
+  });
 
   useEffect(() => {
     getLocation();
@@ -46,12 +44,12 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   }, []); // Option?
 
   useEffect(() => {
-    getHistory();
-  }, []);
+    localStorage.setItem("favourites", JSON.stringify(favourites));
+  }, [favourites]);
 
-  useEffect(() => {
-    writeHistory();
-  }, [updatedHistoryLocations]);
+  const addToFav = () => {
+    setFavourites([...favourites, query]);
+  };
 
   // Clear History
   const clearHistory = () => {
@@ -65,20 +63,6 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     setAddress(value);
   };
 
-  // Get current history
-  const getHistory = () => {
-    if (localStorage.getItem("history") != null) {
-      setHistoryLocations(localStorage.getItem("history"));
-    }
-    console.log("Can't Read Favourites if Empty");
-  };
-
-  // write into history
-  const writeHistory = () => {
-    console.log(historyLocations, updatedHistoryLocations);
-    localStorage.setItem("history", updatedHistoryLocations);
-    setHistoryLocations(updatedHistoryLocations);
-  };
   // Set address and Set Query, set address to empty after making it equal to query
   const handleSelect = async (value) => {
     setAddress(value);
@@ -92,12 +76,6 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     );
     // Check here if the response is valid
     if (response.ok) {
-      if (!updatedHistoryLocations.includes(query)) {
-        setUpdatedHistoryLocations((historyLocations) => [
-          ...historyLocations,
-          query,
-        ]);
-      }
       const data = await response.json();
       setCWDataFromApi(data);
       await callOneCall(data.coord.lon, data.coord.lat);
@@ -182,7 +160,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     num = num - 273;
     return Math.round(num);
   };
-    // if (
+  // if (
   //   mainWeatherAttribute.includes("Clear") && //Needs to be redone so instead outputs image, for the background aswell as color.
   //   kelvinToCelcius(oneCallDataFromApi && oneCallDataFromApi.current.temp) > 16
   // ) {
@@ -202,17 +180,17 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
 
   if (oneCallDataFromApi && oneCallDataFromApi.current.temp) {
     if (kelvinToCelcius(oneCallDataFromApi.current.temp) >= 10) {
-      var lightness = (100 - (kelvinToCelcius(oneCallDataFromApi.current.temp))); 
+      var lightness = 100 - kelvinToCelcius(oneCallDataFromApi.current.temp);
       document.body.style.backgroundColor = `hsla(20,100%,${lightness}%,0.9)`;
     } else if (kelvinToCelcius(oneCallDataFromApi.current.temp) < 10) {
-      var lightness = (50 + (kelvinToCelcius(oneCallDataFromApi.current.temp)));
+      lightness = 50 + kelvinToCelcius(oneCallDataFromApi.current.temp);
       document.body.style.backgroundColor = `hsla(180,50%,${lightness}%,0.6)`;
     }
   }
   //`linear-gradient(179.31deg, hsla(${hue},${saturation},${lightness}) 9.28%, #F4AC4E 167.45%)`;
   console.log(oneCallDataFromApi);
 
-if (isScriptLoadSucceed && isScriptLoaded) {
+  if (isScriptLoadSucceed && isScriptLoaded) {
     return (
       <div className="App">
         <SearchBar
@@ -225,7 +203,7 @@ if (isScriptLoadSucceed && isScriptLoaded) {
           handleSelect={handleSelect}
           address={address}
         />
-
+        <button onClick={addToFav}></button>
         {/* switch to select relevant page  */}
         {(() => {
           switch (currentView) {

@@ -190,16 +190,16 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
 
   if (oneCallDataFromApi && oneCallDataFromApi.current.temp) {
     if (kelvinToCelcius(oneCallDataFromApi.current.temp) >= 10) {
-      var lightness = 100 - kelvinToCelcius(oneCallDataFromApi.current.temp);
-      document.body.style.backgroundColor = `hsla(20,100%,${lightness}%,0.9),  hsla(360,50%,100%,0.6))`;
-    } else if (kelvinToCelcius(oneCallDataFromApi.current.temp) < 10) {
-      lightness = 50 + kelvinToCelcius(oneCallDataFromApi.current.temp);
-      document.body.style.background = `linear-gradient(hsla(180,50%,${lightness}%,0.6),  hsla(360,50%,100%,0.6))`;
+      var lightness = 90 - kelvinToCelcius(oneCallDataFromApi.current.temp);
+      document.body.style.background = `linear-gradient(hsla(20,100%,${lightness}%,0.9),  hsla(360,50%,100%,0.9))`; //Warm
+    } else if ((kelvinToCelcius(oneCallDataFromApi.current.temp) > 0) && (kelvinToCelcius(oneCallDataFromApi.current.temp) < 10)) {
+      lightness = 60 + kelvinToCelcius(oneCallDataFromApi.current.temp);
+      document.body.style.background = `linear-gradient(hsla(200,50%,${lightness}%,0.8),  hsla(360,50%,100%,0.8))`; //Cold below 10degrees
+    } else if (kelvinToCelcius(oneCallDataFromApi.current.temp) < 0)  {
+      lightness = 40 + kelvinToCelcius(oneCallDataFromApi.current.temp);
+      document.body.style.background = `linear-gradient(hsla(180,50%,${lightness}%,0.8),  hsla(360,50%,100%,0.8))`; //Freezing
     }
-
   }
-  //`linear-gradient(179.31deg, hsla(${hue},${saturation},${lightness}) 9.28%, #F4AC4E 167.45%)`;
-  // console.log(oneCallDataFromApi);
 
   if (isScriptLoadSucceed && isScriptLoaded) {
     return (

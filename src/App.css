@@ -35,46 +35,6 @@
   border: none;
 }
 
-.background-cold {
-  background: linear-gradient(
-    179.31deg,
-    rgba(48, 87, 89, 0.97) 9.28%,
-    #fdfeff 167.45%
-  );
-}
-
-.background-warm {
-  background: linear-gradient(
-    179.31deg,
-    rgba(204, 101, 26, 0.97) 9.28%,
-    #fdfeff 167.45%
-  );
-}
-
-.background-clear {
-  background: linear-gradient(
-    179.31deg,
-    rgba(120, 192, 197, 0.97) 9.28%,
-    #fdfeff 167.45%
-  );
-}
-
-.background-thunderstorm {
-  background: linear-gradient(
-    179.31deg,
-    rgba(87, 42, 182, 0.97) 9.28%,
-    #fdfeff 167.45%
-  );
-}
-
-.background-rain {
-  background: linear-gradient(180deg, #0e2f62 0%, #fdfeff 167.45%);
-}
-
-.background-cloudy {
-  background: linear-gradient(#000000, #fdfeff 167.45%);
-}
-
 .temp-tile {
   display: flex;
   flex-wrap: nowrap;
@@ -96,6 +56,7 @@
 
 .time-of-day-tile {
   display: flex;
+  max-height: 220px;
   flex-wrap: nowrap;
   overflow-x: auto;
 }

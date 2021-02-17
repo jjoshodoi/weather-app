@@ -170,23 +170,6 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   const handleDropDownClick = (item) => {
     setQuery(item);
   };
-  // if (
-  //   mainWeatherAttribute.includes("Clear") && //Needs to be redone so instead outputs image, for the background aswell as color.
-  //   kelvinToCelcius(oneCallDataFromApi && oneCallDataFromApi.current.temp) > 16
-  // ) {
-  //   document.body.className = "background-warm";
-  //   mainWeatherAttribute.splice(0, mainWeatherAttribute.length);
-  // } else if (mainWeatherAttribute.includes("Clouds")) {
-  //   document.body.className = "background-cloudy";
-  //   mainWeatherAttribute.splice(0, mainWeatherAttribute.length);
-  // } else if (mainWeatherAttribute.includes("Clear")) {
-  //   document.body.className = "background-clear";
-  //   mainWeatherAttribute.splice(0, mainWeatherAttribute.length);
-  // } else if (mainWeatherAttribute.includes("Rain")) {
-  //   document.body.className = "background-rain";
-  //   mainWeatherAttribute.splice(0, mainWeatherAttribute.length);
-  // }
-  // console.log(document.body.classList);
 
   if (oneCallDataFromApi && oneCallDataFromApi.current.temp) {
     if (kelvinToCelcius(oneCallDataFromApi.current.temp) >= 10) {

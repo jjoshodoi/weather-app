@@ -8,6 +8,8 @@ import Next7DaysView from "./Next7Days";
 import { MdFavorite } from "react-icons/md";
 import { FaAddressCard } from "react-icons/fa";
 import { GrClear } from "react-icons/gr";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Dropdown from "react-bootstrap/Dropdown";
 
 function App({ isScriptLoaded, isScriptLoadSucceed }) {
   //hide api keys
@@ -167,6 +169,10 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     num = num - 273;
     return Math.round(num);
   };
+
+  const handleDropDownClick = (item) => {
+    setQuery(item);
+  };
   // if (
   //   mainWeatherAttribute.includes("Clear") && //Needs to be redone so instead outputs image, for the background aswell as color.
   //   kelvinToCelcius(oneCallDataFromApi && oneCallDataFromApi.current.temp) > 16
@@ -214,6 +220,24 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
         <div>
           <GrClear onClick={clearFavourites} />
           <span>Clear All Favs</span>
+        </div>
+
+        <div>
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              View Favourites
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {favourites.map((item) => (
+                <Dropdown.Item>
+                  <button onClick={() => handleDropDownClick(item)}>
+                    {item}
+                  </button>
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
 
         {/* switch to select relevant page  */}

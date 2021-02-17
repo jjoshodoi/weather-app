@@ -194,7 +194,8 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
       document.body.style.backgroundColor = `hsla(20,100%,${lightness}%,0.9)`;
     } else if (kelvinToCelcius(oneCallDataFromApi.current.temp) < 10) {
       lightness = 50 + kelvinToCelcius(oneCallDataFromApi.current.temp);
-      document.body.style.backgroundColor = `hsla(180,50%,${lightness}%,0.6)`;
+      document.body.style.background = `linear-gradient(hsla(220, 80%, 80%, 0.6), hsla(300, 80%, 80%.0.6))`;
+      //`hsla(180,50%,${lightness}%,0.6)`;
     }
   }
   //`linear-gradient(179.31deg, hsla(${hue},${saturation},${lightness}) 9.28%, #F4AC4E 167.45%)`;

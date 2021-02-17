@@ -43,6 +43,8 @@ const Next7DaysView = ({
                         return <BiCloudSnow size="1x" />;
                       case "Clear":
                         return <TiWeatherSunny size="1x" />;
+                      default:
+                        return <h3>N/A</h3>;
                     }
                   })()}
                 </div>

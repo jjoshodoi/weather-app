@@ -66,6 +66,8 @@
   flex: 0 0 auto;
   justify-content: center;
   align-items: center;
+  min-width: 40px;
+  max-width: 40px;
 }
 
 .tile-border {
@@ -75,6 +77,7 @@
   max-width: 40px;
   padding: 20px 20px;
   border-radius: 15px;
+  
 }
 
 .icon-temptile {

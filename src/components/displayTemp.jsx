@@ -41,7 +41,6 @@ const DisplayTemp = ({
           default:
             return (
               <div className = "center">
-                <div className="time-of-day-tile">
                   <div className="tile-border">
                     <div className = "center">Morning</div>
                     <div>
@@ -113,7 +112,6 @@ const DisplayTemp = ({
                     )}°C`}</h5>
                  </div>
                 </div>
-              </div>  
             );
         }
       })()}

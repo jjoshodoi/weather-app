@@ -1,5 +1,8 @@
 import React from "react";
-import { FaSnowflake } from "react-icons/fa";
+import { BiCloudSnow } from "react-icons/bi";
+import { AiFillCloud } from "react-icons/ai";
+import { IoRainy } from "react-icons/io5";
+import { TiWeatherSunny } from "react-icons/ti";
 
 const TempCard = ({
   indexNum,
@@ -32,8 +35,21 @@ const TempCard = ({
               return "N/A Times";
           }
         })()}
-        <div>
-          <FaSnowflake />
+        <div className = "center">
+          {(() => {
+          switch (weatherAttributeForCard) {
+            case "Clouds":
+              return  <AiFillCloud />;   
+            case "Rain":
+              return  <IoRainy />;
+            case "Snow":
+              return <BiCloudSnow/>  
+            case "Clear":
+              return <TiWeatherSunny />  
+          }
+        })()}
+         
+
         </div>
       </div>
       <div className="center">{weatherAttributeForCard}</div>

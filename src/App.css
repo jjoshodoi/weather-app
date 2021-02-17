@@ -43,6 +43,8 @@
 
 .card {
   flex: 0 0 auto;
+  justify-content: center;
+  align-items: center;
 }
 
 .tile-border {

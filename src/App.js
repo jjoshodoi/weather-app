@@ -93,7 +93,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
       await callOneCall(data.coord.lon, data.coord.lat);
       setNameOfLocation(`${data.name}, ${data.sys.country}`);
     } else {
-      alert("Enter a valid Location 2");
+      alert("Enter a valid Location");
     }
   };
   // Call the One Call API
@@ -170,7 +170,6 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   const handleDropDownClick = (item) => {
     setQuery(item);
   };
-
   if (oneCallDataFromApi && oneCallDataFromApi.current.temp) {
     if (kelvinToCelcius(oneCallDataFromApi.current.temp) >= 10) {
       var lightness = 90 - kelvinToCelcius(oneCallDataFromApi.current.temp);

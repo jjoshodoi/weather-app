@@ -40,78 +40,80 @@ const DisplayTemp = ({
             );
           default:
             return (
-              <div className="time-of-day-tile">
-                <div className="tile-border">
-                  <div>Morning</div>
-                  <div>
-                    {`${kelvinToCelcius(
-                      oneCallDataFromApi &&
-                        oneCallDataFromApi.daily[1].temp.morn
-                    )} °C`}
-                    <h4>
+              <div className = "center">
+                <div className="time-of-day-tile">
+                  <div className="tile-border">
+                    <div className = "center">Morning</div>
+                    <div>
+                      {`${kelvinToCelcius(
+                        oneCallDataFromApi &&
+                          oneCallDataFromApi.daily[1].temp.morn
+                      )} °C`}
+                      <h4 className = "center">
+                        {oneCallDataFromApi &&
+                          oneCallDataFromApi.hourly[differenceFrom12AM + morning]
+                            .weather[0].main}
+                      </h4>
+                      <h5>{`Feels Like ${kelvinToCelcius(
+                        oneCallDataFromApi &&
+                          oneCallDataFromApi.daily[1].feels_like.morn
+                      )}°C`}</h5>
+                    </div>
+                  </div>
+                  <div className="tile-border">
+                    <div className = "center">Afternoon</div>
+                    <div>
+                      {`${kelvinToCelcius(
+                        oneCallDataFromApi && oneCallDataFromApi.daily[1].temp.day
+                      )} °C`}
+                    </div>
+                    <h4 className = "center">
                       {oneCallDataFromApi &&
-                        oneCallDataFromApi.hourly[differenceFrom12AM + morning]
+                        oneCallDataFromApi.hourly[differenceFrom12AM + afternoon]
                           .weather[0].main}
                     </h4>
                     <h5>{`Feels Like ${kelvinToCelcius(
                       oneCallDataFromApi &&
-                        oneCallDataFromApi.daily[1].feels_like.morn
+                        oneCallDataFromApi.daily[1].feels_like.day
                     )}°C`}</h5>
                   </div>
-                </div>
-                <div className="tile-border">
-                  <div>Afternoon</div>
-                  <div>
-                    {`${kelvinToCelcius(
-                      oneCallDataFromApi && oneCallDataFromApi.daily[1].temp.day
-                    )} °C`}
-                  </div>
-                  <h4>
-                    {oneCallDataFromApi &&
-                      oneCallDataFromApi.hourly[differenceFrom12AM + afternoon]
-                        .weather[0].main}
-                  </h4>
-                  <h5>{`Feels Like ${kelvinToCelcius(
-                    oneCallDataFromApi &&
-                      oneCallDataFromApi.daily[1].feels_like.day
-                  )}°C`}</h5>
-                </div>
-                <div className="tile-border">
-                  <div>Evening</div>
-                  <div>
-                    {`${kelvinToCelcius(
-                      oneCallDataFromApi && oneCallDataFromApi.daily[1].temp.eve
-                    )} °C`}
-                  </div>
-                  <h4>
-                    {oneCallDataFromApi &&
-                      oneCallDataFromApi.hourly[differenceFrom12AM + evening]
-                        .weather[0].main}
-                  </h4>
-                  <h5>{`Feels Like ${kelvinToCelcius(
-                    oneCallDataFromApi &&
-                      oneCallDataFromApi.daily[1].feels_like.eve
-                  )}°C`}</h5>
-                </div>
-                <div className="tile-border">
-                  <div>Night</div>
-                  <div>
-                    {`${kelvinToCelcius(
+                  <div className="tile-border">
+                    <div className = "center">Evening</div>
+                    <div>
+                      {`${kelvinToCelcius(
+                        oneCallDataFromApi && oneCallDataFromApi.daily[1].temp.eve
+                      )} °C`}
+                    </div>
+                    <h4 className = "center">
+                      {oneCallDataFromApi &&
+                        oneCallDataFromApi.hourly[differenceFrom12AM + evening]
+                          .weather[0].main}
+                    </h4>
+                    <h5>{`Feels Like ${kelvinToCelcius(
                       oneCallDataFromApi &&
-                        oneCallDataFromApi.daily[1].temp.night
-                    )} °C`}
+                        oneCallDataFromApi.daily[1].feels_like.eve
+                    )}°C`}</h5>
                   </div>
-                  <h4>
-                    {oneCallDataFromApi &&
-                      oneCallDataFromApi.hourly[differenceFrom12AM + night]
-                        .weather[0].main}
-                  </h4>
-                  <h5>{`Feels Like ${kelvinToCelcius(
-                    oneCallDataFromApi &&
-                      oneCallDataFromApi.daily[1].feels_like.night
-                  )}°C`}</h5>
+                  <div className="tile-border">
+                    <div className = "center">Night</div>
+                    <div>
+                      {`${kelvinToCelcius(
+                        oneCallDataFromApi &&
+                          oneCallDataFromApi.daily[1].temp.night
+                      )} °C`}
+                    </div>
+                    <h4 className = "center">
+                      {oneCallDataFromApi &&
+                        oneCallDataFromApi.hourly[differenceFrom12AM + night]
+                          .weather[0].main}
+                    </h4>
+                    <h5>{`Feels Like ${kelvinToCelcius(
+                      oneCallDataFromApi &&
+                        oneCallDataFromApi.daily[1].feels_like.night
+                    )}°C`}</h5>
+                 </div>
                 </div>
-              </div>
+              </div>  
             );
         }
       })()}

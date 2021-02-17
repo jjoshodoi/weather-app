@@ -1,14 +1,12 @@
 import "./App.css";
 import scriptLoader from "react-async-script-loader";
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useState } from "react";
 import TodayLocation from "./Locations";
 import SearchBar from "./components/search";
 import TomorrowLocation from "./TomorrowLocation";
 import Next7DaysView from "./Next7Days";
 import { MdFavorite } from "react-icons/md";
-import { FaAddressCard } from "react-icons/fa";
 import { GrClear } from "react-icons/gr";
-import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
 
 function App({ isScriptLoaded, isScriptLoadSucceed }) {
@@ -31,6 +29,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   // store the main weather attribute
   const [mainWeatherAttribute, setMainWeatherAttribute] = useState([]);
 
+  // Store current name of displayed city
   const [nameOfLocation, setNameOfLocation] = useState("");
 
   // store the address from searchbar
@@ -50,12 +49,13 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     getUserLocation();
   }, []); // Option?
 
+  // updates favourities when favourites is updated
   useEffect(() => {
     localStorage.setItem("favourites", JSON.stringify(favourites));
   }, [favourites]);
 
+  // Adds to list of favs
   const addToFav = () => {
-    // currentPlace = oneCallDataFromApi.
     if (!favourites.includes(nameOfLocation)) {
       setFavourites([...favourites, nameOfLocation]);
       console.log(`${nameOfLocation} added to favourites`);
@@ -112,10 +112,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
       alert("Enter a valid Location");
     }
   };
-  // Updates search variable with value in search bar
-  // const update = (e) => {
-  //   setSearch(e.target.value);
-  // };
+
   // Runs onSubmit to get the value of search, then resets value
   const getSearch = (e) => {
     e.preventDefault();

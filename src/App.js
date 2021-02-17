@@ -5,6 +5,9 @@ import TodayLocation from "./Locations";
 import SearchBar from "./components/search";
 import TomorrowLocation from "./TomorrowLocation";
 import Next7DaysView from "./Next7Days";
+import { MdFavorite } from "react-icons/md";
+import { FaAddressCard } from "react-icons/fa";
+import { GrClear } from "react-icons/gr";
 
 function App({ isScriptLoaded, isScriptLoadSucceed }) {
   //hide api keys
@@ -25,6 +28,8 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
 
   // store the main weather attribute
   const [mainWeatherAttribute, setMainWeatherAttribute] = useState([]);
+
+  const [nameOfLocation, setNameOfLocation] = useState("");
 
   // store the address from searchbar
   const [address, setAddress] = useState("");
@@ -48,15 +53,20 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   }, [favourites]);
 
   const addToFav = () => {
-    setFavourites([...favourites, query]);
+    // currentPlace = oneCallDataFromApi.
+    if (!favourites.includes(nameOfLocation)) {
+      setFavourites([...favourites, nameOfLocation]);
+      console.log(`${nameOfLocation} added to favourites`);
+    } else {
+      alert("Already in favourites");
+    }
   };
 
-  // Clear History
-  const clearHistory = () => {
+  // Clear Favourites
+  const clearFavourites = () => {
     localStorage.clear();
+    setFavourites([]);
   };
-
-  // clearHistory();
 
   // Update the search bar accordingly
   const handleChange = (value) => {
@@ -79,6 +89,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
       const data = await response.json();
       setCWDataFromApi(data);
       await callOneCall(data.coord.lon, data.coord.lat);
+      setNameOfLocation(`${data.name}, ${data.sys.country}`);
     } else {
       alert("Enter a valid Location 2");
     }
@@ -93,7 +104,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
       setOneCallDataFromApi(data);
       const tempWeather = [];
       data.current.weather.map((item) => tempWeather.push(item.main));
-      console.log(tempWeather);
+      // console.log(tempWeather);
       setMainWeatherAttribute(tempWeather);
     } else {
       alert("Enter a valid Location");
@@ -126,12 +137,8 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     );
     const data = await response.json();
     await callOneCall(data.coord.lon, data.coord.lat);
-    // console.log(
-    //   "Latitude: " +
-    //     position.coords.latitude +
-    //     "<br>Longitude: " +
-    //     position.coords.longitude
-    // );
+    setNameOfLocation(`${data.name}, ${data.sys.country}`);
+
     setCWDataFromApi(data);
   };
 
@@ -176,7 +183,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   //   document.body.className = "background-rain";
   //   mainWeatherAttribute.splice(0, mainWeatherAttribute.length);
   // }
-  console.log(document.body.classList);
+  // console.log(document.body.classList);
 
   if (oneCallDataFromApi && oneCallDataFromApi.current.temp) {
     if (kelvinToCelcius(oneCallDataFromApi.current.temp) >= 10) {
@@ -188,22 +195,27 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     }
   }
   //`linear-gradient(179.31deg, hsla(${hue},${saturation},${lightness}) 9.28%, #F4AC4E 167.45%)`;
-  console.log(oneCallDataFromApi);
+  // console.log(oneCallDataFromApi);
 
   if (isScriptLoadSucceed && isScriptLoaded) {
     return (
       <div className="App">
         <SearchBar
-          // WEATHER_API_KEY={WEATHER_API_KEY}
-          // getLocation={getLocation}
-          // update={update}
           getUserLocation={getUserLocation}
           getSearch={getSearch}
           handleChange={handleChange}
           handleSelect={handleSelect}
           address={address}
         />
-        <button onClick={addToFav}></button>
+        <div>
+          <MdFavorite onClick={addToFav} />
+          <span>Add to Fav</span>
+        </div>
+        <div>
+          <GrClear onClick={clearFavourites} />
+          <span>Clear All Favs</span>
+        </div>
+
         {/* switch to select relevant page  */}
         {(() => {
           switch (currentView) {

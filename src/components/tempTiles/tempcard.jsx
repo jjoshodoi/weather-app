@@ -1,5 +1,5 @@
 import React from "react";
-// import { FaSnowflake } from "react-icons/fa";
+import { FaSnowflake } from "react-icons/fa";
 
 const TempCard = ({
   indexNum,
@@ -32,7 +32,9 @@ const TempCard = ({
               return "N/A Times";
           }
         })()}
-        <div>{/* <FaSnowflake /> */}</div>
+        <div>
+          <FaSnowflake />
+        </div>
       </div>
       <div className="center">{weatherAttributeForCard}</div>
       <div>{`${kelvinToCelcius(

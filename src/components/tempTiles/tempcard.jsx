@@ -16,7 +16,7 @@ const TempCard = ({
     oneCallDataFromApi && oneCallDataFromApi.hourly[indexNum].weather[0].main;
 
   return (
-    <div className="tile-border">
+    <div className={`tile-border${indexNum === 0 ? "-now" : ""}`}>
       <div className="card">
         {(() => {
           switch (tomorrow) {
@@ -33,7 +33,9 @@ const TempCard = ({
           }
         })()}
         <div>
-          <FaSnowflake />
+          <FaSnowflake
+            className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}
+          />
         </div>
       </div>
       <div className="center">{weatherAttributeForCard}</div>

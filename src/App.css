@@ -54,6 +54,24 @@
   border-radius: 15px;
 }
 
+.icon-temptile {
+  color: white;
+}
+
+.icon-temptile-now {
+  color: black;
+}
+
+.tile-border-now {
+  border: 1px solid #fdfeff;
+  margin: 10px;
+  min-width: 40px;
+  max-width: 40px;
+  padding: 20px 20px;
+  border-radius: 15px;
+  background-color: white;
+}
+
 .time-of-day-tile {
   display: flex;
   max-height: 220px;

@@ -17,7 +17,6 @@ const Next7DaysView = ({
   const days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
   return (
     <div>
-      <SelectDay setCurrentView={setCurrentView} currentView={currentView}/>
       <h1>Next 7 Days</h1>
       <div className = "center">
           <div className= "temp-tile">
@@ -50,6 +49,7 @@ const Next7DaysView = ({
               ))}
           </div>
         </div>
+        <SelectDay setCurrentView={setCurrentView} currentView={currentView}/>
     </div>
   );
 };

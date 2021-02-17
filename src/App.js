@@ -14,22 +14,22 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   const GEOCODING_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
   // const [search, setSearch] = useState("");
-  const [query, setQuery] = useState("London, UK");
+  const [query, setQuery] = useState(() => "London, UK");
 
   // Select relevant Page View
-  const [currentView, setCurrentView] = useState("Today");
+  const [currentView, setCurrentView] = useState(() => "Today");
 
   // store our data from api in this
-  const [cwDataFromApi, setCWDataFromApi] = useState(null);
+  const [cwDataFromApi, setCWDataFromApi] = useState(() => null);
 
   // store data from one call api
-  const [oneCallDataFromApi, setOneCallDataFromApi] = useState(null);
+  const [oneCallDataFromApi, setOneCallDataFromApi] = useState(() => null);
 
   // store the main weather attribute
-  const [mainWeatherAttribute, setMainWeatherAttribute] = useState([]);
+  const [mainWeatherAttribute, setMainWeatherAttribute] = useState(() => []);
 
   // store the address from searchbar
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState(() => "");
 
   // store the current contents of history locations
   // const [historyLocations, setHistoryLocations] = useState([]);
@@ -40,9 +40,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   // ]);
 
   // store list of favourites
-  const [favourites, setFavourites] = useState(() => [
-    localStorage.getItem("favourites"),
-  ]);
+  const [favourites, setFavourites] = useState([]);
 
   useEffect(() => {
     getLocation();
@@ -52,6 +50,10 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     getUserLocation();
   }, []); // Option?
 
+  useEffect(() => {
+    checkIfFavourites();
+  }, []);
+
   // useEffect(() => {
   //   getHistory();
   // }, []);
@@ -59,40 +61,6 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   // useEffect(() => {
   //   writeHistory();
   // }, [updatedHistoryLocations]);
-
-  useEffect(() => {
-    readFavourites();
-  }, []);
-
-  useEffect(() => {
-    writeIntoFavourites
-  })
-
-  // Clear History
-  const clearFavourites = () => {
-    localStorage.clear();
-  };
-
-  // localStorage - Read
-  const readFavourites = () => {
-    setFavourites(localStorage.getItem("favourites"));
-  };
-
-  // localStorage - Writes
-  const writeIntoFavourites = () => {
-    if (!favourites.includes(query)) {
-      setFavourites((currentFavs) => [...currentFavs, query]);
-    }
-  };
-
-  console.log("Favourites: ", favourites);
-
-  // clearFavourites();
-
-  // Update the search bar accordingly
-  const handleChange = (value) => {
-    setAddress(value);
-  };
 
   // Get current history
   // const getHistory = () => {
@@ -108,6 +76,43 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   //   localStorage.setItem("history", updatedHistoryLocations);
   //   setHistoryLocations(updatedHistoryLocations);
   // };
+
+  // useEffect(() => {
+  //   writeIntoFavourites();
+  // }, []);
+  // var favourites = [];
+
+  // // See if Favourites exists. If not write it.
+  const checkIfFavourites = async () => {
+    var x = localStorage.getItem("favourites");
+    if (x) {
+      setFavourites(x);
+    } else {
+      // localStorage.setItem("favourites", "");
+    }
+  };
+
+  // Clear History
+  const clearFavourites = () => {
+    localStorage.clear();
+  };
+
+  // localStorage - Writes
+  const writeIntoFavourites = () => {
+    if (!favourites.includes(query)) {
+      setFavourites((favourites) => [...favourites, query]);
+      localStorage.setItem("favourites", JSON.stringify(favourites));
+    } else {
+      alert("Location already exists in Favourites");
+    }
+  };
+
+  // clearFavourites();
+
+  // Update the search bar accordingly
+  const handleChange = (value) => {
+    setAddress(value);
+  };
 
   // Set address and Set Query, set address to empty after making it equal to query
   const handleSelect = async (value) => {
@@ -145,7 +150,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
       setOneCallDataFromApi(data);
       const tempWeather = [];
       data.current.weather.map((item) => tempWeather.push(item.main));
-      console.log(tempWeather);
+      // console.log(tempWeather);
       setMainWeatherAttribute(tempWeather);
     } else {
       alert("Enter a valid Location");
@@ -229,7 +234,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     document.body.className = "background-rain";
     mainWeatherAttribute.splice(0, mainWeatherAttribute.length);
   }
-  console.log(document.body.classList);
+  // console.log(document.body.classList);
 
   if (isScriptLoadSucceed && isScriptLoaded) {
     return (
@@ -244,7 +249,9 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
           handleSelect={handleSelect}
           address={address}
         />
-        <button onClick={writeIntoFavourites}>Add To Favourites</button>
+        <button onClick={writeIntoFavourites}>
+          Add This Location To Favourites
+        </button>
 
         {/* <DropdownButton
           id="dropdown-split-variants-primary"
@@ -294,6 +301,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
               );
           }
         })()}
+        <button onClick={clearFavourites}>Reset Stored Values</button>
       </div>
     );
   } else {

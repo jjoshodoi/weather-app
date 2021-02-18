@@ -14,16 +14,17 @@ const TomorrowLocation = ({
   currentView,
 }) => {
   return (
-    <div className="location">
+    <div>
       {/* <GeoButtons GEOCODING_API_KEY={GEOCODING_API_KEY} /> */}
-
-      <DisplayDate tomorrow={tomorrow} />
-      <DisplayTemp
-        tomorrow={tomorrow}
-        oneCallDataFromApi={oneCallDataFromApi}
-        cwDataFromApi={cwDataFromApi}
-        kelvinToCelcius={kelvinToCelcius}
-      />
+      <div className="main-info-card">
+        <DisplayDate tomorrow={tomorrow} />
+        <DisplayTemp
+          tomorrow={tomorrow}
+          oneCallDataFromApi={oneCallDataFromApi}
+          cwDataFromApi={cwDataFromApi}
+          kelvinToCelcius={kelvinToCelcius}
+        />
+      </div>
       <SelectDay
         currentView={currentView}
         setCurrentView={setCurrentView}

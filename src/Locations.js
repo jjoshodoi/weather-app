@@ -26,14 +26,16 @@ const TodayLocation = ({
   };
 
   return (
-    <div className="location">
-      <DisplayDate tomorrow={tomorrow} />
-      <DisplayTemp
-        oneCallDataFromApi={oneCallDataFromApi}
-        cwDataFromApi={cwDataFromApi}
-        kelvinToCelcius={kelvinToCelcius}
-        tomorrow={tomorrow}
-      />
+    <div>
+      <div className="main-info-card">
+        <DisplayDate tomorrow={tomorrow} />
+        <DisplayTemp
+          oneCallDataFromApi={oneCallDataFromApi}
+          cwDataFromApi={cwDataFromApi}
+          kelvinToCelcius={kelvinToCelcius}
+          tomorrow={tomorrow}
+        />
+      </div>
       <SelectDay setCurrentView={setCurrentView} currentView={currentView} />
       <TempByHour
         findMainWeatherAttribute={findMainWeatherAttribute}

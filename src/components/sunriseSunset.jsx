@@ -19,9 +19,12 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow, sidebar }) => {
         switch (tomorrow) {
           case false:
             return (
-              <div id={sidebar ? "footer" : "footer-expand"} className="row center">
+              <div
+                id={sidebar ? "footer" : "footer-expand"}
+                className="row center"
+              >
                 <h3 className="column">
-                <FiSunrise size = {25}/> Sunrise:{" "}
+                  <FiSunrise size={25} /> Sunrise:{" "}
                   {oneCallDataFromApi &&
                     epochToDate(oneCallDataFromApi.current.sunrise).getHours()}
                   :
@@ -36,7 +39,7 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow, sidebar }) => {
                     ).getSeconds()}
                 </h3>
                 <h3 className="column">
-                <FiSunset size = {25}/> Sunset:{" "}
+                  <FiSunset size={25} /> Sunset:{" "}
                   {oneCallDataFromApi &&
                     epochToDate(oneCallDataFromApi.current.sunset).getHours()}
                   :
@@ -47,16 +50,19 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow, sidebar }) => {
                     epochToDate(oneCallDataFromApi.current.sunset).getSeconds()}
                 </h3>
                 <h3 className="column">
-                <WiHumidity size = {30}/>  Humidity:{" "}
+                  <WiHumidity size={30} /> Humidity:{" "}
                   {oneCallDataFromApi && oneCallDataFromApi.current.humidity}%
                 </h3>
               </div>
             );
           default:
             return (
-              <div id="footer" className="row center">
+              <div
+                id={sidebar ? "footer" : "footer-expand"}
+                className="row center"
+              >
                 <h3 className="column">
-                <FiSunrise size = {25}/> Sunrise:{" "}
+                  <FiSunrise size={25} /> Sunrise:{" "}
                   {oneCallDataFromApi &&
                     epochToDate(oneCallDataFromApi.daily[1].sunrise).getHours()}
                   :
@@ -71,7 +77,7 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow, sidebar }) => {
                     ).getSeconds()}
                 </h3>
                 <h3 className="column">
-                  <FiSunset size = {25}/> Sunset:{" "}
+                  <FiSunset size={25} /> Sunset:{" "}
                   {oneCallDataFromApi &&
                     epochToDate(oneCallDataFromApi.daily[1].sunset).getHours()}
                   :
@@ -86,8 +92,8 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow, sidebar }) => {
                     ).getSeconds()}
                 </h3>
                 <h3 className="column">
-                <WiHumidity size = {30}/> 
-                Humidity:{" "}
+                  <WiHumidity size={30} />
+                  Humidity:{" "}
                   {oneCallDataFromApi && oneCallDataFromApi.daily[1].humidity}%
                 </h3>
               </div>

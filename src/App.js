@@ -184,18 +184,18 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     if (kelvinToCelcius(oneCallDataFromApi.current.temp) >= 10) {
       var lightness = 90 - kelvinToCelcius(oneCallDataFromApi.current.temp);
       document.body.style.background = `linear-gradient(hsla(20,100%,${lightness}%,0.9),  hsla(360,50%,100%,0.9))`; //Warm
-      var color = "red"
+      var color = "red";
     } else if (
       kelvinToCelcius(oneCallDataFromApi.current.temp) > 0 &&
       kelvinToCelcius(oneCallDataFromApi.current.temp) < 10
     ) {
       lightness = 60 + kelvinToCelcius(oneCallDataFromApi.current.temp);
       document.body.style.background = `linear-gradient(hsla(200,50%,${lightness}%,0.8),  hsla(360,50%,100%,0.8))`; //Cold below 10degrees
-          color = "blue"
+      color = "blue";
     } else if (kelvinToCelcius(oneCallDataFromApi.current.temp) < 0) {
       lightness = 40 + kelvinToCelcius(oneCallDataFromApi.current.temp);
       document.body.style.background = `linear-gradient(hsla(180,50%,${lightness}%,0.8),  hsla(360,50%,100%,0.8))`; //Freezing
-          color = "lightskyblue"
+      color = "lightskyblue";
     }
   }
 
@@ -263,6 +263,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
                       <SunriseSunset
                         oneCallDataFromApi={oneCallDataFromApi}
                         tomorrow={true}
+                        sidebar={sidebar}
                       />
                     </div>
                   </div>

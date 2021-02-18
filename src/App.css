@@ -142,3 +142,14 @@
 .top-margin {
   margin-top: 50px;
 }
+
+#footer {
+  margin-left: 1%;
+  position: fixed;
+  bottom: 0;
+  width: 84%;
+  background-color: white;
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
+  border: white 2px;
+}

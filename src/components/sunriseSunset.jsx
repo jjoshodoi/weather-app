@@ -25,29 +25,37 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow, sidebar }) => {
               >
                 <h3 className="column">
                   <FiSunrise size={25} /> Sunrise:{" "}
-                  {oneCallDataFromApi &&
-                    epochToDate(oneCallDataFromApi.current.sunrise).getHours()}
+                  {`0${
+                    oneCallDataFromApi &&
+                    epochToDate(oneCallDataFromApi.current.sunrise).getHours()
+                  }`.slice(-2)}
                   :
-                  {oneCallDataFromApi &&
-                    epochToDate(
-                      oneCallDataFromApi.current.sunrise
-                    ).getMinutes()}
+                  {`0${
+                    oneCallDataFromApi &&
+                    epochToDate(oneCallDataFromApi.current.sunrise).getMinutes()
+                  }`.slice(-2)}
                   :
-                  {oneCallDataFromApi &&
-                    epochToDate(
-                      oneCallDataFromApi.current.sunrise
-                    ).getSeconds()}
+                  {`0${
+                    oneCallDataFromApi &&
+                    epochToDate(oneCallDataFromApi.current.sunrise).getSeconds()
+                  }`.slice(-2)}
                 </h3>
                 <h3 className="column">
                   <FiSunset size={25} /> Sunset:{" "}
-                  {oneCallDataFromApi &&
-                    epochToDate(oneCallDataFromApi.current.sunset).getHours()}
+                  {`0${
+                    oneCallDataFromApi &&
+                    epochToDate(oneCallDataFromApi.current.sunset).getHours()
+                  }`.slice(-2)}
                   :
-                  {oneCallDataFromApi &&
-                    epochToDate(oneCallDataFromApi.current.sunset).getMinutes()}
+                  {`0${
+                    oneCallDataFromApi &&
+                    epochToDate(oneCallDataFromApi.current.sunset).getMinutes()
+                  }`.slice(-2)}
                   :
-                  {oneCallDataFromApi &&
-                    epochToDate(oneCallDataFromApi.current.sunset).getSeconds()}
+                  {`0${
+                    oneCallDataFromApi &&
+                    epochToDate(oneCallDataFromApi.current.sunset).getSeconds()
+                  }`.slice(-2)}
                 </h3>
                 <h3 className="column">
                   <WiHumidity size={30} /> Humidity:{" "}
@@ -63,33 +71,41 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow, sidebar }) => {
               >
                 <h3 className="column">
                   <FiSunrise size={25} /> Sunrise:{" "}
-                  {oneCallDataFromApi &&
-                    epochToDate(oneCallDataFromApi.daily[1].sunrise).getHours()}
+                  {`0${
+                    oneCallDataFromApi &&
+                    epochToDate(oneCallDataFromApi.daily[1].sunrise).getHours()
+                  }`.slice(-2)}
                   :
-                  {oneCallDataFromApi &&
+                  {`0${
+                    oneCallDataFromApi &&
                     epochToDate(
                       oneCallDataFromApi.daily[1].sunrise
-                    ).getMinutes()}
+                    ).getMinutes()
+                  }`.slice(-2)}
                   :
-                  {oneCallDataFromApi &&
+                  {`0${
+                    oneCallDataFromApi &&
                     epochToDate(
                       oneCallDataFromApi.daily[1].sunrise
-                    ).getSeconds()}
+                    ).getSeconds()
+                  }`.slice(-2)}
                 </h3>
                 <h3 className="column">
                   <FiSunset size={25} /> Sunset:{" "}
-                  {oneCallDataFromApi &&
-                    epochToDate(oneCallDataFromApi.daily[1].sunset).getHours()}
+                  {`0${
+                    oneCallDataFromApi &&
+                    epochToDate(oneCallDataFromApi.daily[1].sunset).getHours()
+                  }`.slice(-2)}
                   :
-                  {oneCallDataFromApi &&
-                    epochToDate(
-                      oneCallDataFromApi.daily[1].sunset
-                    ).getMinutes()}
+                  {`0${
+                    oneCallDataFromApi &&
+                    epochToDate(oneCallDataFromApi.daily[1].sunset).getMinutes()
+                  }`.slice(-2)}
                   :
-                  {oneCallDataFromApi &&
-                    epochToDate(
-                      oneCallDataFromApi.daily[1].sunset
-                    ).getSeconds()}
+                  {`0${
+                    oneCallDataFromApi &&
+                    epochToDate(oneCallDataFromApi.daily[1].sunset).getSeconds()
+                  }`.slice(-2)}
                 </h3>
                 <h3 className="column">
                   <WiHumidity size={30} />

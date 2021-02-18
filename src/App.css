@@ -116,6 +116,7 @@
   border-top-right-radius: 30px;
   border-top-left-radius: 30px;
   border: white 2px;
+  transition: 250ms;
 }
 
 #footer-expand {
@@ -126,6 +127,7 @@
   border-top-right-radius: 30px;
   border-top-left-radius: 30px;
   border: white 2px;
+  transition: 250ms;
 }
 
 .select-day-padding {

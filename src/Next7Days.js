@@ -11,13 +11,14 @@ const Next7DaysView = ({
   oneCallDataFromApi,
   setCurrentView,
   currentView,
+  color,
 }) => {
   const d = new Date();
   const today = d.getDay() - 1;
   const days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
   return (
     <div>
-      <div className="main-info-card-7days">
+      <div className={`main-info-card-${color}`}>
         <h1>Next 7 Days</h1>
         <div>
           <h3>

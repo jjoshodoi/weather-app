@@ -12,11 +12,12 @@ const TomorrowLocation = ({
   kelvinToCelcius,
   tomorrow,
   currentView,
+  color
 }) => {
   return (
     <div>
       {/* <GeoButtons GEOCODING_API_KEY={GEOCODING_API_KEY} /> */}
-      <div className="main-info-card">
+      <div className={`main-info-card-${color}`}>
         <DisplayDate tomorrow={tomorrow} />
         <DisplayTemp
           tomorrow={tomorrow}

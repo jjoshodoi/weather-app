@@ -26,6 +26,11 @@
   height: 10%;
 }
 
+button {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .column {
   -webkit-flex: 1;
   -ms-flex: 1;
@@ -152,4 +157,9 @@
   border-top-right-radius: 30px;
   border-top-left-radius: 30px;
   border: white 2px;
+}
+
+.select-day-padding {
+  padding-top: 10px;
+  padding-bottom: 30px;
 }

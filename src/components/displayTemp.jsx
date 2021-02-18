@@ -54,7 +54,7 @@ const DisplayTemp = ({
                 </h3>
                 <h1>{`${kelvinToCelcius(
                   oneCallDataFromApi && oneCallDataFromApi.current.temp
-                )} °C`}</h1>
+                )}°C`}</h1>
                 <h5>{`Feels Like ${kelvinToCelcius(
                   oneCallDataFromApi && oneCallDataFromApi.current.feels_like
                 )}°C`}</h5>
@@ -80,19 +80,21 @@ const DisplayTemp = ({
                         {`${kelvinToCelcius(
                           oneCallDataFromApi &&
                             oneCallDataFromApi.daily[1].temp.morn
-                        )} °C`}{" "}
+                        )}°C`}{" "}
                       </b>
                       <div className="center">
                         {(() => {
                           switch (weatherAttributeForMorning) {
                             case "Clouds":
                               return (
-                                <AiFillCloud
-                                  size={40}
-                                  className={`icon-temptile${
-                                    indexNum === 0 ? "-now" : ""
-                                  }`}
-                                />
+                                <div className="padding-bottom">
+                                  <AiFillCloud
+                                    size={40}
+                                    className={`icon-temptile${
+                                      indexNum === 0 ? "-now" : ""
+                                    }`}
+                                  />
+                              </div> 
                               );
                             case "Rain":
                               return (
@@ -107,21 +109,25 @@ const DisplayTemp = ({
                               );
                             case "Snow":
                               return (
-                                <BiCloudSnow
-                                  size={40}
-                                  className={`icon-temptile${
-                                    indexNum === 0 ? "-now" : ""
-                                  }`}
-                                />
+                                <div className="padding-bottom">
+                                  <BiCloudSnow
+                                    size={40}
+                                    className={`icon-temptile${
+                                      indexNum === 0 ? "-now" : ""
+                                    }`}
+                                  />
+                                </div>  
                               );
                             case "Clear":
                               return (
+                                <div className="padding-bottom">
                                 <TiWeatherSunny
                                   size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
                                 />
+                              </div>  
                               );
                             default:
                               return (
@@ -149,7 +155,7 @@ const DisplayTemp = ({
                         {`${kelvinToCelcius(
                           oneCallDataFromApi &&
                             oneCallDataFromApi.daily[1].temp.day
-                        )} °C`}{" "}
+                        )}°C`}{" "}
                       </b>
                     </div>
                     {/* <h4 className="center">
@@ -163,39 +169,47 @@ const DisplayTemp = ({
                         switch (weatherAttributeForAfternoon) {
                           case "Clouds":
                             return (
-                              <AiFillCloud
-                                size={40}
-                                className={`icon-temptile${
-                                  indexNum === 0 ? "-now" : ""
-                                }`}
-                              />
+                              <div className="padding-bottom">
+                                <AiFillCloud
+                                  size={40}
+                                  className={`icon-temptile${
+                                    indexNum === 0 ? "-now" : ""
+                                  }`}
+                                />
+                              </div> 
                             );
                           case "Rain":
                             return (
-                              <IoRainy
-                                size={40}
-                                className={`icon-temptile${
-                                  indexNum === 0 ? "-now" : ""
-                                }`}
-                              />
+                              <div className="padding">
+                                <IoRainy
+                                  size={40}
+                                  className={`icon-temptile${
+                                    indexNum === 0 ? "-now" : ""
+                                  }`}
+                                />
+                              </div>
                             );
                           case "Snow":
                             return (
-                              <BiCloudSnow
-                                size={40}
-                                className={`icon-temptile${
-                                  indexNum === 0 ? "-now" : ""
-                                }`}
-                              />
+                              <div className="padding-bottom">
+                                  <BiCloudSnow
+                                    size={40}
+                                    className={`icon-temptile${
+                                      indexNum === 0 ? "-now" : ""
+                                    }`}
+                                  />
+                              </div> 
                             );
                           case "Clear":
                             return (
-                              <TiWeatherSunny
-                                size={40}
-                                className={`icon-temptile${
-                                  indexNum === 0 ? "-now" : ""
-                                }`}
-                              />
+                              <div className="padding-bottom">
+                                <TiWeatherSunny
+                                  size={40}
+                                  className={`icon-temptile${
+                                    indexNum === 0 ? "-now" : ""
+                                  }`}
+                                />
+                              </div>  
                             );
                           default:
                             return (
@@ -222,7 +236,7 @@ const DisplayTemp = ({
                         {`${kelvinToCelcius(
                           oneCallDataFromApi &&
                             oneCallDataFromApi.daily[1].temp.eve
-                        )} °C`}{" "}
+                        )}°C`}{" "}
                       </b>
                     </div>
                     {/* <h4 className="center">
@@ -235,12 +249,14 @@ const DisplayTemp = ({
                         switch (weatherAttributeForEvening) {
                           case "Clouds":
                             return (
-                              <AiFillCloud
-                                size={40}
-                                className={`icon-temptile${
-                                  indexNum === 0 ? "-now" : ""
-                                }`}
-                              />
+                              <div className="padding-bottom">
+                                <AiFillCloud
+                                  size={40}
+                                  className={`icon-temptile${
+                                    indexNum === 0 ? "-now" : ""
+                                  }`}
+                                />
+                              </div> 
                             );
                           case "Rain":
                             return (
@@ -255,21 +271,25 @@ const DisplayTemp = ({
                             );
                           case "Snow":
                             return (
-                              <BiCloudSnow
-                                size={40}
-                                className={`icon-temptile${
-                                  indexNum === 0 ? "-now" : ""
-                                }`}
-                              />
+                              <div className="padding-bottom">
+                                  <BiCloudSnow
+                                    size={40}
+                                    className={`icon-temptile${
+                                      indexNum === 0 ? "-now" : ""
+                                    }`}
+                                  />
+                              </div>  
                             );
                           case "Clear":
                             return (
-                              <TiWeatherSunny
-                                size={40}
-                                className={`icon-temptile${
-                                  indexNum === 0 ? "-now" : ""
-                                }`}
-                              />
+                              <div className="padding-bottom">
+                                <TiWeatherSunny
+                                  size={40}
+                                  className={`icon-temptile${
+                                    indexNum === 0 ? "-now" : ""
+                                  }`}
+                                />
+                              </div>  
                             );
                           default:
                             return (
@@ -296,7 +316,7 @@ const DisplayTemp = ({
                         {`${kelvinToCelcius(
                           oneCallDataFromApi &&
                             oneCallDataFromApi.daily[1].temp.night
-                        )} °C`}{" "}
+                        )}°C`}{" "}
                       </b>
                     </div>
                     <div className="center">
@@ -304,39 +324,47 @@ const DisplayTemp = ({
                         switch (weatherAttributeForNight) {
                           case "Clouds":
                             return (
-                              <AiFillCloud
-                                size={40}
-                                className={`icon-temptile${
-                                  indexNum === 0 ? "-now" : ""
-                                }`}
-                              />
+                              <div className="padding-bottom">
+                                <AiFillCloud
+                                  size={40}
+                                  className={`icon-temptile${
+                                    indexNum === 0 ? "-now" : ""
+                                  }`}
+                                />
+                              </div>  
                             );
                           case "Rain":
                             return (
-                              <IoRainy
-                                size={40}
-                                className={`icon-temptile${
-                                  indexNum === 0 ? "-now" : ""
-                                }`}
-                              />
+                              <div className="padding">
+                                <IoRainy
+                                  size={40}
+                                  className={`icon-temptile${
+                                    indexNum === 0 ? "-now" : ""
+                                  }`}
+                                />
+                              </div>
                             );
                           case "Snow":
                             return (
-                              <BiCloudSnow
-                                size={40}
-                                className={`icon-temptile${
-                                  indexNum === 0 ? "-now" : ""
-                                }`}
-                              />
+                              <div className="padding-bottom">
+                                  <BiCloudSnow
+                                    size={40}
+                                    className={`icon-temptile${
+                                      indexNum === 0 ? "-now" : ""
+                                    }`}
+                                  />
+                              </div>  
                             );
                           case "Clear":
                             return (
-                              <TiWeatherSunny
-                                size={40}
-                                className={`icon-temptile${
-                                  indexNum === 0 ? "-now" : ""
-                                }`}
-                              />
+                              <div className="padding-bottom">
+                                <TiWeatherSunny
+                                  size={40}
+                                  className={`icon-temptile${
+                                    indexNum === 0 ? "-now" : ""
+                                  }`}
+                                />
+                              </div>  
                             );
                           default:
                             return (
@@ -355,7 +383,6 @@ const DisplayTemp = ({
                         oneCallDataFromApi.hourly[differenceFrom12AM + night]
                           .weather[0].main}
                     </h4> */}
-
                     <h5>{`Feels Like ${kelvinToCelcius(
                       oneCallDataFromApi &&
                         oneCallDataFromApi.daily[1].feels_like.night

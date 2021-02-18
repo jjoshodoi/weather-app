@@ -72,6 +72,10 @@ button {
 .temp-tile {
   display: flex;
   flex-wrap: nowrap;
+  overflow-x: hidden;
+}
+
+.temp-tile:hover {
   overflow-x: auto;
 }
 

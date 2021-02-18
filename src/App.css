@@ -7,12 +7,11 @@
   /* min-height: 10vh; */
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
 }
 
-.top {
-  /* position: absolute; */
-  /* top: 0px; */
+.search-margin {
+  margin-top: 20px;
 }
 
 .right {
@@ -25,6 +24,11 @@
   display: -webkit-flex;
   display: flex;
   height: 10%;
+}
+
+button {
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .column {
@@ -68,6 +72,10 @@
 .temp-tile {
   display: flex;
   flex-wrap: nowrap;
+  overflow-x: hidden;
+}
+
+.temp-tile:hover {
   overflow-x: auto;
 }
 
@@ -143,4 +151,20 @@
 
 .top-margin {
   margin-top: 50px;
+}
+
+#footer {
+  margin-left: 1%;
+  position: fixed;
+  bottom: 0;
+  width: 84%;
+  background-color: white;
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
+  border: white 2px;
+}
+
+.select-day-padding {
+  padding-top: 10px;
+  padding-bottom: 30px;
 }

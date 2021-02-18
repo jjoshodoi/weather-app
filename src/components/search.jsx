@@ -9,7 +9,7 @@ const SearchBar = ({
   address,
 }) => {
   return (
-    <div>
+    <div className="search-margin">
       <form onSubmit={getSearch} className="Search-form">
         <PlacesAutocomplete
           value={address}
@@ -59,9 +59,11 @@ const SearchBar = ({
             Search
           </button>
         </div>
-        <button onClick={getUserLocation} className="Search-Location">
-          Locate
-        </button>
+        <div>
+          <button onClick={getUserLocation} className="Search-Location">
+            Locate
+          </button>
+        </div>
       </form>
     </div>
   );

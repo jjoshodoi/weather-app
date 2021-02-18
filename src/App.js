@@ -209,7 +209,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
               <button id="addCity" onClick={addToFav}>
                 Add Current City
                 <br />
-                <MdFavorite className="white-icon" />
+                <MdFavorite size={50} className="white-icon" />
               </button>
             </li>
             <li>
@@ -228,41 +228,6 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
             handleSelect={handleSelect}
             address={address}
           />
-          {/* <div>
-            <MdFavorite onClick={addToFav} />
-            <span>Add to Fav</span>
-          </div>
-
-          <div>
-            <GrClear onClick={clearFavourites} />
-            <span>Clear All Favs</span>
-          </div>
-
-          <div>
-            <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                View Favourites
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                {favourites.length === 0 ? (
-                  <Dropdown.Item>
-                    <button>Nothing In Favourites</button>
-                  </Dropdown.Item>
-                ) : (
-                  favourites.map((item) => (
-                    <Dropdown.Item>
-                      <button onClick={() => handleDropDownClick(item)}>
-                        {item}
-                      </button>
-                    </Dropdown.Item>
-                  ))
-                )}
-              </Dropdown.Menu>
-            </Dropdown>
-          </div> */}
-
-          {/* switch to select relevant page  */}
           {(() => {
             switch (currentView) {
               case "TomorrowLocationView":

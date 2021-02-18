@@ -12,6 +12,7 @@ const TodayLocation = ({
   kelvinToCelcius,
   tomorrow,
   currentView,
+  color,
 }) => {
   const findMainWeatherAttribute = (apiData) => {
     const listMainWeatherAttribute = [];
@@ -27,7 +28,7 @@ const TodayLocation = ({
 
   return (
     <div>
-      <div className="main-info-card">
+      <div className={`main-info-card-${color}`}>
         <DisplayDate tomorrow={tomorrow} />
         <DisplayTemp
           oneCallDataFromApi={oneCallDataFromApi}

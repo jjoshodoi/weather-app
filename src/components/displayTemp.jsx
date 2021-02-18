@@ -73,12 +73,12 @@ const DisplayTemp = ({
                 </h3>
                 <div className="center">
                   <div className="tile-border">
-                    <div className="center">Morning</div>
+                    <div id="morningtext">Morning</div>
                     <div>
-                      {`${kelvinToCelcius(
+                     <b> {`${kelvinToCelcius(
                         oneCallDataFromApi &&
                           oneCallDataFromApi.daily[1].temp.morn
-                      )} °C`}
+                      )} °C`} </b>
                       <div className="center">
                         {(() => {
                           switch (weatherAttributeForMorning) {
@@ -137,12 +137,12 @@ const DisplayTemp = ({
                     </div>
                   </div>
                   <div className="tile-border">
-                    <div className="center">Afternoon</div>
+                    <div id="afternoontext">Afternoon</div>
                     <div>
-                      {`${kelvinToCelcius(
+                    <b>   {`${kelvinToCelcius(
                         oneCallDataFromApi &&
                           oneCallDataFromApi.daily[1].temp.day
-                      )} °C`}
+                      )} °C`} </b>
                     </div>
                     {/* <h4 className="center">
                       {oneCallDataFromApi &&
@@ -207,12 +207,12 @@ const DisplayTemp = ({
                     )}°C`}</h5>
                   </div>
                   <div className="tile-border">
-                    <div className="center">Evening</div>
+                    <div id="eveningtext">Evening</div>
                     <div>
-                      {`${kelvinToCelcius(
+                    <b>   {`${kelvinToCelcius(
                         oneCallDataFromApi &&
                           oneCallDataFromApi.daily[1].temp.eve
-                      )} °C`}
+                      )} °C`} </b>
                     </div>
                     {/* <h4 className="center">
                       {oneCallDataFromApi &&
@@ -276,12 +276,12 @@ const DisplayTemp = ({
                     )}°C`}</h5>
                   </div>
                   <div className="tile-border">
-                    <div className="center">Night</div>
+                    <div id="nighttext">Night</div>
                     <div>
-                      {`${kelvinToCelcius(
+                    <b>      {`${kelvinToCelcius(
                         oneCallDataFromApi &&
                           oneCallDataFromApi.daily[1].temp.night
-                      )} °C`}
+                      )} °C`} </b>
                     </div>
                     <div className="center">
                       {(() => {

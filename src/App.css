@@ -86,7 +86,7 @@
   padding-top: 7px;
 }
 .tile-border {
-  border: 1px solid #fdfeff;
+  border: 5px solid #fdfeff;
   margin: 10px;
   min-width: 40px;
   max-width: 40px;
@@ -245,4 +245,37 @@
 .select-day-padding {
   padding-top: 10px;
   padding-bottom: 30px;
+}
+
+.timeofday{
+  font-size: 25px;
+  font-style: bold;
+}
+
+#morningtext {
+  color: orangered;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#afternoontext {
+  color: lightseagreen;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#eveningtext {
+  color: purple;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#nighttext {
+  color: darkblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

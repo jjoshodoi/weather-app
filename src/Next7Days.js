@@ -48,7 +48,7 @@ const Next7DaysView = ({
                         case "Rain":
                           return (
                             <div className="padding">
-                              <IoRainy size={38} padding="15px" />
+                              <IoRainy size={38} />
                             </div>
                           );
                         case "Snow":

@@ -93,12 +93,14 @@ const DisplayTemp = ({
                               );
                             case "Rain":
                               return (
+                               <div className ="padding"> 
                                 <IoRainy
                                   size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
                                 />
+                                </div>
                               );
                             case "Snow":
                               return (
@@ -233,12 +235,14 @@ const DisplayTemp = ({
                             );
                           case "Rain":
                             return (
-                              <IoRainy
-                                size={40}
-                                className={`icon-temptile${
-                                  indexNum === 0 ? "-now" : ""
-                                }`}
-                              />
+                              <div className ="padding"> 
+                                <IoRainy
+                                  size={40}
+                                  className={`icon-temptile${
+                                    indexNum === 0 ? "-now" : ""
+                                  }`}
+                                />
+                                </div>
                             );
                           case "Snow":
                             return (

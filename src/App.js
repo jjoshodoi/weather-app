@@ -1,6 +1,7 @@
 import "./App.css";
 import "./sidenav.css";
 import "./scrollbar.css";
+import "./tempcard.css";
 
 import scriptLoader from "react-async-script-loader";
 import { useEffect, useState } from "react";

@@ -18,7 +18,7 @@ const Next7DaysView = ({
   const days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
   return (
     <div>
-      <div className={`main-info-card-${color}`}>
+      <div className={`main-info-card-7days-${color}`}>
         <h1>Next 7 Days</h1>
         <div>
           <h3>

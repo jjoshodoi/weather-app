@@ -77,7 +77,6 @@
   max-width: 40px;
   padding: 20px 20px;
   border-radius: 15px;
-  
 }
 
 .icon-temptile {
@@ -103,7 +102,7 @@
   max-height: 220px;
   flex-wrap: nowrap;
   overflow-x: auto;
-} 
+}
 
 .center {
   display: flex;

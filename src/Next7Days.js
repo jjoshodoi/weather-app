@@ -4,6 +4,7 @@ import { BiCloudSnow } from "react-icons/bi";
 import { AiFillCloud } from "react-icons/ai";
 import { IoRainy } from "react-icons/io5";
 import { TiWeatherSunny } from "react-icons/ti";
+import DisplayTemp from "./components/displayTemp";
 
 const Next7DaysView = ({
   cwDataFromApi,
@@ -18,6 +19,12 @@ const Next7DaysView = ({
   return (
     <div>
       <h1>Next 7 Days</h1>
+      <div>
+        <h3>
+          {cwDataFromApi && cwDataFromApi.name},{" "}
+          {cwDataFromApi && cwDataFromApi.sys.country}
+        </h3>
+      </div>
       <div className="center">
         <div className="temp-tile">
           {oneCallDataFromApi &&

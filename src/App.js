@@ -1,4 +1,6 @@
 import "./App.css";
+import "./sidenav.css";
+
 import scriptLoader from "react-async-script-loader";
 import { useEffect, useState } from "react";
 import TodayLocation from "./Locations";
@@ -174,10 +176,13 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     if (kelvinToCelcius(oneCallDataFromApi.current.temp) >= 10) {
       var lightness = 90 - kelvinToCelcius(oneCallDataFromApi.current.temp);
       document.body.style.background = `linear-gradient(hsla(20,100%,${lightness}%,0.9),  hsla(360,50%,100%,0.9))`; //Warm
-    } else if ((kelvinToCelcius(oneCallDataFromApi.current.temp) > 0) && (kelvinToCelcius(oneCallDataFromApi.current.temp) < 10)) {
+    } else if (
+      kelvinToCelcius(oneCallDataFromApi.current.temp) > 0 &&
+      kelvinToCelcius(oneCallDataFromApi.current.temp) < 10
+    ) {
       lightness = 60 + kelvinToCelcius(oneCallDataFromApi.current.temp);
       document.body.style.background = `linear-gradient(hsla(200,50%,${lightness}%,0.8),  hsla(360,50%,100%,0.8))`; //Cold below 10degrees
-    } else if (kelvinToCelcius(oneCallDataFromApi.current.temp) < 0)  {
+    } else if (kelvinToCelcius(oneCallDataFromApi.current.temp) < 0) {
       lightness = 40 + kelvinToCelcius(oneCallDataFromApi.current.temp);
       document.body.style.background = `linear-gradient(hsla(180,50%,${lightness}%,0.8),  hsla(360,50%,100%,0.8))`; //Freezing
     }
@@ -186,84 +191,113 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   if (isScriptLoadSucceed && isScriptLoaded) {
     return (
       <div className="App">
-        <SearchBar
-          getUserLocation={getUserLocation}
-          getSearch={getSearch}
-          handleChange={handleChange}
-          handleSelect={handleSelect}
-          address={address}
-        />
-        <div>
-          <MdFavorite onClick={addToFav} />
-          <span>Add to Fav</span>
+        <div className="sidenav">
+          <ul>
+            <li>
+              <button id="title">Favourites</button>
+            </li>
+            {favourites.map((item) => (
+              <li>
+                <button onClick={() => handleDropDownClick(item)}>
+                  {item}
+                </button>
+              </li>
+            ))}
+            <li>
+              <button id="addCity" onClick={addToFav}>
+                Add Current City
+                <br />
+                <MdFavorite className="white-icon" />
+              </button>
+            </li>
+            <li>
+              <button id="clearAll" onClick={clearFavourites}>
+                Clear All <br />
+                <GrClear className="white-icon" />
+              </button>
+            </li>
+          </ul>
         </div>
+        <div className="content">
+          <SearchBar
+            getUserLocation={getUserLocation}
+            getSearch={getSearch}
+            handleChange={handleChange}
+            handleSelect={handleSelect}
+            address={address}
+          />
+          {/* <div>
+            <MdFavorite onClick={addToFav} />
+            <span>Add to Fav</span>
+          </div>
 
-        <div>
-          <GrClear onClick={clearFavourites} />
-          <span>Clear All Favs</span>
-        </div>
+          <div>
+            <GrClear onClick={clearFavourites} />
+            <span>Clear All Favs</span>
+          </div>
 
-        <div>
-          <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              View Favourites
-            </Dropdown.Toggle>
+          <div>
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                View Favourites
+              </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-              {favourites.length === 0 ? (
-                <Dropdown.Item>
-                  <button>Nothing In Favourites</button>
-                </Dropdown.Item>
-              ) : (
-                favourites.map((item) => (
+              <Dropdown.Menu>
+                {favourites.length === 0 ? (
                   <Dropdown.Item>
-                    <button onClick={() => handleDropDownClick(item)}>
-                      {item}
-                    </button>
+                    <button>Nothing In Favourites</button>
                   </Dropdown.Item>
-                ))
-              )}
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
+                ) : (
+                  favourites.map((item) => (
+                    <Dropdown.Item>
+                      <button onClick={() => handleDropDownClick(item)}>
+                        {item}
+                      </button>
+                    </Dropdown.Item>
+                  ))
+                )}
+              </Dropdown.Menu>
+            </Dropdown>
+          </div> */}
 
-        {/* switch to select relevant page  */}
-        {(() => {
-          switch (currentView) {
-            case "TomorrowLocationView":
-              return (
-                <TomorrowLocation
-                  cwDataFromApi={cwDataFromApi}
-                  oneCallDataFromApi={oneCallDataFromApi}
-                  setCurrentView={setCurrentView}
-                  currentView={currentView}
-                  kelvinToCelcius={kelvinToCelcius}
-                  tomorrow={true} // Use this value to see if we are looking for tomorrows data or not
-                />
-              );
-            case "Next7DaysView":
-              return (
-                <Next7DaysView
-                  cwDataFromApi={cwDataFromApi}
-                  oneCallDataFromApi={oneCallDataFromApi}
-                  setCurrentView={setCurrentView}
-                  kelvinToCelcius={kelvinToCelcius}
-                  currentView={currentView}
-                />
-              );
-            default:
-              return (
-                <TodayLocation
-                  cwDataFromApi={cwDataFromApi}
-                  oneCallDataFromApi={oneCallDataFromApi}
-                  setCurrentView={setCurrentView}
-                  kelvinToCelcius={kelvinToCelcius}
-                  currentView={currentView}
-                  tomorrow={false}
-                />
-              );
-          }
-        })()}
+          {/* switch to select relevant page  */}
+          {(() => {
+            switch (currentView) {
+              case "TomorrowLocationView":
+                return (
+                  <TomorrowLocation
+                    cwDataFromApi={cwDataFromApi}
+                    oneCallDataFromApi={oneCallDataFromApi}
+                    setCurrentView={setCurrentView}
+                    currentView={currentView}
+                    kelvinToCelcius={kelvinToCelcius}
+                    tomorrow={true} // Use this value to see if we are looking for tomorrows data or not
+                  />
+                );
+              case "Next7DaysView":
+                return (
+                  <Next7DaysView
+                    cwDataFromApi={cwDataFromApi}
+                    oneCallDataFromApi={oneCallDataFromApi}
+                    setCurrentView={setCurrentView}
+                    kelvinToCelcius={kelvinToCelcius}
+                    currentView={currentView}
+                  />
+                );
+              default:
+                return (
+                  <TodayLocation
+                    cwDataFromApi={cwDataFromApi}
+                    oneCallDataFromApi={oneCallDataFromApi}
+                    setCurrentView={setCurrentView}
+                    kelvinToCelcius={kelvinToCelcius}
+                    currentView={currentView}
+                    tomorrow={false}
+                  />
+                );
+            }
+          })()}
+        </div>
       </div>
     );
   } else {

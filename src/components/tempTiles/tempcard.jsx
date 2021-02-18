@@ -42,13 +42,13 @@ const TempCard = ({
             {(() => {
             switch (weatherAttributeForCard) {
               case "Clouds":
-                return  <AiFillCloud size="4x" className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>;   
+                return  <AiFillCloud size={40} className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>;   
               case "Rain":
-                return  <IoRainy size="4x" className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>;
+                return  <IoRainy size={40} className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>;
               case "Snow":
-                return <BiCloudSnow size="4x" className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>  
+                return <BiCloudSnow size={40} className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>  
               case "Clear":
-                return <TiWeatherSunny size="4x" className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>  
+                return <TiWeatherSunny size={40} className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>  
             }
           })()}
           

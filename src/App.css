@@ -73,10 +73,11 @@
 
 .card {
   flex: 0 0 auto;
-  justify-content: center;
-  align-items: center;
+  display: inline-block;
+  top: 1px;
   min-width: 40px;
   max-width: 40px;
+  padding-top: 20px;
 }
 
 .tile-border {

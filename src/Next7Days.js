@@ -2,7 +2,7 @@ import React from "react";
 import SelectDay from "./components/selectDay";
 import { BiCloudSnow } from "react-icons/bi";
 import { AiFillCloud } from "react-icons/ai";
-import { IoRainy } from "react-icons/io5";
+import { IoRainySharp } from "react-icons/io5";
 import { TiWeatherSunny } from "react-icons/ti";
 import DisplayTemp from "./components/displayTemp";
 
@@ -43,9 +43,9 @@ const Next7DaysView = ({
                   {(() => {
                     switch (day.weather[0].main) {
                       case "Clouds":
-                        return <AiFillCloud size="1x" />;
+                        return <AiFillCloud size="1x" align= "top"/>;
                       case "Rain":
-                        return <IoRainy size="1x" />;
+                        return <IoRainySharp size="1x" vertical-align= "bottom"/>;
                       case "Snow":
                         return <BiCloudSnow size="1x" />;
                       case "Clear":

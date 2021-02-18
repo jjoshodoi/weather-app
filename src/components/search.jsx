@@ -54,9 +54,11 @@ const SearchBar = ({
             </div>
           )}
         </PlacesAutocomplete>
-        <button className="Search-Button" type="submit">
-          Search
-        </button>
+        <div className="top">
+          <button className="Search-Button " type="submit">
+            Search
+          </button>
+        </div>
         <button onClick={getUserLocation} className="Search-Location">
           Locate
         </button>

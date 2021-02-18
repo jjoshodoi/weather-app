@@ -11,8 +11,8 @@
 }
 
 .top {
-  position: sticky;
-  top: 0px;
+  /* position: absolute; */
+  /* top: 0px; */
 }
 
 .right {

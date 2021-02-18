@@ -1,5 +1,6 @@
 import React from "react";
 import PlacesAutocomplete from "react-places-autocomplete";
+import { IoLocationSharp } from "react-icons/io5";
 
 const SearchBar = ({
   getUserLocation,
@@ -54,14 +55,12 @@ const SearchBar = ({
             </div>
           )}
         </PlacesAutocomplete>
+        <div>
+          <IoLocationSharp size={35} onClick={getUserLocation} />
+        </div>
         <div className="top">
           <button className="Search-Button " type="submit">
             Search
-          </button>
-        </div>
-        <div>
-          <button onClick={getUserLocation} className="Search-Location">
-            Locate
           </button>
         </div>
       </form>

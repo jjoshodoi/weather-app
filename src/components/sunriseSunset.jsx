@@ -1,4 +1,7 @@
 import React from "react";
+import { FiSunrise } from "react-icons/fi";
+import { FiSunset } from "react-icons/fi";
+import { WiHumidity } from "react-icons/wi";
 
 const SunriseSunset = ({ oneCallDataFromApi, tomorrow }) => {
   const epochToDate = (num) => {
@@ -18,7 +21,7 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow }) => {
             return (
               <div id="footer" className="row center">
                 <h3 className="column">
-                  Sunrise:{" "}
+                <FiSunrise size = {25}/> Sunrise:{" "}
                   {oneCallDataFromApi &&
                     epochToDate(oneCallDataFromApi.current.sunrise).getHours()}
                   :
@@ -33,7 +36,7 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow }) => {
                     ).getSeconds()}
                 </h3>
                 <h3 className="column">
-                  Sunset:{" "}
+                <FiSunset size = {25}/> Sunset:{" "}
                   {oneCallDataFromApi &&
                     epochToDate(oneCallDataFromApi.current.sunset).getHours()}
                   :
@@ -44,7 +47,7 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow }) => {
                     epochToDate(oneCallDataFromApi.current.sunset).getSeconds()}
                 </h3>
                 <h3 className="column">
-                  Humidity:{" "}
+                <WiHumidity size = {30}/>  Humidity:{" "}
                   {oneCallDataFromApi && oneCallDataFromApi.current.humidity}%
                 </h3>
               </div>
@@ -53,7 +56,7 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow }) => {
             return (
               <div id="footer" className="row center">
                 <h3 className="column">
-                  Sunrise:{" "}
+                <FiSunrise size = {25}/> Sunrise:{" "}
                   {oneCallDataFromApi &&
                     epochToDate(oneCallDataFromApi.daily[1].sunrise).getHours()}
                   :
@@ -68,7 +71,7 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow }) => {
                     ).getSeconds()}
                 </h3>
                 <h3 className="column">
-                  Sunset:{" "}
+                  <FiSunset size = {25}/> Sunset:{" "}
                   {oneCallDataFromApi &&
                     epochToDate(oneCallDataFromApi.daily[1].sunset).getHours()}
                   :
@@ -83,7 +86,8 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow }) => {
                     ).getSeconds()}
                 </h3>
                 <h3 className="column">
-                  Humidity:{" "}
+                <WiHumidity size = {30}/> 
+                Humidity:{" "}
                   {oneCallDataFromApi && oneCallDataFromApi.daily[1].humidity}%
                 </h3>
               </div>

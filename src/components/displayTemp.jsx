@@ -55,9 +55,9 @@ const DisplayTemp = ({
                 <h1>{`${kelvinToCelcius(
                   oneCallDataFromApi && oneCallDataFromApi.current.temp
                 )} °C`}</h1>
-                <h4>{`Feels Like ${kelvinToCelcius(
+                <h5>{`Feels Like ${kelvinToCelcius(
                   oneCallDataFromApi && oneCallDataFromApi.current.feels_like
-                )}°C`}</h4>
+                )}°C`}</h5>
                 <h3>
                   {oneCallDataFromApi &&
                     oneCallDataFromApi.current.weather[0].main}
@@ -75,10 +75,13 @@ const DisplayTemp = ({
                   <div className="tile-border">
                     <div id="morningtext">Morning</div>
                     <div>
-                     <b> {`${kelvinToCelcius(
-                        oneCallDataFromApi &&
-                          oneCallDataFromApi.daily[1].temp.morn
-                      )} °C`} </b>
+                      <b>
+                        {" "}
+                        {`${kelvinToCelcius(
+                          oneCallDataFromApi &&
+                            oneCallDataFromApi.daily[1].temp.morn
+                        )} °C`}{" "}
+                      </b>
                       <div className="center">
                         {(() => {
                           switch (weatherAttributeForMorning) {
@@ -93,13 +96,13 @@ const DisplayTemp = ({
                               );
                             case "Rain":
                               return (
-                               <div className ="padding"> 
-                                <IoRainy
-                                  size={40}
-                                  className={`icon-temptile${
-                                    indexNum === 0 ? "-now" : ""
-                                  }`}
-                                />
+                                <div className="padding">
+                                  <IoRainy
+                                    size={40}
+                                    className={`icon-temptile${
+                                      indexNum === 0 ? "-now" : ""
+                                    }`}
+                                  />
                                 </div>
                               );
                             case "Snow":
@@ -141,10 +144,13 @@ const DisplayTemp = ({
                   <div className="tile-border">
                     <div id="afternoontext">Afternoon</div>
                     <div>
-                    <b>   {`${kelvinToCelcius(
-                        oneCallDataFromApi &&
-                          oneCallDataFromApi.daily[1].temp.day
-                      )} °C`} </b>
+                      <b>
+                        {" "}
+                        {`${kelvinToCelcius(
+                          oneCallDataFromApi &&
+                            oneCallDataFromApi.daily[1].temp.day
+                        )} °C`}{" "}
+                      </b>
                     </div>
                     {/* <h4 className="center">
                       {oneCallDataFromApi &&
@@ -211,10 +217,13 @@ const DisplayTemp = ({
                   <div className="tile-border">
                     <div id="eveningtext">Evening</div>
                     <div>
-                    <b>   {`${kelvinToCelcius(
-                        oneCallDataFromApi &&
-                          oneCallDataFromApi.daily[1].temp.eve
-                      )} °C`} </b>
+                      <b>
+                        {" "}
+                        {`${kelvinToCelcius(
+                          oneCallDataFromApi &&
+                            oneCallDataFromApi.daily[1].temp.eve
+                        )} °C`}{" "}
+                      </b>
                     </div>
                     {/* <h4 className="center">
                       {oneCallDataFromApi &&
@@ -235,14 +244,14 @@ const DisplayTemp = ({
                             );
                           case "Rain":
                             return (
-                              <div className ="padding"> 
+                              <div className="padding">
                                 <IoRainy
                                   size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
                                 />
-                                </div>
+                              </div>
                             );
                           case "Snow":
                             return (
@@ -282,10 +291,13 @@ const DisplayTemp = ({
                   <div className="tile-border">
                     <div id="nighttext">Night</div>
                     <div>
-                    <b>      {`${kelvinToCelcius(
-                        oneCallDataFromApi &&
-                          oneCallDataFromApi.daily[1].temp.night
-                      )} °C`} </b>
+                      <b>
+                        {" "}
+                        {`${kelvinToCelcius(
+                          oneCallDataFromApi &&
+                            oneCallDataFromApi.daily[1].temp.night
+                        )} °C`}{" "}
+                      </b>
                     </div>
                     <div className="center">
                       {(() => {

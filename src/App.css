@@ -89,14 +89,7 @@
 .padding-bottom {
   padding-bottom: 5px;
 }
-.tile-border {
-  border: 5px solid #fdfeff;
-  margin: 10px;
-  min-width: 40px;
-  max-width: 40px;
-  padding: 20px 20px;
-  border-radius: 15px;
-}
+
 
 .icon-temptile {
   color: white;
@@ -184,6 +177,15 @@
   margin: 40px auto;
 }
 
+.tile-border {
+  border: 5px solid #fdfeff;
+  margin: 10px;
+  min-width: 40px;
+  max-width: 40px;
+  padding: 20px 20px;
+  border-radius: 15px;
+}
+
 .tile-border-now {
   border: 1px solid #fdfeff;
   margin: 10px;
@@ -192,7 +194,7 @@
   padding: 20px 20px;
   border-radius: 15px;
   background-color: white;
-  max-height: 65px;
+  min-height: 75px;
 }
 
 .time-of-day-tile {

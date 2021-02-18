@@ -9,7 +9,7 @@ const SearchBar = ({
   address,
 }) => {
   return (
-    <div className="">
+    <div>
       <form onSubmit={getSearch} className="Search-form">
         <PlacesAutocomplete
           value={address}
@@ -22,7 +22,7 @@ const SearchBar = ({
             getSuggestionItemProps,
             loading,
           }) => (
-            <div>
+            <div className="stretch-bar">
               <input
                 {...getInputProps({
                   className: "Search-Bar",

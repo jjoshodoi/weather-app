@@ -26,16 +26,20 @@ const DisplayTemp = ({
   const indexNum = 0;
 
   var weatherAttributeForMorning =
-    oneCallDataFromApi && oneCallDataFromApi.hourly[(differenceFrom12AM+morning)].weather[0].main;
+    oneCallDataFromApi &&
+    oneCallDataFromApi.hourly[differenceFrom12AM + morning].weather[0].main;
 
-    var weatherAttributeForAfternoon =
-    oneCallDataFromApi && oneCallDataFromApi.hourly[(differenceFrom12AM+afternoon)].weather[0].main;
+  var weatherAttributeForAfternoon =
+    oneCallDataFromApi &&
+    oneCallDataFromApi.hourly[differenceFrom12AM + afternoon].weather[0].main;
 
-    var weatherAttributeForEvening =
-    oneCallDataFromApi && oneCallDataFromApi.hourly[(differenceFrom12AM+evening)].weather[0].main;
+  var weatherAttributeForEvening =
+    oneCallDataFromApi &&
+    oneCallDataFromApi.hourly[differenceFrom12AM + evening].weather[0].main;
 
-    var weatherAttributeForNight =
-    oneCallDataFromApi && oneCallDataFromApi.hourly[(differenceFrom12AM+night)].weather[0].main;
+  var weatherAttributeForNight =
+    oneCallDataFromApi &&
+    oneCallDataFromApi.hourly[differenceFrom12AM + night].weather[0].main;
 
   return (
     <div>
@@ -44,6 +48,10 @@ const DisplayTemp = ({
           case false:
             return (
               <div>
+                <h3>
+                  {cwDataFromApi && cwDataFromApi.name},{" "}
+                  {cwDataFromApi && cwDataFromApi.sys.country}
+                </h3>
                 <h1>{`${kelvinToCelcius(
                   oneCallDataFromApi && oneCallDataFromApi.current.temp
                 )} °C`}</h1>
@@ -126,7 +134,6 @@ const DisplayTemp = ({
                         oneCallDataFromApi &&
                           oneCallDataFromApi.daily[1].feels_like.morn
                       )}°C`}</h5>
-                      
                     </div>
                   </div>
                   <div className="tile-border">
@@ -144,56 +151,56 @@ const DisplayTemp = ({
                         ].weather[0].main}
                     </h4> */}
                     <div className="center">
-                        {(() => {
-                          switch (weatherAttributeForAfternoon) {
-                            case "Clouds":
-                              return (
-                                <AiFillCloud
-                                  size={40}
-                                  className={`icon-temptile${
-                                    indexNum === 0 ? "-now" : ""
-                                  }`}
-                                />
-                              );
-                            case "Rain":
-                              return (
-                                <IoRainy
-                                  size={40}
-                                  className={`icon-temptile${
-                                    indexNum === 0 ? "-now" : ""
-                                  }`}
-                                />
-                              );
-                            case "Snow":
-                              return (
-                                <BiCloudSnow
-                                  size={40}
-                                  className={`icon-temptile${
-                                    indexNum === 0 ? "-now" : ""
-                                  }`}
-                                />
-                              );
-                            case "Clear":
-                              return (
-                                <TiWeatherSunny
-                                  size={40}
-                                  className={`icon-temptile${
-                                    indexNum === 0 ? "-now" : ""
-                                  }`}
-                                />
-                              );
-                            default:
-                              return (
-                                <h4 className="center">
-                                  {oneCallDataFromApi &&
-                                    oneCallDataFromApi.hourly[
-                                      differenceFrom12AM + afternoon
-                                    ].weather[0].main}
-                                </h4>
-                              );
-                          }
-                        })()}
-                      </div>
+                      {(() => {
+                        switch (weatherAttributeForAfternoon) {
+                          case "Clouds":
+                            return (
+                              <AiFillCloud
+                                size={40}
+                                className={`icon-temptile${
+                                  indexNum === 0 ? "-now" : ""
+                                }`}
+                              />
+                            );
+                          case "Rain":
+                            return (
+                              <IoRainy
+                                size={40}
+                                className={`icon-temptile${
+                                  indexNum === 0 ? "-now" : ""
+                                }`}
+                              />
+                            );
+                          case "Snow":
+                            return (
+                              <BiCloudSnow
+                                size={40}
+                                className={`icon-temptile${
+                                  indexNum === 0 ? "-now" : ""
+                                }`}
+                              />
+                            );
+                          case "Clear":
+                            return (
+                              <TiWeatherSunny
+                                size={40}
+                                className={`icon-temptile${
+                                  indexNum === 0 ? "-now" : ""
+                                }`}
+                              />
+                            );
+                          default:
+                            return (
+                              <h4 className="center">
+                                {oneCallDataFromApi &&
+                                  oneCallDataFromApi.hourly[
+                                    differenceFrom12AM + afternoon
+                                  ].weather[0].main}
+                              </h4>
+                            );
+                        }
+                      })()}
+                    </div>
                     <h5>{`Feels Like ${kelvinToCelcius(
                       oneCallDataFromApi &&
                         oneCallDataFromApi.daily[1].feels_like.day
@@ -213,62 +220,60 @@ const DisplayTemp = ({
                           .weather[0].main}
                     </h4> */}
                     <div className="center">
-                        {(() => {
-                          switch (weatherAttributeForEvening) {
-                            case "Clouds":
-                              return (
-                                <AiFillCloud
-                                  size={40}
-                                  className={`icon-temptile${
-                                    indexNum === 0 ? "-now" : ""
-                                  }`}
-                                />
-                              );
-                            case "Rain":
-                              return (
-                                <IoRainy
-                                  size={40}
-                                  className={`icon-temptile${
-                                    indexNum === 0 ? "-now" : ""
-                                  }`}
-                                />
-                              );
-                            case "Snow":
-                              return (
-                                <BiCloudSnow
-                                  size={40}
-                                  className={`icon-temptile${
-                                    indexNum === 0 ? "-now" : ""
-                                  }`}
-                                />
-                              );
-                            case "Clear":
-                              return (
-                                <TiWeatherSunny
-                                  size={40}
-                                  className={`icon-temptile${
-                                    indexNum === 0 ? "-now" : ""
-                                  }`}
-                                />
-                              );
-                            default:
-                              return (
-                                <h4 className="center">
-                                  {oneCallDataFromApi &&
-                                    oneCallDataFromApi.hourly[
-                                      differenceFrom12AM + evening
-                                    ].weather[0].main}
-                                </h4>
-                              );
-                          }
-                        })()}
-                      </div>
+                      {(() => {
+                        switch (weatherAttributeForEvening) {
+                          case "Clouds":
+                            return (
+                              <AiFillCloud
+                                size={40}
+                                className={`icon-temptile${
+                                  indexNum === 0 ? "-now" : ""
+                                }`}
+                              />
+                            );
+                          case "Rain":
+                            return (
+                              <IoRainy
+                                size={40}
+                                className={`icon-temptile${
+                                  indexNum === 0 ? "-now" : ""
+                                }`}
+                              />
+                            );
+                          case "Snow":
+                            return (
+                              <BiCloudSnow
+                                size={40}
+                                className={`icon-temptile${
+                                  indexNum === 0 ? "-now" : ""
+                                }`}
+                              />
+                            );
+                          case "Clear":
+                            return (
+                              <TiWeatherSunny
+                                size={40}
+                                className={`icon-temptile${
+                                  indexNum === 0 ? "-now" : ""
+                                }`}
+                              />
+                            );
+                          default:
+                            return (
+                              <h4 className="center">
+                                {oneCallDataFromApi &&
+                                  oneCallDataFromApi.hourly[
+                                    differenceFrom12AM + evening
+                                  ].weather[0].main}
+                              </h4>
+                            );
+                        }
+                      })()}
+                    </div>
                     <h5>{`Feels Like ${kelvinToCelcius(
                       oneCallDataFromApi &&
                         oneCallDataFromApi.daily[1].feels_like.eve
                     )}°C`}</h5>
-
-
                   </div>
                   <div className="tile-border">
                     <div className="center">Night</div>
@@ -279,62 +284,62 @@ const DisplayTemp = ({
                       )} °C`}
                     </div>
                     <div className="center">
-                        {(() => {
-                          switch (weatherAttributeForNight) {
-                            case "Clouds":
-                              return (
-                                <AiFillCloud
-                                  size={40}
-                                  className={`icon-temptile${
-                                    indexNum === 0 ? "-now" : ""
-                                  }`}
-                                />
-                              );
-                            case "Rain":
-                              return (
-                                <IoRainy
-                                  size={40}
-                                  className={`icon-temptile${
-                                    indexNum === 0 ? "-now" : ""
-                                  }`}
-                                />
-                              );
-                            case "Snow":
-                              return (
-                                <BiCloudSnow
-                                  size={40}
-                                  className={`icon-temptile${
-                                    indexNum === 0 ? "-now" : ""
-                                  }`}
-                                />
-                              );
-                            case "Clear":
-                              return (
-                                <TiWeatherSunny
-                                  size={40}
-                                  className={`icon-temptile${
-                                    indexNum === 0 ? "-now" : ""
-                                  }`}
-                                />
-                              );
-                            default:
-                              return (
-                                <h4 className="center">
-                                  {oneCallDataFromApi &&
-                                    oneCallDataFromApi.hourly[
-                                      differenceFrom12AM + night
-                                    ].weather[0].main}
-                                </h4>
-                              );
-                          }
-                        })()}
-                      </div>
+                      {(() => {
+                        switch (weatherAttributeForNight) {
+                          case "Clouds":
+                            return (
+                              <AiFillCloud
+                                size={40}
+                                className={`icon-temptile${
+                                  indexNum === 0 ? "-now" : ""
+                                }`}
+                              />
+                            );
+                          case "Rain":
+                            return (
+                              <IoRainy
+                                size={40}
+                                className={`icon-temptile${
+                                  indexNum === 0 ? "-now" : ""
+                                }`}
+                              />
+                            );
+                          case "Snow":
+                            return (
+                              <BiCloudSnow
+                                size={40}
+                                className={`icon-temptile${
+                                  indexNum === 0 ? "-now" : ""
+                                }`}
+                              />
+                            );
+                          case "Clear":
+                            return (
+                              <TiWeatherSunny
+                                size={40}
+                                className={`icon-temptile${
+                                  indexNum === 0 ? "-now" : ""
+                                }`}
+                              />
+                            );
+                          default:
+                            return (
+                              <h4 className="center">
+                                {oneCallDataFromApi &&
+                                  oneCallDataFromApi.hourly[
+                                    differenceFrom12AM + night
+                                  ].weather[0].main}
+                              </h4>
+                            );
+                        }
+                      })()}
+                    </div>
                     {/* <h4 className="center">
                       {oneCallDataFromApi &&
                         oneCallDataFromApi.hourly[differenceFrom12AM + night]
                           .weather[0].main}
                     </h4> */}
-                    
+
                     <h5>{`Feels Like ${kelvinToCelcius(
                       oneCallDataFromApi &&
                         oneCallDataFromApi.daily[1].feels_like.night

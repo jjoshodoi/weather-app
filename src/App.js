@@ -209,7 +209,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
               <button id="addCity" onClick={addToFav}>
                 Add Current City
                 <br />
-                <MdFavorite size={50} className="white-icon" />
+                <MdFavorite className="white-icon" />
               </button>
             </li>
             <li>

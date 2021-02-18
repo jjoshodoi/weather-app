@@ -9,9 +9,93 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow, sidebar }) => {
     return d;
   };
 
-  //   console.log(
-  //     oneCallDataFromApi && epochToDate(oneCallDataFromApi.current.sunrise)
-  //   );
+  const timeDifference =
+    oneCallDataFromApi && oneCallDataFromApi.timezone_offset / 3600;
+  console.log(timeDifference);
+  // todays hours
+  var currentSunriseHours =
+    oneCallDataFromApi &&
+    epochToDate(oneCallDataFromApi.current.sunrise).getHours() + timeDifference;
+  var currentSunriseMinutes =
+    oneCallDataFromApi &&
+    epochToDate(oneCallDataFromApi.current.sunrise).getMinutes() +
+      timeDifference;
+  var currentSunriseSeconds =
+    oneCallDataFromApi &&
+    epochToDate(oneCallDataFromApi.current.sunrise).getSeconds() +
+      timeDifference;
+  var currentSunsetHours =
+    oneCallDataFromApi &&
+    epochToDate(oneCallDataFromApi.current.sunset).getHours() + timeDifference;
+  var currentSunsetMinutes =
+    oneCallDataFromApi &&
+    epochToDate(oneCallDataFromApi.current.sunset).getMinutes() +
+      timeDifference;
+  var currentSunsetSeconds =
+    oneCallDataFromApi &&
+    epochToDate(oneCallDataFromApi.current.sunset).getSeconds() +
+      timeDifference;
+  
+      //tomorrows hours
+  var tomorrowSunriseHours =
+    oneCallDataFromApi &&
+    epochToDate(oneCallDataFromApi.daily[1].sunrise).getHours() +
+      timeDifference;
+  var tomorrowSunriseMinutes =
+    oneCallDataFromApi &&
+    epochToDate(oneCallDataFromApi.daily[1].sunrise).getMinutes() +
+      timeDifference;
+  var tomorrowSunriseSeconds =
+    oneCallDataFromApi &&
+    epochToDate(oneCallDataFromApi.daily[1].sunrise).getSeconds() +
+      timeDifference;
+  var tomorrowSunsetHours =
+    oneCallDataFromApi &&
+    epochToDate(oneCallDataFromApi.daily[1].sunset).getHours() + timeDifference;
+  var tomorrowSunsetMinutes =
+    oneCallDataFromApi &&
+    epochToDate(oneCallDataFromApi.daily[1].sunset).getMinutes() +
+      timeDifference;
+  var tomorrowSunsetSeconds =
+    oneCallDataFromApi &&
+    epochToDate(oneCallDataFromApi.daily[1].sunset).getSeconds() +
+      timeDifference;
+
+  var currentListOfHours = [
+    currentSunriseHours,
+    currentSunriseMinutes,
+    currentSunriseSeconds,
+    currentSunsetHours,
+    currentSunsetMinutes,
+    currentSunsetSeconds,
+  ];
+  var tomorrowListOfHours = [
+    tomorrowSunriseHours,
+    tomorrowSunriseMinutes,
+    tomorrowSunriseSeconds,
+    tomorrowSunsetHours,
+    tomorrowSunsetMinutes,
+    tomorrowSunsetSeconds,
+  ];
+
+  if (oneCallDataFromApi) {
+    for (let index = 0; index < currentListOfHours.length; index++) {
+      if (currentListOfHours[index] > 23) {
+        currentListOfHours[index] = -24;
+      }
+      if (currentListOfHours[index] < 0) {
+        currentListOfHours[index] = +24;
+      }
+    }
+    for (let index = 0; index < tomorrowListOfHours.length; index++) {
+      if (tomorrowListOfHours[index] > 23) {
+        tomorrowListOfHours[index] = -24;
+      }
+      if (tomorrowListOfHours[index] < 0) {
+        tomorrowListOfHours[index] = +24;
+      }
+    }
+  }
 
   return (
     <div>
@@ -25,37 +109,15 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow, sidebar }) => {
               >
                 <h3 className="column">
                   <FiSunrise size={25} /> Sunrise:{" "}
-                  {`0${
-                    oneCallDataFromApi &&
-                    epochToDate(oneCallDataFromApi.current.sunrise).getHours()
-                  }`.slice(-2)}
-                  :
-                  {`0${
-                    oneCallDataFromApi &&
-                    epochToDate(oneCallDataFromApi.current.sunrise).getMinutes()
-                  }`.slice(-2)}
-                  :
-                  {`0${
-                    oneCallDataFromApi &&
-                    epochToDate(oneCallDataFromApi.current.sunrise).getSeconds()
-                  }`.slice(-2)}
+                  {`0${currentListOfHours[0]}`.slice(-2)}:
+                  {`0${currentListOfHours[1]}`.slice(-2)}:
+                  {`0${currentListOfHours[2]}`.slice(-2)}
                 </h3>
                 <h3 className="column">
                   <FiSunset size={25} /> Sunset:{" "}
-                  {`0${
-                    oneCallDataFromApi &&
-                    epochToDate(oneCallDataFromApi.current.sunset).getHours()
-                  }`.slice(-2)}
-                  :
-                  {`0${
-                    oneCallDataFromApi &&
-                    epochToDate(oneCallDataFromApi.current.sunset).getMinutes()
-                  }`.slice(-2)}
-                  :
-                  {`0${
-                    oneCallDataFromApi &&
-                    epochToDate(oneCallDataFromApi.current.sunset).getSeconds()
-                  }`.slice(-2)}
+                  {`0${currentListOfHours[3]}`.slice(-2)}:
+                  {`0${currentListOfHours[4]}`.slice(-2)}:
+                  {`0${currentListOfHours[5]}`.slice(-2)}
                 </h3>
                 <h3 className="column">
                   <WiHumidity size={30} /> Humidity:{" "}
@@ -71,41 +133,15 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow, sidebar }) => {
               >
                 <h3 className="column">
                   <FiSunrise size={25} /> Sunrise:{" "}
-                  {`0${
-                    oneCallDataFromApi &&
-                    epochToDate(oneCallDataFromApi.daily[1].sunrise).getHours()
-                  }`.slice(-2)}
-                  :
-                  {`0${
-                    oneCallDataFromApi &&
-                    epochToDate(
-                      oneCallDataFromApi.daily[1].sunrise
-                    ).getMinutes()
-                  }`.slice(-2)}
-                  :
-                  {`0${
-                    oneCallDataFromApi &&
-                    epochToDate(
-                      oneCallDataFromApi.daily[1].sunrise
-                    ).getSeconds()
-                  }`.slice(-2)}
+                  {`0${tomorrowListOfHours[0]}`.slice(-2)}:
+                  {`0${tomorrowListOfHours[1]}`.slice(-2)}:
+                  {`0${tomorrowListOfHours[2]}`.slice(-2)}
                 </h3>
                 <h3 className="column">
                   <FiSunset size={25} /> Sunset:{" "}
-                  {`0${
-                    oneCallDataFromApi &&
-                    epochToDate(oneCallDataFromApi.daily[1].sunset).getHours()
-                  }`.slice(-2)}
-                  :
-                  {`0${
-                    oneCallDataFromApi &&
-                    epochToDate(oneCallDataFromApi.daily[1].sunset).getMinutes()
-                  }`.slice(-2)}
-                  :
-                  {`0${
-                    oneCallDataFromApi &&
-                    epochToDate(oneCallDataFromApi.daily[1].sunset).getSeconds()
-                  }`.slice(-2)}
+                  {`0${tomorrowListOfHours[3]}`.slice(-2)}:
+                  {`0${tomorrowListOfHours[4]}`.slice(-2)}:
+                  {`0${tomorrowListOfHours[5]}`.slice(-2)}
                 </h3>
                 <h3 className="column">
                   <WiHumidity size={30} />

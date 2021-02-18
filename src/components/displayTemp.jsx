@@ -77,7 +77,7 @@ const DisplayTemp = ({
                             case "Clouds":
                               return (
                                 <AiFillCloud
-                                  size="4x"
+                                  size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
@@ -86,7 +86,7 @@ const DisplayTemp = ({
                             case "Rain":
                               return (
                                 <IoRainy
-                                  size="4x"
+                                  size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
@@ -95,7 +95,7 @@ const DisplayTemp = ({
                             case "Snow":
                               return (
                                 <BiCloudSnow
-                                  size="4x"
+                                  size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
@@ -104,7 +104,7 @@ const DisplayTemp = ({
                             case "Clear":
                               return (
                                 <TiWeatherSunny
-                                  size="4x"
+                                  size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
@@ -149,7 +149,7 @@ const DisplayTemp = ({
                             case "Clouds":
                               return (
                                 <AiFillCloud
-                                  size="4x"
+                                  size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
@@ -158,7 +158,7 @@ const DisplayTemp = ({
                             case "Rain":
                               return (
                                 <IoRainy
-                                  size="4x"
+                                  size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
@@ -167,7 +167,7 @@ const DisplayTemp = ({
                             case "Snow":
                               return (
                                 <BiCloudSnow
-                                  size="4x"
+                                  size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
@@ -176,7 +176,7 @@ const DisplayTemp = ({
                             case "Clear":
                               return (
                                 <TiWeatherSunny
-                                  size="4x"
+                                  size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
@@ -218,7 +218,7 @@ const DisplayTemp = ({
                             case "Clouds":
                               return (
                                 <AiFillCloud
-                                  size="4x"
+                                  size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
@@ -227,7 +227,7 @@ const DisplayTemp = ({
                             case "Rain":
                               return (
                                 <IoRainy
-                                  size="4x"
+                                  size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
@@ -236,7 +236,7 @@ const DisplayTemp = ({
                             case "Snow":
                               return (
                                 <BiCloudSnow
-                                  size="4x"
+                                  size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
@@ -245,7 +245,7 @@ const DisplayTemp = ({
                             case "Clear":
                               return (
                                 <TiWeatherSunny
-                                  size="4x"
+                                  size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
@@ -284,7 +284,7 @@ const DisplayTemp = ({
                             case "Clouds":
                               return (
                                 <AiFillCloud
-                                  size="4x"
+                                  size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
@@ -293,7 +293,7 @@ const DisplayTemp = ({
                             case "Rain":
                               return (
                                 <IoRainy
-                                  size="4x"
+                                  size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
@@ -302,7 +302,7 @@ const DisplayTemp = ({
                             case "Snow":
                               return (
                                 <BiCloudSnow
-                                  size="4x"
+                                  size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}
@@ -311,7 +311,7 @@ const DisplayTemp = ({
                             case "Clear":
                               return (
                                 <TiWeatherSunny
-                                  size="4x"
+                                  size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
                                   }`}

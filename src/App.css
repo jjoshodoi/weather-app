@@ -78,13 +78,14 @@
 
 .card {
   flex: 0 0 auto;
-  display: inline-block;
-  top: 1px;
   min-width: 40px;
   max-width: 40px;
-  padding-top: 20px;
 }
 
+.padding {
+  padding-top: 20px;
+  margin: 20px;
+}
 .tile-border {
   border: 1px solid #fdfeff;
   margin: 10px;

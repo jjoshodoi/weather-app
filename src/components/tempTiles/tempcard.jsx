@@ -42,23 +42,41 @@ const TempCard = ({
             {(() => {
             switch (weatherAttributeForCard) {
               case "Clouds":
-                return  <AiFillCloud size={40} className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>;   
+                return (
+                  <div className = "padding-bottom">
+                    <AiFillCloud size={40} className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>
+                  </div>
+                );   
               case "Rain":
-                return  <IoRainy size={40} className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>;
+                return  (
+                  <div className="padding">
+                    <IoRainy size={38} padding="15px" className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>
+                  </div>
+                ); 
               case "Snow":
-                return <BiCloudSnow size={40} className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>  
+                return (
+                  <div className = "padding-bottom">
+                     <BiCloudSnow size={40} className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>
+                  </div>
+                );  
               case "Clear":
-                return <TiWeatherSunny size={40} className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>  
+                return (
+                  <div className = "padding-bottom">
+                    <TiWeatherSunny size={40} className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/> 
+                  </div>
+                );
             }
           })()}
           
 
           </div>
         </div>
-        <div className = "center">{`${kelvinToCelcius(
+        <div className = "center">
+          {`${kelvinToCelcius(
           //Change key to be unique
           hour.temp
-        )}°C`}</div>
+        )}°C`}
+        </div>
       </div>
       </div>
   );

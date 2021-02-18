@@ -177,19 +177,25 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   const handleDropDownClick = (item) => {
     setQuery(item);
   };
+
+  /*const getBackgroundColor = () => {();
+  };*/
   if (oneCallDataFromApi && oneCallDataFromApi.current.temp) {
     if (kelvinToCelcius(oneCallDataFromApi.current.temp) >= 10) {
       var lightness = 90 - kelvinToCelcius(oneCallDataFromApi.current.temp);
       document.body.style.background = `linear-gradient(hsla(20,100%,${lightness}%,0.9),  hsla(360,50%,100%,0.9))`; //Warm
+      var color = "red"
     } else if (
       kelvinToCelcius(oneCallDataFromApi.current.temp) > 0 &&
       kelvinToCelcius(oneCallDataFromApi.current.temp) < 10
     ) {
       lightness = 60 + kelvinToCelcius(oneCallDataFromApi.current.temp);
       document.body.style.background = `linear-gradient(hsla(200,50%,${lightness}%,0.8),  hsla(360,50%,100%,0.8))`; //Cold below 10degrees
+          color = "blue"
     } else if (kelvinToCelcius(oneCallDataFromApi.current.temp) < 0) {
       lightness = 40 + kelvinToCelcius(oneCallDataFromApi.current.temp);
       document.body.style.background = `linear-gradient(hsla(180,50%,${lightness}%,0.8),  hsla(360,50%,100%,0.8))`; //Freezing
+          color = "lightskyblue"
     }
   }
 
@@ -251,6 +257,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
                       currentView={currentView}
                       kelvinToCelcius={kelvinToCelcius}
                       tomorrow={true} // Use this value to see if we are looking for tomorrows data or not
+                      color={color} // calls in color variable for border
                     />
                     <div>
                       <SunriseSunset
@@ -268,6 +275,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
                     setCurrentView={setCurrentView}
                     kelvinToCelcius={kelvinToCelcius}
                     currentView={currentView}
+                    color={color}
                   />
                 );
               default:
@@ -280,6 +288,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
                       kelvinToCelcius={kelvinToCelcius}
                       currentView={currentView}
                       tomorrow={false}
+                      color={color}
                     />
                     <div className="location">
                       <SunriseSunset

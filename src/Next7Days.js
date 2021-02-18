@@ -43,9 +43,13 @@ const Next7DaysView = ({
                   {(() => {
                     switch (day.weather[0].main) {
                       case "Clouds":
-                        return <AiFillCloud size={40}/>;
-                      case "Rain":
-                        return <IoRainy size={40} />;
+                        return  <AiFillCloud size={40} />;
+                        case "Rain":
+                          return (
+                            <div className="padding"> 
+                          <IoRainy size={38} padding = "15px"/>
+                          </div>
+                          )
                       case "Snow":
                         return <BiCloudSnow size={40} />;
                       case "Clear":

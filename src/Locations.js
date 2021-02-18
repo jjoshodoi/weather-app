@@ -1,7 +1,6 @@
 import React from "react";
 import DisplayDate from "./components/displayDate";
 import SelectDay from "./components/selectDay";
-import AdditionalStats from "./components/additionalStats";
 import SunriseSunset from "./components/sunriseSunset";
 import TempByHour from "./components/tempTiles/tempByHour";
 import DisplayTemp from "./components/displayTemp";
@@ -42,17 +41,6 @@ const TodayLocation = ({
         kelvinToCelcius={kelvinToCelcius}
         tomorrow={tomorrow}
       />
-
-      <div>
-        <SunriseSunset
-          oneCallDataFromApi={oneCallDataFromApi}
-          tomorrow={tomorrow}
-        />
-        <h3>
-          Humidity: {oneCallDataFromApi && oneCallDataFromApi.current.humidity}%
-        </h3>
-      </div>
-      <AdditionalStats />
     </div>
   );
 };

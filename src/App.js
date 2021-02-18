@@ -10,6 +10,7 @@ import Next7DaysView from "./Next7Days";
 import { MdFavorite } from "react-icons/md";
 import { GrClear } from "react-icons/gr";
 import Dropdown from "react-bootstrap/Dropdown";
+import SunriseSunset from "./components/sunriseSunset";
 
 function App({ isScriptLoaded, isScriptLoadSucceed }) {
   //hide api keys
@@ -265,14 +266,22 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
             switch (currentView) {
               case "TomorrowLocationView":
                 return (
-                  <TomorrowLocation
-                    cwDataFromApi={cwDataFromApi}
-                    oneCallDataFromApi={oneCallDataFromApi}
-                    setCurrentView={setCurrentView}
-                    currentView={currentView}
-                    kelvinToCelcius={kelvinToCelcius}
-                    tomorrow={true} // Use this value to see if we are looking for tomorrows data or not
-                  />
+                  <div>
+                    <TomorrowLocation
+                      cwDataFromApi={cwDataFromApi}
+                      oneCallDataFromApi={oneCallDataFromApi}
+                      setCurrentView={setCurrentView}
+                      currentView={currentView}
+                      kelvinToCelcius={kelvinToCelcius}
+                      tomorrow={true} // Use this value to see if we are looking for tomorrows data or not
+                    />
+                    <div>
+                      <SunriseSunset
+                        oneCallDataFromApi={oneCallDataFromApi}
+                        tomorrow={true}
+                      />
+                    </div>
+                  </div>
                 );
               case "Next7DaysView":
                 return (
@@ -286,14 +295,22 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
                 );
               default:
                 return (
-                  <TodayLocation
-                    cwDataFromApi={cwDataFromApi}
-                    oneCallDataFromApi={oneCallDataFromApi}
-                    setCurrentView={setCurrentView}
-                    kelvinToCelcius={kelvinToCelcius}
-                    currentView={currentView}
-                    tomorrow={false}
-                  />
+                  <div>
+                    <TodayLocation
+                      cwDataFromApi={cwDataFromApi}
+                      oneCallDataFromApi={oneCallDataFromApi}
+                      setCurrentView={setCurrentView}
+                      kelvinToCelcius={kelvinToCelcius}
+                      currentView={currentView}
+                      tomorrow={false}
+                    />
+                    <div className="location">
+                      <SunriseSunset
+                        oneCallDataFromApi={oneCallDataFromApi}
+                        tomorrow={false}
+                      />
+                    </div>
+                  </div>
                 );
             }
           })()}

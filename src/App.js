@@ -12,6 +12,7 @@ import { MdFavorite } from "react-icons/md";
 import { GrClear } from "react-icons/gr";
 import Dropdown from "react-bootstrap/Dropdown";
 import SunriseSunset from "./components/sunriseSunset";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function App({ isScriptLoaded, isScriptLoadSucceed }) {
   //hide api keys
@@ -38,6 +39,8 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
 
   // store the address from searchbar
   const [address, setAddress] = useState("");
+
+  const [sidebar, setSideBar] = useState(false);
 
   // store the favourites list
   const [favourites, setFavourites] = useState(() => {
@@ -193,9 +196,12 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   if (isScriptLoadSucceed && isScriptLoaded) {
     return (
       <div className="App">
-        <div className="sidenav">
+        <div className={sidebar ? "sidenav" : "sidenav-inactive"}>
           <ul>
             <li>
+              <button id="goBack" onClick={() => setSideBar(!sidebar)}>
+                {<GrClear />} Close
+              </button>
               <button id="title">Favourites</button>
             </li>
             {favourites.map((item) => (
@@ -220,7 +226,12 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
             </li>
           </ul>
         </div>
-        <div className="content">
+        <div className={sidebar ? "content" : "content-expand"}>
+          <GiHamburgerMenu
+            size={40}
+            className="top-left"
+            onClick={() => setSideBar(!sidebar)}
+          />
           <SearchBar
             getUserLocation={getUserLocation}
             getSearch={getSearch}
@@ -274,6 +285,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
                       <SunriseSunset
                         oneCallDataFromApi={oneCallDataFromApi}
                         tomorrow={false}
+                        sidebar={sidebar}
                       />
                     </div>
                   </div>

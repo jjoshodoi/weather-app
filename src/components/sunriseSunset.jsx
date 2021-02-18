@@ -1,6 +1,6 @@
 import React from "react";
 
-const SunriseSunset = ({ oneCallDataFromApi, tomorrow }) => {
+const SunriseSunset = ({ oneCallDataFromApi, tomorrow, sidebar }) => {
   const epochToDate = (num) => {
     var d = new Date(num * 1000); // The 0 there is the key, which sets the date to the epoch
     return d;
@@ -16,7 +16,7 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow }) => {
         switch (tomorrow) {
           case false:
             return (
-              <div id="footer" className="row center">
+              <div id={sidebar ? "footer" : "footer-expand"} className="row center">
                 <h3 className="column">
                   Sunrise:{" "}
                   {oneCallDataFromApi &&

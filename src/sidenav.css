@@ -8,6 +8,28 @@
   left: 0;
   background-color: grey;
   overflow-x: hidden;
+  transition: 250ms;
+}
+
+.top-left {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-left: 10px;
+  padding-top: 10px;
+  color: white;
+}
+
+.sidenav-inactive {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: -200px;
+  background-color: grey;
+  overflow-x: hidden;
+  transition: 250ms;
 }
 
 /* Side navigation links */
@@ -45,6 +67,11 @@
   background-color: white;
 }
 
+.sidenav #goBack {
+  color: black;
+  background-color: lightgray;
+}
+
 /* .sidenav #title:hover {
   background-color: transparent;
 } */
@@ -72,8 +99,14 @@
 /* Style the content */
 .content {
   margin-left: 200px;
+  transition: 250ms;
   /* padding-left: 20px;
   padding-right: 20px; */
+}
+
+.content-expand {
+  margin-left: 0px;
+  transition: 250ms;
 }
 
 .white-icon {

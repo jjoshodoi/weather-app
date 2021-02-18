@@ -44,7 +44,11 @@ const TempCard = ({
               case "Clouds":
                 return  <AiFillCloud size={40} className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>;   
               case "Rain":
-                return  <IoRainy size={40} className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>;
+                return  (
+                  <div className="padding">
+                    <IoRainy size={38} padding="15px" className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>
+                  </div>
+                ); 
               case "Snow":
                 return <BiCloudSnow size={40} className={`icon-temptile${indexNum === 0 ? "-now" : ""}`}/>  
               case "Clear":
@@ -55,10 +59,14 @@ const TempCard = ({
 
           </div>
         </div>
-        <div className = "center">{`${kelvinToCelcius(
+        <div className = "center">
+          <div className="padding-bottom">
+          {`${kelvinToCelcius(
           //Change key to be unique
           hour.temp
-        )}°C`}</div>
+        )}°C`}
+        </div>
+        </div>
       </div>
       </div>
   );

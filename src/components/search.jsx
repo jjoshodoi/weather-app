@@ -11,7 +11,8 @@ const SearchBar = ({
 }) => {
   return (
     <div className="search-margin">
-      <form onSubmit={getSearch} className="Search-form">
+      <form onSubmit={getSearch} className="Search-form row">
+        <div className="column"></div>
         <PlacesAutocomplete
           value={address}
           onChange={handleChange}
@@ -23,7 +24,7 @@ const SearchBar = ({
             getSuggestionItemProps,
             loading,
           }) => (
-            <div className="stretch-bar">
+            <div className="stretch-bar column-2">
               <input
                 {...getInputProps({
                   className: "Search-Bar",
@@ -55,13 +56,14 @@ const SearchBar = ({
             </div>
           )}
         </PlacesAutocomplete>
-        <div>
-          <IoLocationSharp size={35} onClick={getUserLocation} />
-        </div>
-        <div className="top">
-          <button className="Search-Button " type="submit">
-            Search
-          </button>
+        <div className="column row-and-column ">
+          <div className="column top">
+            <IoLocationSharp size={35} onClick={getUserLocation} />
+            <button className="Search-Button top" type="submit">
+              Search
+            </button>
+          </div>
+          <div className="column-2"></div>
         </div>
       </form>
     </div>

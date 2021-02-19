@@ -1,7 +1,6 @@
 import React from "react";
 import DisplayDate from "./components/displayDate";
 import SelectDay from "./components/selectDay";
-import SunriseSunset from "./components/sunriseSunset";
 import TempByHour from "./components/tempTiles/tempByHour";
 import DisplayTemp from "./components/displayTemp";
 import { BiCloudSnow } from "react-icons/bi";
@@ -10,8 +9,6 @@ import { IoRainy } from "react-icons/io5";
 import { TiWeatherSunny } from "react-icons/ti";
 import { RiMistFill } from "react-icons/ri";
 import { GiHeatHaze } from "react-icons/gi";
-import App from "./App";
-
 const TodayLocation = ({
   cwDataFromApi,
   oneCallDataFromApi,

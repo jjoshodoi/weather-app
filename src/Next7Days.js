@@ -6,7 +6,6 @@ import { IoRainy } from "react-icons/io5";
 import { TiWeatherSunny } from "react-icons/ti";
 import { RiMistFill } from "react-icons/ri";
 import { GiHeatHaze } from "react-icons/gi";
-import DisplayTemp from "./components/displayTemp";
 
 const Next7DaysView = ({
   cwDataFromApi,

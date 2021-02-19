@@ -16,12 +16,6 @@ import SideBar from "./components/sidebar";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdFavorite } from "react-icons/md";
 import { GrClear } from "react-icons/gr";
-import { BiCloudSnow } from "react-icons/bi";
-import { AiFillCloud } from "react-icons/ai";
-import { IoRainy } from "react-icons/io5";
-import { TiWeatherSunny } from "react-icons/ti";
-import { RiMistFill } from "react-icons/ri";
-import { GiHeatHaze } from "react-icons/gi";
 
 function App({ isScriptLoaded, isScriptLoadSucceed }) {
   //hide api keys

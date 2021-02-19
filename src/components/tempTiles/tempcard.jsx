@@ -17,8 +17,14 @@ const TempCard = ({
   tomorrow,
 }) => {
   // map every weather attribute in api
-  var weatherAttributeForCard =
-    oneCallDataFromApi && oneCallDataFromApi.hourly[indexNum].weather[0].main;
+
+  if (indexNum === 0) {
+    var weatherAttributeForCard =
+      oneCallDataFromApi && oneCallDataFromApi.current.weather[0].main;
+  } else {
+    weatherAttributeForCard =
+      oneCallDataFromApi && oneCallDataFromApi.hourly[indexNum].weather[0].main;
+  }
 
   return (
     <div>
@@ -90,10 +96,10 @@ const TempCard = ({
                       />
                     </div>
                   );
-                  case "Mist":
-                    return (
-                      <div className="padding-bottom"> 
-                        <RiMistFill 
+                case "Mist":
+                  return (
+                    <div className="padding-bottom">
+                      <RiMistFill
                         size={40}
                         className={`icon-temptile${
                           indexNum === 0 ? "-now" : ""
@@ -101,17 +107,17 @@ const TempCard = ({
                       />
                     </div>
                   );
-                  case "Haze":
-                    return (
-                      <div className="padding-bottom">
-                        <GiHeatHaze 
-                        size = {40}
+                case "Haze":
+                  return (
+                    <div className="padding-bottom">
+                      <GiHeatHaze
+                        size={40}
                         className={`icon-temptile${
                           indexNum === 0 ? "-now" : ""
                         }`}
-                        />
-                      </div>
-                  );    
+                      />
+                    </div>
+                  );
                 default:
                   return <h4>{weatherAttributeForCard}</h4>;
               }

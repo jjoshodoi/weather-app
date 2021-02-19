@@ -150,8 +150,7 @@
   top: 10%;
   right: 40%;
   bottom: 100%;
-  margin-top: 5%;
-  position: absolute;
+
 }
 
 .icon-background-shrink {
@@ -159,5 +158,5 @@
   color: rgba(255, 255, 255, 0.336);
   top: 10%;
   right: 34%;
-  margin-top: 20%;
+
 }

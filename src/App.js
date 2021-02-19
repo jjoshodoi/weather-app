@@ -262,7 +262,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
             handleSelect={handleSelect}
             address={address}
           />
-          <div>
+          {/* <div>
             {(() => {
               switch (mainWeatherAttribute) {
                 case "Clouds":
@@ -309,11 +309,32 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
                       }
                     />
                   );
+                  case "Mist":
+                    return (
+                    <RiMistFill size ={40}
+                      size={400}
+                      className={
+                        sidebar
+                          ? "icon-background-shrink"
+                          : "icon-background-expand"
+                      }
+                    />
+                  );
+                  case "Haze":
+                    return (
+                    <GiHeatHaze  size={400}
+                      className={
+                        sidebar
+                          ? "icon-background-shrink"
+                          : "icon-background-expand"
+                      }
+                    />
+                  ); 
                 default:
                   return <div></div>;
               }
             })()}
-          </div>
+          </div> */}
 
           {(() => {
             switch (currentView) {

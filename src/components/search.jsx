@@ -58,7 +58,7 @@ const SearchBar = ({
         </PlacesAutocomplete>
         <div className="column row-and-column ">
           <div className="column top">
-            <IoLocationSharp size={35} onClick={getUserLocation} />
+            <IoLocationSharp color='grey' size={35} onClick={getUserLocation} />
             <button className="Search-Button top" type="submit">
               Search
             </button>

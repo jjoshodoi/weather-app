@@ -94,7 +94,7 @@ const DisplayTemp = ({
                                       indexNum === 0 ? "-now" : ""
                                     }`}
                                   />
-                              </div> 
+                                </div>
                               );
                             case "Rain":
                               return (
@@ -116,18 +116,18 @@ const DisplayTemp = ({
                                       indexNum === 0 ? "-now" : ""
                                     }`}
                                   />
-                                </div>  
+                                </div>
                               );
                             case "Clear":
                               return (
                                 <div className="padding-bottom">
-                                <TiWeatherSunny
-                                  size={40}
-                                  className={`icon-temptile${
-                                    indexNum === 0 ? "-now" : ""
-                                  }`}
-                                />
-                              </div>  
+                                  <TiWeatherSunny
+                                    size={40}
+                                    className={`icon-temptile${
+                                      indexNum === 0 ? "-now" : ""
+                                    }`}
+                                  />
+                                </div>
                               );
                             default:
                               return (
@@ -158,12 +158,6 @@ const DisplayTemp = ({
                         )}°C`}{" "}
                       </b>
                     </div>
-                    {/* <h4 className="center">
-                      {oneCallDataFromApi &&
-                        oneCallDataFromApi.hourly[
-                          differenceFrom12AM + afternoon
-                        ].weather[0].main}
-                    </h4> */}
                     <div className="center">
                       {(() => {
                         switch (weatherAttributeForAfternoon) {
@@ -176,7 +170,7 @@ const DisplayTemp = ({
                                     indexNum === 0 ? "-now" : ""
                                   }`}
                                 />
-                              </div> 
+                              </div>
                             );
                           case "Rain":
                             return (
@@ -192,13 +186,13 @@ const DisplayTemp = ({
                           case "Snow":
                             return (
                               <div className="padding-bottom">
-                                  <BiCloudSnow
-                                    size={40}
-                                    className={`icon-temptile${
-                                      indexNum === 0 ? "-now" : ""
-                                    }`}
-                                  />
-                              </div> 
+                                <BiCloudSnow
+                                  size={40}
+                                  className={`icon-temptile${
+                                    indexNum === 0 ? "-now" : ""
+                                  }`}
+                                />
+                              </div>
                             );
                           case "Clear":
                             return (
@@ -209,7 +203,7 @@ const DisplayTemp = ({
                                     indexNum === 0 ? "-now" : ""
                                   }`}
                                 />
-                              </div>  
+                              </div>
                             );
                           default:
                             return (
@@ -256,7 +250,7 @@ const DisplayTemp = ({
                                     indexNum === 0 ? "-now" : ""
                                   }`}
                                 />
-                              </div> 
+                              </div>
                             );
                           case "Rain":
                             return (
@@ -272,13 +266,13 @@ const DisplayTemp = ({
                           case "Snow":
                             return (
                               <div className="padding-bottom">
-                                  <BiCloudSnow
-                                    size={40}
-                                    className={`icon-temptile${
-                                      indexNum === 0 ? "-now" : ""
-                                    }`}
-                                  />
-                              </div>  
+                                <BiCloudSnow
+                                  size={40}
+                                  className={`icon-temptile${
+                                    indexNum === 0 ? "-now" : ""
+                                  }`}
+                                />
+                              </div>
                             );
                           case "Clear":
                             return (
@@ -289,7 +283,7 @@ const DisplayTemp = ({
                                     indexNum === 0 ? "-now" : ""
                                   }`}
                                 />
-                              </div>  
+                              </div>
                             );
                           default:
                             return (
@@ -331,7 +325,7 @@ const DisplayTemp = ({
                                     indexNum === 0 ? "-now" : ""
                                   }`}
                                 />
-                              </div>  
+                              </div>
                             );
                           case "Rain":
                             return (
@@ -347,13 +341,13 @@ const DisplayTemp = ({
                           case "Snow":
                             return (
                               <div className="padding-bottom">
-                                  <BiCloudSnow
-                                    size={40}
-                                    className={`icon-temptile${
-                                      indexNum === 0 ? "-now" : ""
-                                    }`}
-                                  />
-                              </div>  
+                                <BiCloudSnow
+                                  size={40}
+                                  className={`icon-temptile${
+                                    indexNum === 0 ? "-now" : ""
+                                  }`}
+                                />
+                              </div>
                             );
                           case "Clear":
                             return (
@@ -364,7 +358,7 @@ const DisplayTemp = ({
                                     indexNum === 0 ? "-now" : ""
                                   }`}
                                 />
-                              </div>  
+                              </div>
                             );
                           default:
                             return (

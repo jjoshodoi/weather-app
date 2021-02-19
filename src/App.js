@@ -14,6 +14,8 @@ import Next7DaysView from "./Next7Days";
 import SideBar from "./components/sidebar";
 
 import { GiHamburgerMenu } from "react-icons/gi";
+import { MdFavorite } from "react-icons/md";
+import { GrClear } from "react-icons/gr";
 
 function App({ isScriptLoaded, isScriptLoadSucceed }) {
   //hide api keys
@@ -203,14 +205,44 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   if (isScriptLoadSucceed && isScriptLoaded) {
     return (
       <div className="App">
-        <SideBar
+        {/* <SideBar
           sidebar={sidebar}
           setSideBar={setSideBar}
           favourties={favourites}
           handleDropDownClick={handleDropDownClick}
           addToFav={addToFav}
           clearFavourites={clearFavourites}
-        />
+        /> */}
+        <div className={sidebar ? "sidenav" : "sidenav-inactive"}>
+          <ul>
+            <li>
+              <button id="goBack" onClick={() => setSideBar(!sidebar)}>
+                {<GrClear />} Close
+              </button>
+              <button id="title">Favourites</button>
+            </li>
+            {favourites.map((item) => (
+              <li>
+                <button onClick={() => handleDropDownClick(item)}>
+                  {item}
+                </button>
+              </li>
+            ))}
+            <li>
+              <button id="addCity" onClick={addToFav}>
+                Add Current City
+                <br />
+                <MdFavorite className="white-icon" />
+              </button>
+            </li>
+            <li>
+              <button id="clearAll" onClick={clearFavourites}>
+                Clear All <br />
+                <GrClear className="white-icon" />
+              </button>
+            </li>
+          </ul>
+        </div>
         <div className={sidebar ? "content" : "content-expand"}>
           <GiHamburgerMenu
             size={35}
@@ -224,6 +256,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
             handleSelect={handleSelect}
             address={address}
           />
+
           {(() => {
             switch (currentView) {
               case "TomorrowLocationView":

@@ -5,14 +5,14 @@ import "./tempcard.css";
 
 import scriptLoader from "react-async-script-loader";
 import { useEffect, useState } from "react";
+
 import TodayLocation from "./Locations";
+import SunriseSunset from "./components/sunriseSunset";
 import SearchBar from "./components/search";
 import TomorrowLocation from "./TomorrowLocation";
 import Next7DaysView from "./Next7Days";
-import { MdFavorite } from "react-icons/md";
-import { GrClear } from "react-icons/gr";
-import Dropdown from "react-bootstrap/Dropdown";
-import SunriseSunset from "./components/sunriseSunset";
+import SideBar from "./components/sidebar";
+
 import { GiHamburgerMenu } from "react-icons/gi";
 
 function App({ isScriptLoaded, isScriptLoadSucceed }) {
@@ -203,36 +203,14 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   if (isScriptLoadSucceed && isScriptLoaded) {
     return (
       <div className="App">
-        <div className={sidebar ? "sidenav" : "sidenav-inactive"}>
-          <ul>
-            <li>
-              <button id="goBack" onClick={() => setSideBar(!sidebar)}>
-                {<GrClear />} Close
-              </button>
-              <button id="title">Favourites</button>
-            </li>
-            {favourites.map((item) => (
-              <li>
-                <button onClick={() => handleDropDownClick(item)}>
-                  {item}
-                </button>
-              </li>
-            ))}
-            <li>
-              <button id="addCity" onClick={addToFav}>
-                Add Current City
-                <br />
-                <MdFavorite className="white-icon" />
-              </button>
-            </li>
-            <li>
-              <button id="clearAll" onClick={clearFavourites}>
-                Clear All <br />
-                <GrClear className="white-icon" />
-              </button>
-            </li>
-          </ul>
-        </div>
+        <SideBar
+          sidebar={sidebar}
+          setSideBar={setSideBar}
+          favourties={favourites}
+          handleDropDownClick={handleDropDownClick}
+          addToFav={addToFav}
+          clearFavourites={clearFavourites}
+        />
         <div className={sidebar ? "content" : "content-expand"}>
           <GiHamburgerMenu
             size={35}

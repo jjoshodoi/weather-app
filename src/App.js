@@ -235,7 +235,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
         </div>
         <div className={sidebar ? "content" : "content-expand"}>
           <GiHamburgerMenu
-            size={40}
+            size={35}
             className="top-left"
             onClick={() => setSideBar(!sidebar)}
           />

@@ -1,7 +1,7 @@
 import React from "react";
 import { FiSunrise } from "react-icons/fi";
 import { FiSunset } from "react-icons/fi";
-import { WiHumidity } from "react-icons/wi";
+import { WiHumidity, WiStrongWind } from "react-icons/wi";
 
 const SunriseSunset = ({ oneCallDataFromApi, tomorrow, sidebar }) => {
   const epochToDate = (num) => {
@@ -35,8 +35,8 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow, sidebar }) => {
     oneCallDataFromApi &&
     epochToDate(oneCallDataFromApi.current.sunset).getSeconds() +
       timeDifference;
-  
-      //tomorrows hours
+
+  //tomorrows hours
   var tomorrowSunriseHours =
     oneCallDataFromApi &&
     epochToDate(oneCallDataFromApi.daily[1].sunrise).getHours() +
@@ -123,6 +123,12 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow, sidebar }) => {
                   <WiHumidity size={30} /> Humidity:{" "}
                   {oneCallDataFromApi && oneCallDataFromApi.current.humidity}%
                 </h3>
+                <h3 className="column">
+                  <WiStrongWind size={30} />
+                  Wind:{" "}
+                  {oneCallDataFromApi && oneCallDataFromApi.current.wind_speed}
+                  mph
+                </h3>
               </div>
             );
           default:
@@ -147,6 +153,12 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow, sidebar }) => {
                   <WiHumidity size={30} />
                   Humidity:{" "}
                   {oneCallDataFromApi && oneCallDataFromApi.daily[1].humidity}%
+                </h3>{" "}
+                <h3 className="column">
+                  <WiStrongWind size={30} />
+                  Wind:{" "}
+                  {oneCallDataFromApi && oneCallDataFromApi.daily[1].wind_speed}
+                  mph
                 </h3>
               </div>
             );

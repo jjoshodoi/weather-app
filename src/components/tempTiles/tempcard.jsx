@@ -3,6 +3,8 @@ import { BiCloudSnow } from "react-icons/bi";
 import { AiFillCloud } from "react-icons/ai";
 import { IoRainy } from "react-icons/io5";
 import { TiWeatherSunny } from "react-icons/ti";
+import { RiMistFill } from "react-icons/ri";
+import { GiHeatHaze } from "react-icons/gi";
 
 const TempCard = ({
   indexNum,
@@ -88,6 +90,28 @@ const TempCard = ({
                       />
                     </div>
                   );
+                  case "Mist":
+                    return (
+                      <div className="padding-bottom"> 
+                        <RiMistFill 
+                        size={40}
+                        className={`icon-temptile${
+                          indexNum === 0 ? "-now" : ""
+                        }`}
+                      />
+                    </div>
+                  );
+                  case "Haze":
+                    return (
+                      <div className="padding-bottom">
+                        <GiHeatHaze 
+                        size = {40}
+                        className={`icon-temptile${
+                          indexNum === 0 ? "-now" : ""
+                        }`}
+                        />
+                      </div>
+                  );    
                 default:
                   return <h4>{weatherAttributeForCard}</h4>;
               }

@@ -4,7 +4,10 @@ import { BiCloudSnow } from "react-icons/bi";
 import { AiFillCloud } from "react-icons/ai";
 import { IoRainy } from "react-icons/io5";
 import { TiWeatherSunny } from "react-icons/ti";
+import { RiMistFill } from "react-icons/ri";
+import { GiHeatHaze } from "react-icons/gi";
 import DisplayTemp from "./components/displayTemp";
+
 const Next7DaysView = ({
   cwDataFromApi,
   kelvinToCelcius,
@@ -55,6 +58,10 @@ const Next7DaysView = ({
                           return <BiCloudSnow size={40} />;
                         case "Clear":
                           return <TiWeatherSunny size={40} />;
+                        case "Mist":
+                          return <RiMistFill size ={40}/>;
+                        case "Haze":
+                          return <GiHeatHaze size = {40}/>;
                         default:
                           return <h3>N/A</h3>;
                       }

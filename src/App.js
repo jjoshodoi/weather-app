@@ -20,6 +20,8 @@ import { BiCloudSnow } from "react-icons/bi";
 import { AiFillCloud } from "react-icons/ai";
 import { IoRainy } from "react-icons/io5";
 import { TiWeatherSunny } from "react-icons/ti";
+import { RiMistFill } from "react-icons/ri";
+import { GiHeatHaze } from "react-icons/gi";
 
 function App({ isScriptLoaded, isScriptLoadSucceed }) {
   //hide api keys
@@ -260,7 +262,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
             handleSelect={handleSelect}
             address={address}
           />
-          {/* <div>
+          <div>
             {(() => {
               switch (mainWeatherAttribute) {
                 case "Clouds":
@@ -288,7 +290,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
                 case "Snow":
                   return (
                     <BiCloudSnow
-                      ize={400}
+                      size={400}
                       className={
                         sidebar
                           ? "icon-background-shrink"
@@ -311,7 +313,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
                   return <div></div>;
               }
             })()}
-          </div> */}
+          </div>
 
           {(() => {
             switch (currentView) {

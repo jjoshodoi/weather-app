@@ -123,7 +123,7 @@
   margin: 40px auto;
   border-width: 3px;
   border-style: solid;
-  border-image: linear-gradient(to bottom, blue, rgba(0, 0, 0, 0)) 1 100%;
+  border-image: linear-gradient(to bottom, rgb(0, 183, 255), rgba(0, 0, 0, 0)) 1 100%;
 }
 
 .main-info-card-7days-blue {

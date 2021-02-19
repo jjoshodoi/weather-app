@@ -72,10 +72,10 @@ const TempCard = ({
           </div>
         </div>
         <div className = "center">
-          {`${kelvinToCelcius(
+         <b> {`${kelvinToCelcius(
           //Change key to be unique
           hour.temp
-        )}°C`}
+        )}°C`} </b>
         </div>
       </div>
       </div>

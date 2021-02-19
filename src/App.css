@@ -139,3 +139,23 @@
   font-size: 25px;
   font-style: bold;
 }
+
+.foreground {
+  color: rgba(255, 0, 0);
+}
+
+.icon-background-expand {
+  transition: 250ms;
+  color: rgba(255, 255, 255, 0.336);
+  position: fixed;
+  top: 10%;
+  right: 36%;
+}
+
+.icon-background-shrink {
+  transition: 250ms;
+  color: rgba(255, 255, 255, 0.336);
+  position: fixed;
+  top: 10%;
+  right: 29%;
+}

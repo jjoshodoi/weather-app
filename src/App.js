@@ -16,6 +16,10 @@ import SideBar from "./components/sidebar";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdFavorite } from "react-icons/md";
 import { GrClear } from "react-icons/gr";
+import { BiCloudSnow } from "react-icons/bi";
+import { AiFillCloud } from "react-icons/ai";
+import { IoRainy } from "react-icons/io5";
+import { TiWeatherSunny } from "react-icons/ti";
 
 function App({ isScriptLoaded, isScriptLoadSucceed }) {
   //hide api keys
@@ -117,7 +121,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
       const tempWeather = [];
       data.current.weather.map((item) => tempWeather.push(item.main));
       // console.log(tempWeather);
-      setMainWeatherAttribute(tempWeather);
+      setMainWeatherAttribute(tempWeather[0]);
     } else {
       alert("Enter a valid Location");
     }
@@ -256,6 +260,58 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
             handleSelect={handleSelect}
             address={address}
           />
+          {/* <div>
+            {(() => {
+              switch (mainWeatherAttribute) {
+                case "Clouds":
+                  return (
+                    <AiFillCloud
+                      size={400}
+                      className={
+                        sidebar
+                          ? "icon-background-shrink"
+                          : "icon-background-expand"
+                      }
+                    />
+                  );
+                case "Rain":
+                  return (
+                    <IoRainy
+                      size={400}
+                      className={
+                        sidebar
+                          ? "icon-background-shrink"
+                          : "icon-background-expand"
+                      }
+                    />
+                  );
+                case "Snow":
+                  return (
+                    <BiCloudSnow
+                      ize={400}
+                      className={
+                        sidebar
+                          ? "icon-background-shrink"
+                          : "icon-background-expand"
+                      }
+                    />
+                  );
+                case "Clear":
+                  return (
+                    <TiWeatherSunny
+                      size={400}
+                      className={
+                        sidebar
+                          ? "icon-background-shrink"
+                          : "icon-background-expand"
+                      }
+                    />
+                  );
+                default:
+                  return <div></div>;
+              }
+            })()}
+          </div> */}
 
           {(() => {
             switch (currentView) {

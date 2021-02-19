@@ -47,21 +47,21 @@ const Next7DaysView = ({
                     {(() => {
                       switch (day.weather[0].main) {
                         case "Clouds":
-                          return <AiFillCloud size={40} />;
+                          return <AiFillCloud size={40} color = "#bfc5c7"/>;
                         case "Rain":
                           return (
                             <div className="padding">
-                              <IoRainy size={38} />
+                              <IoRainy size={38} color = "#a6d5e3"/>
                             </div>
                           );
                         case "Snow":
                           return <BiCloudSnow size={40} />;
                         case "Clear":
-                          return <TiWeatherSunny size={40} />;
+                          return <TiWeatherSunny size={40} color ="#f5bd56"/>;
                         case "Mist":
-                          return <RiMistFill size ={40}/>;
+                          return <RiMistFill size ={40} color ="#d6d5d2"/>;
                         case "Haze":
-                          return <GiHeatHaze size = {40}/>;
+                          return <GiHeatHaze size = {40} color ="#406d7a"/>;
                         default:
                           return <h3>N/A</h3>;
                       }

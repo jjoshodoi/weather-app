@@ -91,6 +91,7 @@ const DisplayTemp = ({
                               return (
                                 <div className="padding-bottom">
                                   <AiFillCloud
+                                    color = "#bfc5c7"
                                     size={40}
                                     className={`icon-temptile${
                                       indexNum === 0 ? "-now" : ""
@@ -102,6 +103,7 @@ const DisplayTemp = ({
                               return (
                                 <div className="padding">
                                   <IoRainy
+                                    color = "#a6d5e3"
                                     size={40}
                                     className={`icon-temptile${
                                       indexNum === 0 ? "-now" : ""
@@ -124,6 +126,7 @@ const DisplayTemp = ({
                               return (
                                 <div className="padding-bottom">
                                   <TiWeatherSunny
+                                    color = "#f5bd56"
                                     size={40}
                                     className={`icon-temptile${
                                       indexNum === 0 ? "-now" : ""
@@ -134,7 +137,8 @@ const DisplayTemp = ({
                               case "Mist":
                                 return (
                                   <div className="padding-bottom"> 
-                                    <RiMistFill 
+                                    <RiMistFill
+                                    color ="#d6d5d2" 
                                     size={40}
                                     className={`icon-temptile${
                                       indexNum === 0 ? "-now" : ""
@@ -189,6 +193,7 @@ const DisplayTemp = ({
                             return (
                               <div className="padding-bottom">
                                 <AiFillCloud
+                                  color = "#bfc5c7"
                                   size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
@@ -200,6 +205,7 @@ const DisplayTemp = ({
                             return (
                               <div className="padding">
                                 <IoRainy
+                                  color = "#a6d5e3"
                                   size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
@@ -222,6 +228,7 @@ const DisplayTemp = ({
                             return (
                               <div className="padding-bottom">
                                 <TiWeatherSunny
+                                  color = "#f5bd56"
                                   size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
@@ -232,7 +239,8 @@ const DisplayTemp = ({
                             case "Mist":
                               return (
                                 <div className="padding-bottom"> 
-                                  <RiMistFill 
+                                  <RiMistFill
+                                  color ="#d6d5d2" 
                                   size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
@@ -244,6 +252,7 @@ const DisplayTemp = ({
                               return (
                                 <div className="padding-bottom">
                                   <GiHeatHaze 
+                                  color ="#406d7a"
                                   size = {40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
@@ -291,6 +300,7 @@ const DisplayTemp = ({
                             return (
                               <div className="padding-bottom">
                                 <AiFillCloud
+                                  color = "#bfc5c7"
                                   size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
@@ -302,6 +312,7 @@ const DisplayTemp = ({
                             return (
                               <div className="padding">
                                 <IoRainy
+                                  color = "#a6d5e3"
                                   size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
@@ -324,6 +335,7 @@ const DisplayTemp = ({
                             return (
                               <div className="padding-bottom">
                                 <TiWeatherSunny
+                                  color = "#f5bd56"
                                   size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
@@ -334,7 +346,8 @@ const DisplayTemp = ({
                             case "Mist":
                               return (
                                 <div className="padding-bottom"> 
-                                  <RiMistFill 
+                                  <RiMistFill
+                                  color ="#d6d5d2" 
                                   size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
@@ -345,7 +358,8 @@ const DisplayTemp = ({
                             case "Haze":
                               return (
                                 <div className="padding-bottom">
-                                  <GiHeatHaze 
+                                  <GiHeatHaze
+                                  color ="#406d7a" 
                                   size = {40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
@@ -388,6 +402,7 @@ const DisplayTemp = ({
                             return (
                               <div className="padding-bottom">
                                 <AiFillCloud
+                                  color = "#bfc5c7"
                                   size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
@@ -399,6 +414,7 @@ const DisplayTemp = ({
                             return (
                               <div className="padding">
                                 <IoRainy
+                                  color = "#a6d5e3"
                                   size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
@@ -421,6 +437,7 @@ const DisplayTemp = ({
                             return (
                               <div className="padding-bottom">
                                 <TiWeatherSunny
+                                  color = "#f5bd56"
                                   size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
@@ -431,7 +448,8 @@ const DisplayTemp = ({
                             case "Mist":
                               return (
                                 <div className="padding-bottom"> 
-                                  <RiMistFill 
+                                  <RiMistFill
+                                  color ="#d6d5d2" 
                                   size={40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""
@@ -442,7 +460,8 @@ const DisplayTemp = ({
                             case "Haze":
                               return (
                                 <div className="padding-bottom">
-                                  <GiHeatHaze 
+                                  <GiHeatHaze
+                                  color ="#406d7a" 
                                   size = {40}
                                   className={`icon-temptile${
                                     indexNum === 0 ? "-now" : ""

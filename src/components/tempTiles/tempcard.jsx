@@ -88,6 +88,8 @@ const TempCard = ({
                       />
                     </div>
                   );
+                default:
+                  return <h4>{weatherAttributeForCard}</h4>;
               }
             })()}
           </div>

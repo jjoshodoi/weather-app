@@ -6,6 +6,7 @@ import "./tempcard.css";
 import scriptLoader from "react-async-script-loader";
 import { useEffect, useState } from "react";
 
+import { getCurrentWeatherData, getCurrentForecast } from "./api/weather";
 import TodayLocation from "./Locations";
 import SunriseSunset from "./components/sunriseSunset";
 import SearchBar from "./components/search";
@@ -89,34 +90,28 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     setQuery(value);
     setAddress("");
   };
+
   // Call the Weather API
   const getLocation = async () => {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${WEATHER_API_KEY}`
-    );
-    // Check here if the response is valid
-    if (response.ok) {
-      const data = await response.json();
-      setCWDataFromApi(data);
-      await callOneCall(data.coord.lon, data.coord.lat);
-      setNameOfLocation(`${data.name}, ${data.sys.country}`);
-    } else {
+    try {
+      const currentWeatherData = await getCurrentWeatherData(query);
+      setCWDataFromApi(currentWeatherData);
+      setNameOfLocation(
+        `${currentWeatherData.name}, ${currentWeatherData.sys.country}`
+      );
+      callOneCall(currentWeatherData.coord.lat, currentWeatherData.coord.lon);
+    } catch (error) {
       alert("Enter a valid Location");
     }
   };
+
   // Call the One Call API
-  const callOneCall = async (lon, lat) => {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${WEATHER_API_KEY}`
-    );
-    if (response.ok) {
-      const data = await response.json();
-      setOneCallDataFromApi(data);
-      const tempWeather = [];
-      data.current.weather.map((item) => tempWeather.push(item.main));
-      // console.log(tempWeather);
-      setMainWeatherAttribute(tempWeather[0]);
-    } else {
+  const callOneCall = async (lat, lon) => {
+    try {
+      const currentForecast = await getCurrentForecast(lat, lon);
+      setOneCallDataFromApi(currentForecast);
+      setMainWeatherAttribute(currentForecast.current.weather[0].main);
+    } catch (error) {
       alert("Enter a valid Location");
     }
   };
@@ -143,7 +138,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
       `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${WEATHER_API_KEY}`
     );
     const data = await response.json();
-    await callOneCall(data.coord.lon, data.coord.lat);
+    await callOneCall(data.coord.lat, data.coord.lon);
     setNameOfLocation(`${data.name}, ${data.sys.country}`);
 
     setCWDataFromApi(data);

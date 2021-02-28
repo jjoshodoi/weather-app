@@ -3,37 +3,34 @@ import React from "react";
 import { MdFavorite } from "react-icons/md";
 import { GrClear } from "react-icons/gr";
 
-const SideBar = ({
-  sidebar,
-  setSideBar,
-  favourites,
-  handleDropDownClick,
-  addToFav,
-  clearFavourites,
-}) => {
+import FavouriteListItem from "./favouriteListItem";
+
+const SideBar = (props) => {
   return (
-    <div className={sidebar ? "sidenav" : "sidenav-inactive"}>
+    <div className={props.sidebarEnabled ? "sidenav" : "sidenav-inactive"}>
       <ul>
         <li>
-          <button id="goBack" onClick={() => setSideBar(!sidebar)}>
+          <button id="goBack" onClick={props.onSidebarClose}>
             {<GrClear />} Close
           </button>
           <button id="title">Favourites</button>
         </li>
-        {favourites.map((item) => (
-          <li>
-            <button onClick={() => handleDropDownClick(item)}>{item}</button>
-          </li>
+        {props.favourites.map((favourite) => (
+          <FavouriteListItem
+            key={favourite}
+            favourite={favourite}
+            onFavouriteClick={props.onFavouriteClick}
+          />
         ))}
         <li>
-          <button id="addCity" onClick={addToFav}>
+          <button id="addCity" onClick={props.onAddToFavouriteClick}>
             Add Current City
             <br />
             <MdFavorite className="white-icon" />
           </button>
         </li>
         <li>
-          <button id="clearAll" onClick={clearFavourites}>
+          <button id="clearAll" onClick={props.onClearFavourites}>
             Clear All <br />
             <GrClear className="white-icon" />
           </button>

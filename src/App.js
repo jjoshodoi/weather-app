@@ -14,8 +14,6 @@ import Next7DaysView from "./Next7Days";
 import SideBar from "./components/sidebar";
 
 import { GiHamburgerMenu } from "react-icons/gi";
-import { MdFavorite } from "react-icons/md";
-import { GrClear } from "react-icons/gr";
 
 //hide api keys
 const WEATHER_API_KEY = process.env.REACT_APP_API_KEY;
@@ -65,7 +63,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   }, [favourites]);
 
   // Adds to list of favs
-  const addToFav = () => {
+  const handleAddToFavourite = () => {
     if (!favourites.includes(nameOfLocation)) {
       setFavourites([...favourites, nameOfLocation]);
       console.log(`${nameOfLocation} added to favourites`);
@@ -75,7 +73,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   };
 
   // Clear Favourites
-  const clearFavourites = () => {
+  const handleClearFavourites = () => {
     localStorage.clear();
     setFavourites([]);
   };
@@ -177,8 +175,8 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     return Math.round(num);
   };
 
-  const handleDropDownClick = (item) => {
-    setQuery(item);
+  const handleFavouriteClick = (favourite) => {
+    setQuery(favourite);
   };
 
   /*const getBackgroundColor = () => {();
@@ -205,49 +203,19 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   if (isScriptLoadSucceed && isScriptLoaded) {
     return (
       <div className="App">
-        {/* <SideBar
-          sidebar={sidebar}
-          setSideBar={setSideBar}
-          favourties={favourites}
-          handleDropDownClick={handleDropDownClick}
-          addToFav={addToFav}
-          clearFavourites={clearFavourites}
-        /> */}
-        <div className={sidebar ? "sidenav" : "sidenav-inactive"}>
-          <ul>
-            <li>
-              <button id="goBack" onClick={() => setSideBar(!sidebar)}>
-                {<GrClear />} Close
-              </button>
-              <button id="title">Favourites</button>
-            </li>
-            {favourites.map((item) => (
-              <li>
-                <button onClick={() => handleDropDownClick(item)}>
-                  {item}
-                </button>
-              </li>
-            ))}
-            <li>
-              <button id="addCity" onClick={addToFav}>
-                Add Current City
-                <br />
-                <MdFavorite className="white-icon" />
-              </button>
-            </li>
-            <li>
-              <button id="clearAll" onClick={clearFavourites}>
-                Clear All <br />
-                <GrClear className="white-icon" />
-              </button>
-            </li>
-          </ul>
-        </div>
+        <SideBar
+          favourites={favourites}
+          sidebarEnabled={sidebar}
+          onAddToFavouriteClick={handleAddToFavourite}
+          onClearFavourites={handleClearFavourites}
+          onFavouriteClick={(favourite) => handleFavouriteClick(favourite)}
+          onSidebarClose={() => setSideBar(false)}
+        />
         <div className={sidebar ? "content" : "content-expand"}>
           <GiHamburgerMenu
             size={35}
             className="top-left"
-            onClick={() => setSideBar(!sidebar)}
+            onClick={() => setSideBar(true)}
           />
           <SearchBar
             getUserLocation={getUserLocation}

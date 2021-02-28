@@ -17,11 +17,11 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { MdFavorite } from "react-icons/md";
 import { GrClear } from "react-icons/gr";
 
-function App({ isScriptLoaded, isScriptLoadSucceed }) {
-  //hide api keys
-  const WEATHER_API_KEY = process.env.REACT_APP_API_KEY;
-  const GEOCODING_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+//hide api keys
+const WEATHER_API_KEY = process.env.REACT_APP_API_KEY;
+const GEOCODING_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
+function App({ isScriptLoaded, isScriptLoadSucceed }) {
   // const [search, setSearch] = useState("");
   const [query, setQuery] = useState("London, UK");
 
@@ -323,5 +323,5 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
 }
 
 export default scriptLoader([
-  `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_API_KEY}&libraries=places`,
+  `https://maps.googleapis.com/maps/api/js?key=${GEOCODING_API_KEY}&libraries=places`,
 ])(App);

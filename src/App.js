@@ -6,6 +6,7 @@ import "./tempcard.css";
 import scriptLoader from "react-async-script-loader";
 import { useEffect, useState } from "react";
 
+import { getCurrentWeatherData, getCurrentForecast } from "./api/weather";
 import TodayLocation from "./Locations";
 import SunriseSunset from "./components/sunriseSunset";
 import SearchBar from "./components/search";
@@ -14,14 +15,12 @@ import Next7DaysView from "./Next7Days";
 import SideBar from "./components/sidebar";
 
 import { GiHamburgerMenu } from "react-icons/gi";
-import { MdFavorite } from "react-icons/md";
-import { GrClear } from "react-icons/gr";
+
+//hide api keys
+const WEATHER_API_KEY = process.env.REACT_APP_API_KEY;
+const GEOCODING_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 function App({ isScriptLoaded, isScriptLoadSucceed }) {
-  //hide api keys
-  const WEATHER_API_KEY = process.env.REACT_APP_API_KEY;
-  const GEOCODING_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
-
   // const [search, setSearch] = useState("");
   const [query, setQuery] = useState("London, UK");
 
@@ -65,7 +64,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   }, [favourites]);
 
   // Adds to list of favs
-  const addToFav = () => {
+  const handleAddToFavourite = () => {
     if (!favourites.includes(nameOfLocation)) {
       setFavourites([...favourites, nameOfLocation]);
       console.log(`${nameOfLocation} added to favourites`);
@@ -75,7 +74,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   };
 
   // Clear Favourites
-  const clearFavourites = () => {
+  const handleClearFavourites = () => {
     localStorage.clear();
     setFavourites([]);
   };
@@ -91,34 +90,28 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     setQuery(value);
     setAddress("");
   };
+
   // Call the Weather API
   const getLocation = async () => {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${WEATHER_API_KEY}`
-    );
-    // Check here if the response is valid
-    if (response.ok) {
-      const data = await response.json();
-      setCWDataFromApi(data);
-      await callOneCall(data.coord.lon, data.coord.lat);
-      setNameOfLocation(`${data.name}, ${data.sys.country}`);
-    } else {
+    try {
+      const currentWeatherData = await getCurrentWeatherData(query);
+      setCWDataFromApi(currentWeatherData);
+      setNameOfLocation(
+        `${currentWeatherData.name}, ${currentWeatherData.sys.country}`
+      );
+      callOneCall(currentWeatherData.coord.lat, currentWeatherData.coord.lon);
+    } catch (error) {
       alert("Enter a valid Location");
     }
   };
+
   // Call the One Call API
-  const callOneCall = async (lon, lat) => {
-    const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${WEATHER_API_KEY}`
-    );
-    if (response.ok) {
-      const data = await response.json();
-      setOneCallDataFromApi(data);
-      const tempWeather = [];
-      data.current.weather.map((item) => tempWeather.push(item.main));
-      // console.log(tempWeather);
-      setMainWeatherAttribute(tempWeather[0]);
-    } else {
+  const callOneCall = async (lat, lon) => {
+    try {
+      const currentForecast = await getCurrentForecast(lat, lon);
+      setOneCallDataFromApi(currentForecast);
+      setMainWeatherAttribute(currentForecast.current.weather[0].main);
+    } catch (error) {
       alert("Enter a valid Location");
     }
   };
@@ -145,7 +138,7 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
       `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${WEATHER_API_KEY}`
     );
     const data = await response.json();
-    await callOneCall(data.coord.lon, data.coord.lat);
+    await callOneCall(data.coord.lat, data.coord.lon);
     setNameOfLocation(`${data.name}, ${data.sys.country}`);
 
     setCWDataFromApi(data);
@@ -177,8 +170,8 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     return Math.round(num);
   };
 
-  const handleDropDownClick = (item) => {
-    setQuery(item);
+  const handleFavouriteClick = (favourite) => {
+    setQuery(favourite);
   };
 
   /*const getBackgroundColor = () => {();
@@ -205,49 +198,19 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
   if (isScriptLoadSucceed && isScriptLoaded) {
     return (
       <div className="App">
-        {/* <SideBar
-          sidebar={sidebar}
-          setSideBar={setSideBar}
-          favourties={favourites}
-          handleDropDownClick={handleDropDownClick}
-          addToFav={addToFav}
-          clearFavourites={clearFavourites}
-        /> */}
-        <div className={sidebar ? "sidenav" : "sidenav-inactive"}>
-          <ul>
-            <li>
-              <button id="goBack" onClick={() => setSideBar(!sidebar)}>
-                {<GrClear />} Close
-              </button>
-              <button id="title">Favourites</button>
-            </li>
-            {favourites.map((item) => (
-              <li>
-                <button onClick={() => handleDropDownClick(item)}>
-                  {item}
-                </button>
-              </li>
-            ))}
-            <li>
-              <button id="addCity" onClick={addToFav}>
-                Add Current City
-                <br />
-                <MdFavorite className="white-icon" />
-              </button>
-            </li>
-            <li>
-              <button id="clearAll" onClick={clearFavourites}>
-                Clear All <br />
-                <GrClear className="white-icon" />
-              </button>
-            </li>
-          </ul>
-        </div>
+        <SideBar
+          favourites={favourites}
+          sidebarEnabled={sidebar}
+          onAddToFavouriteClick={handleAddToFavourite}
+          onClearFavourites={handleClearFavourites}
+          onFavouriteClick={(favourite) => handleFavouriteClick(favourite)}
+          onSidebarClose={() => setSideBar(false)}
+        />
         <div className={sidebar ? "content" : "content-expand"}>
           <GiHamburgerMenu
             size={35}
             className="top-left"
-            onClick={() => setSideBar(!sidebar)}
+            onClick={() => setSideBar(true)}
           />
           <SearchBar
             getUserLocation={getUserLocation}
@@ -323,5 +286,5 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
 }
 
 export default scriptLoader([
-  `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_API_KEY}&libraries=places`,
+  `https://maps.googleapis.com/maps/api/js?key=${GEOCODING_API_KEY}&libraries=places`,
 ])(App);

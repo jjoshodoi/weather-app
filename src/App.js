@@ -3,7 +3,10 @@ import "./sidenav.css";
 import "./scrollbar.css";
 import "./tempcard.css";
 
-import scriptLoader from "react-async-script-loader";
+import { increment, toggle } from "./redux/reducers/sidebar/actions";
+import * as actions from "./redux/actionTypes";
+
+// import scriptLoader from "react-async-script-loader";
 import { useEffect, useState } from "react";
 
 import { getCurrentWeatherData, getCurrentForecast } from "./api/weather";
@@ -12,37 +15,33 @@ import SunriseSunset from "./components/sunriseSunset";
 import SearchBar from "./components/search";
 import TomorrowLocation from "./TomorrowLocation";
 import Next7DaysView from "./Next7Days";
-import SideBar from "./components/sidebar";
+import SideBar from "./components/sidebar/sidebar";
 
 import { GiHamburgerMenu } from "react-icons/gi";
+import { connect } from "react-redux";
 
 //hide api keys
 const WEATHER_API_KEY = process.env.REACT_APP_API_KEY;
-const GEOCODING_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
-function App({ isScriptLoaded, isScriptLoadSucceed }) {
+function App(props) {
   // const [search, setSearch] = useState("");
   const [query, setQuery] = useState("London, UK");
-
-  // Select relevant Page View
   const [currentView, setCurrentView] = useState("Today");
-
-  // store our data from api in this
   const [cwDataFromApi, setCWDataFromApi] = useState(null);
-
-  // store data from one call api
   const [oneCallDataFromApi, setOneCallDataFromApi] = useState(null);
-
-  // store the main weather attribute
   const [mainWeatherAttribute, setMainWeatherAttribute] = useState([]);
-
-  // Store current name of displayed city
   const [nameOfLocation, setNameOfLocation] = useState("");
-
-  // store the address from searchbar
   const [address, setAddress] = useState("");
+  // const [sidebar, setSideBar] = useState(false);
 
-  const [sidebar, setSideBar] = useState(false);
+  const numberVariable = 3;
+
+  // console.log(increment(3));
+
+  const toggleSidebar = () => {
+    // props.dispatch(increment(numberVariable));
+    props.dispatch(toggle());
+  };
 
   // store the favourites list
   const [favourites, setFavourites] = useState(() => {
@@ -52,11 +51,11 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
 
   useEffect(() => {
     getLocation();
-  }, [query]);
+  }, [props.address]);
 
-  useEffect(() => {
-    getUserLocation();
-  }, []); // Option?
+  // useEffect(() => {
+  //   getUserLocation();
+  // }, []); // Option?
 
   // updates favourities when favourites is updated
   useEffect(() => {
@@ -79,22 +78,10 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     setFavourites([]);
   };
 
-  // Update the search bar accordingly
-  const handleChange = (value) => {
-    setAddress(value);
-  };
-
-  // Set address and Set Query, set address to empty after making it equal to query
-  const handleSelect = async (value) => {
-    setAddress(value);
-    setQuery(value);
-    setAddress("");
-  };
-
   // Call the Weather API
   const getLocation = async () => {
     try {
-      const currentWeatherData = await getCurrentWeatherData(query);
+      const currentWeatherData = await getCurrentWeatherData(props.address);
       setCWDataFromApi(currentWeatherData);
       setNameOfLocation(
         `${currentWeatherData.name}, ${currentWeatherData.sys.country}`
@@ -114,13 +101,6 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     } catch (error) {
       alert("Enter a valid Location");
     }
-  };
-
-  // Runs onSubmit to get the value of search, then resets value
-  const getSearch = (e) => {
-    e.preventDefault();
-    setQuery(address);
-    setAddress("");
   };
 
   // Gets current position of user and calls showPosition
@@ -195,96 +175,92 @@ function App({ isScriptLoaded, isScriptLoadSucceed }) {
     }
   }
 
-  if (isScriptLoadSucceed && isScriptLoaded) {
-    return (
-      <div className="App">
-        <SideBar
-          favourites={favourites}
-          sidebarEnabled={sidebar}
-          onAddToFavouriteClick={handleAddToFavourite}
-          onClearFavourites={handleClearFavourites}
-          onFavouriteClick={(favourite) => handleFavouriteClick(favourite)}
-          onSidebarClose={() => setSideBar(false)}
+  return (
+    <div className="App">
+      <h5>{props.count}</h5>
+      <SideBar
+        favourites={favourites}
+        onAddToFavouriteClick={handleAddToFavourite}
+        onClearFavourites={handleClearFavourites}
+        onFavouriteClick={(favourite) => handleFavouriteClick(favourite)}
+      />
+      <div className={props.isSideOpen ? "content" : "content-expand"}>
+        <GiHamburgerMenu
+          size={35}
+          className="top-left"
+          onClick={toggleSidebar}
         />
-        <div className={sidebar ? "content" : "content-expand"}>
-          <GiHamburgerMenu
-            size={35}
-            className="top-left"
-            onClick={() => setSideBar(true)}
-          />
-          <SearchBar
-            getUserLocation={getUserLocation}
-            getSearch={getSearch}
-            handleChange={handleChange}
-            handleSelect={handleSelect}
-            address={address}
-          />
+        <SearchBar getUserLocation={getUserLocation} />
 
-          {(() => {
-            switch (currentView) {
-              case "TomorrowLocationView":
-                return (
+        {(() => {
+          switch (currentView) {
+            case "TomorrowLocationView":
+              return (
+                <div>
+                  <TomorrowLocation
+                    cwDataFromApi={cwDataFromApi}
+                    oneCallDataFromApi={oneCallDataFromApi}
+                    setCurrentView={setCurrentView}
+                    currentView={currentView}
+                    kelvinToCelcius={kelvinToCelcius}
+                    tomorrow={true} // Use this value to see if we are looking for tomorrows data or not
+                    color={color} // calls in color variable for border
+                  />
                   <div>
-                    <TomorrowLocation
-                      cwDataFromApi={cwDataFromApi}
+                    <SunriseSunset
                       oneCallDataFromApi={oneCallDataFromApi}
-                      setCurrentView={setCurrentView}
-                      currentView={currentView}
-                      kelvinToCelcius={kelvinToCelcius}
-                      tomorrow={true} // Use this value to see if we are looking for tomorrows data or not
-                      color={color} // calls in color variable for border
+                      tomorrow={true}
+                      sidebar={props.isSideOpen}
                     />
-                    <div>
-                      <SunriseSunset
-                        oneCallDataFromApi={oneCallDataFromApi}
-                        tomorrow={true}
-                        sidebar={sidebar}
-                      />
-                    </div>
                   </div>
-                );
-              case "Next7DaysView":
-                return (
-                  <Next7DaysView
+                </div>
+              );
+            case "Next7DaysView":
+              return (
+                <Next7DaysView
+                  cwDataFromApi={cwDataFromApi}
+                  oneCallDataFromApi={oneCallDataFromApi}
+                  setCurrentView={setCurrentView}
+                  kelvinToCelcius={kelvinToCelcius}
+                  currentView={currentView}
+                  color={color}
+                />
+              );
+            default:
+              return (
+                <div>
+                  <TodayLocation
                     cwDataFromApi={cwDataFromApi}
                     oneCallDataFromApi={oneCallDataFromApi}
                     setCurrentView={setCurrentView}
                     kelvinToCelcius={kelvinToCelcius}
                     currentView={currentView}
+                    tomorrow={false}
                     color={color}
                   />
-                );
-              default:
-                return (
-                  <div>
-                    <TodayLocation
-                      cwDataFromApi={cwDataFromApi}
+                  <div className="location">
+                    <SunriseSunset
                       oneCallDataFromApi={oneCallDataFromApi}
-                      setCurrentView={setCurrentView}
-                      kelvinToCelcius={kelvinToCelcius}
-                      currentView={currentView}
                       tomorrow={false}
-                      color={color}
+                      sidebar={props.sideBarOpen}
                     />
-                    <div className="location">
-                      <SunriseSunset
-                        oneCallDataFromApi={oneCallDataFromApi}
-                        tomorrow={false}
-                        sidebar={sidebar}
-                      />
-                    </div>
                   </div>
-                );
-            }
-          })()}
-        </div>
+                </div>
+              );
+          }
+        })()}
       </div>
-    );
-  } else {
-    return <div></div>;
-  }
+    </div>
+  );
 }
 
-export default scriptLoader([
-  `https://maps.googleapis.com/maps/api/js?key=${GEOCODING_API_KEY}&libraries=places`,
-])(App);
+const mapStateToProps = (state) => {
+  return {
+    isSideOpen: state.sidebarReducer.isSideOpen,
+    count: state.counterReducer.count,
+    favourites: state.sidebarReducer.localData,
+    address: state.searchReducer.address,
+  };
+};
+
+export default connect(mapStateToProps)(App);

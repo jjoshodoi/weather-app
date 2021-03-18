@@ -1,4 +1,8 @@
+import * as actions from "../../redux/actionTypes";
+import { toggle } from "../../redux/reducers/sidebar/actions";
+
 import React from "react";
+import { connect } from "react-redux";
 
 import { MdFavorite } from "react-icons/md";
 import { GrClear } from "react-icons/gr";
@@ -6,11 +10,15 @@ import { GrClear } from "react-icons/gr";
 import FavouriteListItem from "./favouriteListItem";
 
 const SideBar = (props) => {
+  const toggleSidebar = () => {
+    props.dispatch(toggle());
+  };
+
   return (
-    <div className={props.sidebarEnabled ? "sidenav" : "sidenav-inactive"}>
+    <div className={props.isSideOpen ? "sidenav" : "sidenav-inactive"}>
       <ul>
         <li>
-          <button id="goBack" onClick={props.onSidebarClose}>
+          <button id="goBack" onClick={toggleSidebar}>
             {<GrClear />} Close
           </button>
           <button id="title">Favourites</button>
@@ -40,4 +48,11 @@ const SideBar = (props) => {
   );
 };
 
-export default SideBar;
+const mapStateToProps = (state) => {
+  return {
+    favs: state.sidebarReducer.localData,
+    isSideOpen: state.sidebarReducer.isSideOpen,
+  };
+};
+
+export default connect(mapStateToProps)(SideBar);

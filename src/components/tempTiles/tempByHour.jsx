@@ -1,19 +1,12 @@
 import React from "react";
 import TempCard from "./tempcard";
 
-
-const TempByHour = ({
-  oneCallDataFromApi,
-  kelvinToCelcius,
-  tomorrow,
-}) => {
+const TempByHour = ({ oneCallDataFromApi, kelvinToCelcius, tomorrow }) => {
   // Finds Current Hour
   const currentHour = new Date().getHours();
 
   // Finds hours from now to 12AM
   const differenceFrom12AM = 24 - currentHour;
-
-  // console.log(oneCallDataFromApi && oneCallDataFromApi.hourly.slice(0, 24));
 
   const timeDifference =
     oneCallDataFromApi && oneCallDataFromApi.timezone_offset / 3600;
@@ -62,9 +55,7 @@ const TempByHour = ({
                     kelvinToCelcius={kelvinToCelcius}
                     differenceFrom12AM={differenceFrom12AM}
                     tomorrow={tomorrow}
-                    
                   />
-                  
                 ))
             );
           default:

@@ -11,7 +11,6 @@ const SunriseSunset = ({ oneCallDataFromApi, tomorrow, sidebar }) => {
 
   const timeDifference =
     oneCallDataFromApi && oneCallDataFromApi.timezone_offset / 3600;
-  console.log(timeDifference);
   // todays hours
   var currentSunriseHours =
     oneCallDataFromApi &&

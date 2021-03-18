@@ -1,10 +1,9 @@
 import React from "react";
 
 const SelectDay = ({ currentView, setCurrentView }) => {
-  console.log(currentView);
   return (
     //Should we Reset day back to Today when they search?
-    <div className='select-day-padding'>
+    <div className="select-day-padding">
       <button
         id={1}
         className={`pageButton${currentView === "Today" ? "-active" : ""}`}

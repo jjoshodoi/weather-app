@@ -1,9 +1,9 @@
 import React from "react";
-import SelectDay from "./components/selectDay";
-import DisplayDate from "./components/displayDate";
+import SelectDay from "../components/selectDay";
+import DisplayDate from "../components/displayDate";
 
-import TempByHour from "./components/tempTiles/tempByHour";
-import DisplayTemp from "./components/displayTemp";
+import TempByHour from "../components/tempTiles/tempByHour";
+import DisplayTemp from "../components/displayTemp";
 
 const TomorrowLocation = ({
   cwDataFromApi,
@@ -12,7 +12,7 @@ const TomorrowLocation = ({
   kelvinToCelcius,
   tomorrow,
   currentView,
-  color
+  color,
 }) => {
   return (
     <div>

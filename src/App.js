@@ -1,43 +1,35 @@
 import "./App.css";
-import "./sidenav.css";
+import "./components/sidebar/sidebar.css";
 import "./scrollbar.css";
 import "./tempcard.css";
 
-import { increment, toggle } from "./redux/reducers/sidebar/actions";
-import * as actions from "./redux/actionTypes";
+import { connect } from "react-redux";
 
-// import scriptLoader from "react-async-script-loader";
+import { increment, toggle } from "./redux/reducers/sidebar/actions";
+import { updateAddress } from "./redux/reducers/search/actions";
+import { updateCWData, updateOneCallData } from "./redux/reducers/api/actions";
+
 import { useEffect, useState } from "react";
 
 import { getCurrentWeatherData, getCurrentForecast } from "./api/weather";
-import TodayLocation from "./Locations";
+
+import TodayLocation from "./screens/Today";
 import SunriseSunset from "./components/sunriseSunset";
 import SearchBar from "./components/search";
-import TomorrowLocation from "./TomorrowLocation";
-import Next7DaysView from "./Next7Days";
+import TomorrowLocation from "./screens/TomorrowLocation";
+import Next7DaysView from "./screens/Next7Days";
 import SideBar from "./components/sidebar/sidebar";
 
 import { GiHamburgerMenu } from "react-icons/gi";
-import { connect } from "react-redux";
 
 //hide api keys
 const WEATHER_API_KEY = process.env.REACT_APP_API_KEY;
 
 function App(props) {
-  // const [search, setSearch] = useState("");
-  const [query, setQuery] = useState("London, UK");
-  const [currentView, setCurrentView] = useState("Today");
-  const [cwDataFromApi, setCWDataFromApi] = useState(null);
-  const [oneCallDataFromApi, setOneCallDataFromApi] = useState(null);
   const [mainWeatherAttribute, setMainWeatherAttribute] = useState([]);
   const [nameOfLocation, setNameOfLocation] = useState("");
-  const [address, setAddress] = useState("");
-  // const [sidebar, setSideBar] = useState(false);
 
-  const numberVariable = 3;
-
-  // console.log(increment(3));
-
+  // const numberVariable = 3;
   const toggleSidebar = () => {
     // props.dispatch(increment(numberVariable));
     props.dispatch(toggle());
@@ -53,16 +45,10 @@ function App(props) {
     getLocation();
   }, [props.address]);
 
-  // useEffect(() => {
-  //   getUserLocation();
-  // }, []); // Option?
-
-  // updates favourities when favourites is updated
   useEffect(() => {
     localStorage.setItem("favourites", JSON.stringify(favourites));
   }, [favourites]);
 
-  // Adds to list of favs
   const handleAddToFavourite = () => {
     if (!favourites.includes(nameOfLocation)) {
       setFavourites([...favourites, nameOfLocation]);
@@ -72,20 +58,19 @@ function App(props) {
     }
   };
 
-  // Clear Favourites
   const handleClearFavourites = () => {
     localStorage.clear();
     setFavourites([]);
   };
 
-  // Call the Weather API
   const getLocation = async () => {
     try {
       const currentWeatherData = await getCurrentWeatherData(props.address);
-      setCWDataFromApi(currentWeatherData);
+      props.dispatch(updateCWData(currentWeatherData));
       setNameOfLocation(
         `${currentWeatherData.name}, ${currentWeatherData.sys.country}`
       );
+
       callOneCall(currentWeatherData.coord.lat, currentWeatherData.coord.lon);
     } catch (error) {
       alert("Enter a valid Location");
@@ -96,7 +81,7 @@ function App(props) {
   const callOneCall = async (lat, lon) => {
     try {
       const currentForecast = await getCurrentForecast(lat, lon);
-      setOneCallDataFromApi(currentForecast);
+      props.dispatch(updateOneCallData(currentForecast));
       setMainWeatherAttribute(currentForecast.current.weather[0].main);
     } catch (error) {
       alert("Enter a valid Location");
@@ -120,8 +105,7 @@ function App(props) {
     const data = await response.json();
     await callOneCall(data.coord.lat, data.coord.lon);
     setNameOfLocation(`${data.name}, ${data.sys.country}`);
-
-    setCWDataFromApi(data);
+    props.dispatch(updateCWData(data));
   };
 
   // Errors for when the Location fails. Gets called getUserLocation
@@ -151,25 +135,23 @@ function App(props) {
   };
 
   const handleFavouriteClick = (favourite) => {
-    setQuery(favourite);
+    props.dispatch(updateAddress(favourite));
   };
 
-  /*const getBackgroundColor = () => {();
-  };*/
-  if (oneCallDataFromApi && oneCallDataFromApi.current.temp) {
-    if (kelvinToCelcius(oneCallDataFromApi.current.temp) >= 10) {
-      var lightness = 90 - kelvinToCelcius(oneCallDataFromApi.current.temp);
+  if (props.oneCallData && props.oneCallData.current.temp) {
+    if (kelvinToCelcius(props.oneCallData.current.temp) >= 10) {
+      var lightness = 90 - kelvinToCelcius(props.oneCallData.current.temp);
       document.body.style.background = `linear-gradient(hsla(20,100%,${lightness}%,0.9),  hsla(360,50%,100%,0.9))`; //Warm
       var color = "red";
     } else if (
-      kelvinToCelcius(oneCallDataFromApi.current.temp) > 0 &&
-      kelvinToCelcius(oneCallDataFromApi.current.temp) < 10
+      kelvinToCelcius(props.oneCallData.current.temp) > 0 &&
+      kelvinToCelcius(props.oneCallData.current.temp) < 10
     ) {
-      lightness = 60 + kelvinToCelcius(oneCallDataFromApi.current.temp);
+      lightness = 60 + kelvinToCelcius(props.oneCallData.current.temp);
       document.body.style.background = `linear-gradient(hsla(200,50%,${lightness}%,0.8),  hsla(360,50%,100%,0.8))`; //Cold below 10degrees
       color = "blue";
-    } else if (kelvinToCelcius(oneCallDataFromApi.current.temp) <= 0) {
-      lightness = 40 + kelvinToCelcius(oneCallDataFromApi.current.temp);
+    } else if (kelvinToCelcius(props.oneCallData.current.temp) <= 0) {
+      lightness = 40 + kelvinToCelcius(props.oneCallData.current.temp);
       document.body.style.background = `linear-gradient(hsla(180,50%,${lightness}%,0.8),  hsla(360,50%,100%,0.8))`; //Freezing
       color = "lightskyblue";
     }
@@ -177,7 +159,7 @@ function App(props) {
 
   return (
     <div className="App">
-      <h5>{props.count}</h5>
+      {/* <h5>{props.count}</h5> */}
       <SideBar
         favourites={favourites}
         onAddToFavouriteClick={handleAddToFavourite}
@@ -193,36 +175,32 @@ function App(props) {
         <SearchBar getUserLocation={getUserLocation} />
 
         {(() => {
-          switch (currentView) {
-            case "TomorrowLocationView":
+          switch (props.view) {
+            case "tomorrow":
               return (
                 <div>
                   <TomorrowLocation
-                    cwDataFromApi={cwDataFromApi}
-                    oneCallDataFromApi={oneCallDataFromApi}
-                    setCurrentView={setCurrentView}
-                    currentView={currentView}
+                    cwDataFromApi={props.cwData}
+                    oneCallDataFromApi={props.oneCallData}
                     kelvinToCelcius={kelvinToCelcius}
                     tomorrow={true} // Use this value to see if we are looking for tomorrows data or not
                     color={color} // calls in color variable for border
                   />
                   <div>
                     <SunriseSunset
-                      oneCallDataFromApi={oneCallDataFromApi}
+                      oneCallDataFromApi={props.oneCallData}
                       tomorrow={true}
                       sidebar={props.isSideOpen}
                     />
                   </div>
                 </div>
               );
-            case "Next7DaysView":
+            case "week":
               return (
                 <Next7DaysView
-                  cwDataFromApi={cwDataFromApi}
-                  oneCallDataFromApi={oneCallDataFromApi}
-                  setCurrentView={setCurrentView}
+                  cwDataFromApi={props.cwData}
+                  oneCallDataFromApi={props.oneCallData}
                   kelvinToCelcius={kelvinToCelcius}
-                  currentView={currentView}
                   color={color}
                 />
               );
@@ -230,19 +208,15 @@ function App(props) {
               return (
                 <div>
                   <TodayLocation
-                    cwDataFromApi={cwDataFromApi}
-                    oneCallDataFromApi={oneCallDataFromApi}
-                    setCurrentView={setCurrentView}
+                    cwDataFromApi={props.cwData}
+                    oneCallDataFromApi={props.oneCallData}
                     kelvinToCelcius={kelvinToCelcius}
-                    currentView={currentView}
                     tomorrow={false}
                     color={color}
                   />
                   <div className="location">
                     <SunriseSunset
-                      oneCallDataFromApi={oneCallDataFromApi}
                       tomorrow={false}
-                      sidebar={props.sideBarOpen}
                     />
                   </div>
                 </div>
@@ -260,6 +234,9 @@ const mapStateToProps = (state) => {
     count: state.counterReducer.count,
     favourites: state.sidebarReducer.localData,
     address: state.searchReducer.address,
+    view: state.viewReducer.currentView,
+    cwData: state.apiReducer.cwData,
+    oneCallData: state.apiReducer.oneCallData,
   };
 };
 

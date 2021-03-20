@@ -1,5 +1,5 @@
 import React from "react";
-import SelectDay from "./components/selectDay";
+import SelectDay from "../components/selectDay";
 import { BiCloudSnow } from "react-icons/bi";
 import { AiFillCloud } from "react-icons/ai";
 import { IoRainy } from "react-icons/io5";

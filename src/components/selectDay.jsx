@@ -1,32 +1,38 @@
 import React from "react";
+import { connect } from "react-redux";
+import * as actions from "../redux/actionTypes";
+import { updateView } from "../redux/reducers/view/actions";
 
-const SelectDay = ({ currentView, setCurrentView }) => {
-  console.log(currentView);
+const SelectDay = (props) => {
+  const changeView = (view) => {
+    props.dispatch(updateView(view));
+  };
+
   return (
     //Should we Reset day back to Today when they search?
-    <div className='select-day-padding'>
+    <div className="select-day-padding">
       <button
         id={1}
-        className={`pageButton${currentView === "Today" ? "-active" : ""}`}
-        onClick={() => setCurrentView("Today")}
+        className={`pageButton${
+          props.currentView === "today" ? "-active" : ""
+        }`}
+        onClick={() => changeView("today")}
       >
         Today
       </button>
       <button
         id={2}
         className={`pageButton${
-          currentView === "TomorrowLocationView" ? "-active" : ""
+          props.currentView === "tomorrow" ? "-active" : ""
         }`}
-        onClick={() => setCurrentView("TomorrowLocationView")}
+        onClick={() => changeView("tomorrow")}
       >
         Tomorrow
       </button>
       <button
         id={3}
-        className={`pageButton${
-          currentView === "Next7DaysView" ? "-active" : ""
-        }`}
-        onClick={() => setCurrentView("Next7DaysView")}
+        className={`pageButton${props.currentView === "week" ? "-active" : ""}`}
+        onClick={() => changeView("week")}
       >
         Next 7 Days
       </button>
@@ -34,4 +40,10 @@ const SelectDay = ({ currentView, setCurrentView }) => {
   );
 };
 
-export default SelectDay;
+const mapStateToProps = (state) => {
+  return {
+    currentView: state.viewReducer.currentView,
+  };
+};
+
+export default connect(mapStateToProps)(SelectDay);

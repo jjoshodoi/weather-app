@@ -1,0 +1,114 @@
+/* Style the side navigation */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: grey;
+  overflow-x: hidden;
+  transition: 250ms;
+}
+
+.top-left {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-left: 10px;
+  padding-top: 18px;
+  color: white;
+}
+
+.sidenav-inactive {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: -200px;
+  background-color: grey;
+  overflow-x: hidden;
+  transition: 250ms;
+}
+
+/* Side navigation links */
+.sidenav a {
+  color: white;
+  padding: 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.sidenav button {
+  background-color: grey;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 200px;
+}
+
+.sidenav ul {
+  list-style-type: none;
+  padding-inline-start: 0px;
+}
+
+.sidenav button:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.sidenav #title {
+  color: black;
+  background-color: white;
+}
+
+.sidenav #goBack {
+  color: black;
+  background-color: lightgray;
+}
+
+/* .sidenav #title:hover {
+  background-color: transparent;
+} */
+
+.sidenav #addCity {
+  color: white;
+  background-color: green;
+}
+
+.sidenav #addCity:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.sidenav #clearAll {
+  color: white;
+  background-color: red;
+}
+
+.sidenav #clearAll:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the content */
+.content {
+  margin-left: 200px;
+  transition: 250ms;
+  /* padding-left: 20px;
+  padding-right: 20px; */
+}
+
+.content-expand {
+  margin-left: 0px;
+  transition: 250ms;
+}
+
+.white-icon {
+  color: white;
+}

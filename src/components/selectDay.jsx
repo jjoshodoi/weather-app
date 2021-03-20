@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../redux/actionTypes";
 import { updateView } from "../redux/reducers/view/actions";
 
-const SelectDay = (props, { currentView, setCurrentView }) => {
+const SelectDay = (props) => {
   const changeView = (view) => {
     props.dispatch(updateView(view));
   };

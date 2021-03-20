@@ -5,40 +5,34 @@ import DisplayDate from "../components/displayDate";
 import TempByHour from "../components/tempTiles/tempByHour";
 import DisplayTemp from "../components/displayTemp";
 
-const TomorrowLocation = ({
-  cwDataFromApi,
-  oneCallDataFromApi,
-  setCurrentView,
-  kelvinToCelcius,
-  tomorrow,
-  currentView,
-  color,
-}) => {
+import { connect } from "react-redux";
+
+const TomorrowLocation = (props) => {
   return (
     <div>
       {/* <GeoButtons GEOCODING_API_KEY={GEOCODING_API_KEY} /> */}
-      <div className={`main-info-card-${color}`}>
-        <DisplayDate tomorrow={tomorrow} />
+      <div className={`main-info-card-${props.color}`}>
+        <DisplayDate tomorrow={props.tomorrow} />
         <DisplayTemp
-          tomorrow={tomorrow}
-          oneCallDataFromApi={oneCallDataFromApi}
-          cwDataFromApi={cwDataFromApi}
-          kelvinToCelcius={kelvinToCelcius}
+          tomorrow={props.tomorrow}
+          kelvinToCelcius={props.kelvinToCelcius}
         />
       </div>
-      <SelectDay
-        currentView={currentView}
-        setCurrentView={setCurrentView}
-        tomorrow={tomorrow}
-      />
+      <SelectDay tomorrow={props.tomorrow} />
       {/* Temp By Hour will be done starting from 0 depending on country. */}
       <TempByHour
-        oneCallDataFromApi={oneCallDataFromApi}
-        kelvinToCelcius={kelvinToCelcius}
-        tomorrow={tomorrow}
+        kelvinToCelcius={props.kelvinToCelcius}
+        tomorrow={props.tomorrow}
       />
     </div>
   );
 };
 
-export default TomorrowLocation;
+const mapStateToProps = (state) => {
+  return {
+    cwData: state.apiReducer.cwData,
+    oneCallData: state.apiReducer.oneCallData,
+  };
+};
+
+export default connect(mapStateToProps)(TomorrowLocation);

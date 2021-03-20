@@ -5,7 +5,7 @@ import "./tempcard.css";
 
 import { connect } from "react-redux";
 
-import { increment, toggle } from "./redux/reducers/sidebar/actions";
+import { toggle } from "./redux/reducers/sidebar/actions";
 import { updateAddress } from "./redux/reducers/search/actions";
 import { updateCWData, updateOneCallData } from "./redux/reducers/api/actions";
 
@@ -26,16 +26,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 const WEATHER_API_KEY = process.env.REACT_APP_API_KEY;
 
 function App(props) {
-  const [mainWeatherAttribute, setMainWeatherAttribute] = useState([]);
   const [nameOfLocation, setNameOfLocation] = useState("");
-
-  // const numberVariable = 3;
-  const toggleSidebar = () => {
-    // props.dispatch(increment(numberVariable));
-    props.dispatch(toggle());
-  };
-
-  // store the favourites list
   const [favourites, setFavourites] = useState(() => {
     const localData = localStorage.getItem("favourites");
     return localData ? JSON.parse(localData) : [];
@@ -48,6 +39,10 @@ function App(props) {
   useEffect(() => {
     localStorage.setItem("favourites", JSON.stringify(favourites));
   }, [favourites]);
+
+  const toggleSidebar = () => {
+    props.dispatch(toggle());
+  };
 
   const handleAddToFavourite = () => {
     if (!favourites.includes(nameOfLocation)) {
@@ -82,7 +77,6 @@ function App(props) {
     try {
       const currentForecast = await getCurrentForecast(lat, lon);
       props.dispatch(updateOneCallData(currentForecast));
-      setMainWeatherAttribute(currentForecast.current.weather[0].main);
     } catch (error) {
       alert("Enter a valid Location");
     }
@@ -180,18 +174,12 @@ function App(props) {
               return (
                 <div>
                   <TomorrowLocation
-                    cwDataFromApi={props.cwData}
-                    oneCallDataFromApi={props.oneCallData}
                     kelvinToCelcius={kelvinToCelcius}
                     tomorrow={true} // Use this value to see if we are looking for tomorrows data or not
                     color={color} // calls in color variable for border
                   />
                   <div>
-                    <SunriseSunset
-                      oneCallDataFromApi={props.oneCallData}
-                      tomorrow={true}
-                      sidebar={props.isSideOpen}
-                    />
+                    <SunriseSunset tomorrow={true} />
                   </div>
                 </div>
               );
@@ -215,9 +203,7 @@ function App(props) {
                     color={color}
                   />
                   <div className="location">
-                    <SunriseSunset
-                      tomorrow={false}
-                    />
+                    <SunriseSunset tomorrow={false} />
                   </div>
                 </div>
               );

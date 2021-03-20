@@ -90,8 +90,6 @@ const SunriseSunset = (props) => {
     tomorrowSunsetMinutes,
     tomorrowSunsetSeconds,
   ];
-  console.log(timeDifference);
-  console.log(currentListOfHours);
 
   return (
     <div>

@@ -6,12 +6,9 @@ import { TiWeatherSunny } from "react-icons/ti";
 import { RiMistFill } from "react-icons/ri";
 import { GiHeatHaze } from "react-icons/gi";
 
-const DisplayTemp = ({
-  kelvinToCelcius,
-  oneCallDataFromApi,
-  cwDataFromApi,
-  tomorrow,
-}) => {
+import { connect } from "react-redux";
+
+const DisplayTemp = (props) => {
   // Morning 8am
   const morning = 8;
   // Day 12pm
@@ -27,50 +24,50 @@ const DisplayTemp = ({
   const indexNum = 0;
 
   var weatherAttributeForMorning =
-    oneCallDataFromApi &&
-    oneCallDataFromApi.hourly[differenceFrom12AM + morning].weather[0].main;
+    props.oneCallData &&
+    props.oneCallData.hourly[differenceFrom12AM + morning].weather[0].main;
 
   var weatherAttributeForAfternoon =
-    oneCallDataFromApi &&
-    oneCallDataFromApi.hourly[differenceFrom12AM + afternoon].weather[0].main;
+    props.oneCallData &&
+    props.oneCallData.hourly[differenceFrom12AM + afternoon].weather[0].main;
 
   var weatherAttributeForEvening =
-    oneCallDataFromApi &&
-    oneCallDataFromApi.hourly[differenceFrom12AM + evening].weather[0].main;
+    props.oneCallData &&
+    props.oneCallData.hourly[differenceFrom12AM + evening].weather[0].main;
 
   var weatherAttributeForNight =
-    oneCallDataFromApi &&
-    oneCallDataFromApi.hourly[differenceFrom12AM + night].weather[0].main;
+    props.oneCallData &&
+    props.oneCallData.hourly[differenceFrom12AM + night].weather[0].main;
 
   return (
     <div>
       {(() => {
-        switch (tomorrow) {
+        switch (props.tomorrow) {
           case false:
             return (
               <div>
                 <h3>
-                  {cwDataFromApi && cwDataFromApi.name},{" "}
-                  {cwDataFromApi && cwDataFromApi.sys.country}
+                  {props.cwData && props.cwData.name},{" "}
+                  {props.cwData && props.cwData.sys.country}
                 </h3>
-                <h1>{`${kelvinToCelcius(
-                  oneCallDataFromApi && oneCallDataFromApi.current.temp
+                <h1>{`${props.kelvinToCelcius(
+                  props.oneCallData && props.oneCallData.current.temp
                 )}°C`}</h1>
-                <h5>{`Feels Like ${kelvinToCelcius(
-                  oneCallDataFromApi && oneCallDataFromApi.current.feels_like
+                <h5>{`Feels Like ${props.kelvinToCelcius(
+                  props.oneCallData && props.oneCallData.current.feels_like
                 )}°C`}</h5>
                 <h3>
-                  {oneCallDataFromApi &&
-                    oneCallDataFromApi.current.weather[0].main}
+                  {props.oneCallData &&
+                    props.oneCallData.current.weather[0].main}
                 </h3>
               </div>
             );
-          default:
+          case true:
             return (
               <div>
                 <h3>
-                  {cwDataFromApi && cwDataFromApi.name},{" "}
-                  {cwDataFromApi && cwDataFromApi.sys.country}
+                  {props.cwData && props.cwData.name},{" "}
+                  {props.cwData && props.cwData.sys.country}
                 </h3>
                 <div className="center">
                   <div className="tile-border">
@@ -78,9 +75,9 @@ const DisplayTemp = ({
                     <div>
                       <b>
                         {" "}
-                        {`${kelvinToCelcius(
-                          oneCallDataFromApi &&
-                            oneCallDataFromApi.daily[1].temp.morn
+                        {`${props.kelvinToCelcius(
+                          props.oneCallData &&
+                            props.oneCallData.daily[1].temp.morn
                         )}°C`}{" "}
                       </b>
                       <div className="center">
@@ -159,8 +156,8 @@ const DisplayTemp = ({
                             default:
                               return (
                                 <h4 className="center">
-                                  {oneCallDataFromApi &&
-                                    oneCallDataFromApi.hourly[
+                                  {props.oneCallData &&
+                                    props.oneCallData.hourly[
                                       differenceFrom12AM + morning
                                     ].weather[0].main}
                                 </h4>
@@ -168,9 +165,9 @@ const DisplayTemp = ({
                           }
                         })()}
                       </div>
-                      <h5>{`Feels Like ${kelvinToCelcius(
-                        oneCallDataFromApi &&
-                          oneCallDataFromApi.daily[1].feels_like.morn
+                      <h5>{`Feels Like ${props.kelvinToCelcius(
+                        props.oneCallData &&
+                          props.oneCallData.daily[1].feels_like.morn
                       )}°C`}</h5>
                     </div>
                   </div>
@@ -179,9 +176,9 @@ const DisplayTemp = ({
                     <div>
                       <b>
                         {" "}
-                        {`${kelvinToCelcius(
-                          oneCallDataFromApi &&
-                            oneCallDataFromApi.daily[1].temp.day
+                        {`${props.kelvinToCelcius(
+                          props.oneCallData &&
+                            props.oneCallData.daily[1].temp.day
                         )}°C`}{" "}
                       </b>
                     </div>
@@ -262,8 +259,8 @@ const DisplayTemp = ({
                           default:
                             return (
                               <h4 className="center">
-                                {oneCallDataFromApi &&
-                                  oneCallDataFromApi.hourly[
+                                {props.oneCallData &&
+                                  props.oneCallData.hourly[
                                     differenceFrom12AM + afternoon
                                   ].weather[0].main}
                               </h4>
@@ -271,9 +268,9 @@ const DisplayTemp = ({
                         }
                       })()}
                     </div>
-                    <h5>{`Feels Like ${kelvinToCelcius(
-                      oneCallDataFromApi &&
-                        oneCallDataFromApi.daily[1].feels_like.day
+                    <h5>{`Feels Like ${props.kelvinToCelcius(
+                      props.oneCallData &&
+                        props.oneCallData.daily[1].feels_like.day
                     )}°C`}</h5>
                   </div>
                   <div className="tile-border">
@@ -281,9 +278,9 @@ const DisplayTemp = ({
                     <div>
                       <b>
                         {" "}
-                        {`${kelvinToCelcius(
-                          oneCallDataFromApi &&
-                            oneCallDataFromApi.daily[1].temp.eve
+                        {`${props.kelvinToCelcius(
+                          props.oneCallData &&
+                            props.oneCallData.daily[1].temp.eve
                         )}°C`}{" "}
                       </b>
                     </div>
@@ -369,8 +366,8 @@ const DisplayTemp = ({
                           default:
                             return (
                               <h4 className="center">
-                                {oneCallDataFromApi &&
-                                  oneCallDataFromApi.hourly[
+                                {props.oneCallData &&
+                                  props.oneCallData.hourly[
                                     differenceFrom12AM + evening
                                   ].weather[0].main}
                               </h4>
@@ -378,9 +375,9 @@ const DisplayTemp = ({
                         }
                       })()}
                     </div>
-                    <h5>{`Feels Like ${kelvinToCelcius(
-                      oneCallDataFromApi &&
-                        oneCallDataFromApi.daily[1].feels_like.eve
+                    <h5>{`Feels Like ${props.kelvinToCelcius(
+                      props.oneCallData &&
+                        props.oneCallData.daily[1].feels_like.eve
                     )}°C`}</h5>
                   </div>
                   <div className="tile-border">
@@ -388,9 +385,9 @@ const DisplayTemp = ({
                     <div>
                       <b>
                         {" "}
-                        {`${kelvinToCelcius(
-                          oneCallDataFromApi &&
-                            oneCallDataFromApi.daily[1].temp.night
+                        {`${props.kelvinToCelcius(
+                          props.oneCallData &&
+                            props.oneCallData.daily[1].temp.night
                         )}°C`}{" "}
                       </b>
                     </div>
@@ -471,8 +468,8 @@ const DisplayTemp = ({
                           default:
                             return (
                               <h4 className="center">
-                                {oneCallDataFromApi &&
-                                  oneCallDataFromApi.hourly[
+                                {props.oneCallData &&
+                                  props.oneCallData.hourly[
                                     differenceFrom12AM + night
                                   ].weather[0].main}
                               </h4>
@@ -481,22 +478,31 @@ const DisplayTemp = ({
                       })()}
                     </div>
                     {/* <h4 className="center">
-                      {oneCallDataFromApi &&
-                        oneCallDataFromApi.hourly[differenceFrom12AM + night]
+                      {props.oneCallData &&
+                        props.oneCallData.hourly[differenceFrom12AM + night]
                           .weather[0].main}
                     </h4> */}
-                    <h5>{`Feels Like ${kelvinToCelcius(
-                      oneCallDataFromApi &&
-                        oneCallDataFromApi.daily[1].feels_like.night
+                    <h5>{`Feels Like ${props.kelvinToCelcius(
+                      props.oneCallData &&
+                        props.oneCallData.daily[1].feels_like.night
                     )}°C`}</h5>
                   </div>
                 </div>
               </div>
             );
+          default:
+            return "";
         }
       })()}
     </div>
   );
 };
 
-export default DisplayTemp;
+const mapStateToProps = (state) => {
+  return {
+    oneCallData: state.apiReducer.oneCallData,
+    cwData: state.apiReducer.cwData,
+  };
+};
+
+export default connect(mapStateToProps)(DisplayTemp);

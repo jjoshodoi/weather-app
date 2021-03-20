@@ -1,4 +1,3 @@
-import * as actions from "../../redux/actionTypes";
 import { toggle } from "../../redux/reducers/sidebar/actions";
 
 import React from "react";

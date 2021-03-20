@@ -1,25 +1,26 @@
 import React from "react";
 import TempCard from "./tempcard";
 
-const TempByHour = ({ oneCallDataFromApi, kelvinToCelcius, tomorrow }) => {
+import { connect } from "react-redux";
+
+const TempByHour = (props) => {
   // Finds Current Hour
   const currentHour = new Date().getHours();
-
   // Finds hours from now to 12AM
   const differenceFrom12AM = 24 - currentHour;
 
   const timeDifference =
-    oneCallDataFromApi && oneCallDataFromApi.timezone_offset / 3600;
+    props.oneCallData && props.oneCallData.timezone_offset / 3600;
 
-  // var weatherAttributeForCard = findMainWeatherAttribute(oneCallDataFromApi);
+  // var weatherAttributeForCard = findMainWeatherAttribute(props.oneCallData);
   return (
     <div className="temp-tile">
       {(() => {
-        switch (tomorrow) {
+        switch (props.tomorrow) {
           case false:
             return (
-              oneCallDataFromApi &&
-              oneCallDataFromApi.hourly.slice(0, 24).map((
+              props.oneCallData &&
+              props.oneCallData.hourly.slice(0, 24).map((
                 hour,
                 index //increment with the card
               ) => (
@@ -29,17 +30,16 @@ const TempByHour = ({ oneCallDataFromApi, kelvinToCelcius, tomorrow }) => {
                   hour={hour}
                   currentHour={currentHour}
                   timeDifference={timeDifference}
-                  oneCallDataFromApi={oneCallDataFromApi}
-                  kelvinToCelcius={kelvinToCelcius}
+                  kelvinToCelcius={props.kelvinToCelcius}
                   differenceFrom12AM={differenceFrom12AM}
-                  tomorrow={tomorrow}
+                  tomorrow={props.tomorrow}
                 />
               ))
             );
           case true:
             return (
-              oneCallDataFromApi &&
-              oneCallDataFromApi.hourly
+              props.oneCallData &&
+              props.oneCallData.hourly
                 .slice(differenceFrom12AM, differenceFrom12AM + 24)
                 .map((
                   hour,
@@ -51,10 +51,10 @@ const TempByHour = ({ oneCallDataFromApi, kelvinToCelcius, tomorrow }) => {
                     hour={hour}
                     currentHour={currentHour}
                     timeDifference={timeDifference}
-                    oneCallDataFromApi={oneCallDataFromApi}
-                    kelvinToCelcius={kelvinToCelcius}
+                    oneCallData={props.oneCallData}
+                    kelvinToCelcius={props.kelvinToCelcius}
                     differenceFrom12AM={differenceFrom12AM}
-                    tomorrow={tomorrow}
+                    tomorrow={props.tomorrow}
                   />
                 ))
             );
@@ -66,4 +66,10 @@ const TempByHour = ({ oneCallDataFromApi, kelvinToCelcius, tomorrow }) => {
   );
 };
 
-export default TempByHour;
+const mapStateToProps = (state) => {
+  return {
+    oneCallData: state.apiReducer.oneCallData,
+  };
+};
+
+export default connect(mapStateToProps)(TempByHour);
